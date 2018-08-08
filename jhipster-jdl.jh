@@ -1,0 +1,54 @@
+enum State{
+	IL
+}
+enum Country{
+	USA
+}
+enum Status{
+	COMPLETED, 
+    PENDING, 
+    CLOSED, 
+    IN_PROGRESS
+}
+entity Location{
+	address String,
+    city String,
+    state State,
+    country Country
+}
+
+entity Employee{
+	fname String required, 
+    lname String required
+}
+
+entity SeparationApplication{
+	status Status required,
+    dateOfLeave LocalDate,
+    dateSumbitted LocalDate required,
+    dateCompleted LocalDate,
+    dateApproved LocalDate
+}
+
+entity HrReps{
+}
+entity FunctionReps{
+}
+entity Action {
+	isCompleted Boolean,
+    task String
+}
+
+relationship OneToOne{
+	SeparationApplication{employee} to Employee{separationApplication},
+    HrReps{employee} to Employee{hr},
+	FunctionReps{employee} to Employee{fr}
+}
+relationship ManyToOne{
+	Employee{location} to Location{employee}
+}
+relationship OneToMany{
+	SeparationApplication{action} to Action{separationApplication},
+    HrReps{application} to SeparationApplication{hr},
+    FunctionReps{application} to SeparationApplication{fr}
+}
