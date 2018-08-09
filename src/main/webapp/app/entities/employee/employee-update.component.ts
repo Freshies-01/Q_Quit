@@ -37,13 +37,13 @@ export class EmployeeUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private employeeService: EmployeeService,
-        private userService:UserService,
+        private userService: UserService,
         private locationService: LocationService,
         private separationApplicationService: SeparationApplicationService,
         private hrRepsService: HrRepsService,
         private functionRepsService: FunctionRepsService,
         private activatedRoute: ActivatedRoute
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.isSaving = false;
@@ -53,7 +53,7 @@ export class EmployeeUpdateComponent implements OnInit {
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
-            } 
+            },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
         this.locationService.query().subscribe(
