@@ -1,0 +1,29 @@
+{
+    "name": "HrReps",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "employee",
+            "otherEntityName": "employee",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "hr"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "application",
+            "otherEntityName": "separationApplication",
+            "otherEntityRelationshipName": "hr"
+        }
+    ],
+    "changelogDate": "20180808183048",
+    "entityTableName": "hr_reps",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity SeparationApplication.
+    -->
+    <changeSet id="20180808183047-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="separation_application"
+                                 constraintName="fk_separation_application_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="hr_id"
+                                 baseTableName="separation_application"
+                                 constraintName="fk_separation_application_hr_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_reps"/>
+
+        <addForeignKeyConstraint baseColumnNames="fr_id"
+                                 baseTableName="separation_application"
+                                 constraintName="fk_separation_application_fr_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="function_reps"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,57 @@
+{
+    "name": "Employee",
+    "fields": [
+        {
+            "fieldName": "fname",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lname",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "separationApplication",
+            "otherEntityName": "separationApplication",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "hr",
+            "otherEntityName": "hrReps",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "fr",
+            "otherEntityName": "functionReps",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "employee"
+        }
+    ],
+    "changelogDate": "20180808183046",
+    "entityTableName": "employee",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,69 @@
+{
+    "name": "SeparationApplication",
+    "fields": [
+        {
+            "fieldName": "status",
+            "fieldType": "Status",
+            "fieldValues": "COMPLETED,PENDING,CLOSED,IN_PROGRESS",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateOfLeave",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateSumbitted",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateCompleted",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateApproved",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "employee",
+            "otherEntityName": "employee",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "separationApplication"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "action",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "separationApplication"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "hr",
+            "otherEntityName": "hrReps",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "fr",
+            "otherEntityName": "functionReps",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180808183047",
+    "entityTableName": "separation_application",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="action">
+            <h2><span>Action</span> {{action.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Is Completed</span></dt>
+                <dd>
+                    <span>{{action.isCompleted}}</span>
+                </dd>
+                <dt><span>Task</span></dt>
+                <dd>
+                    <span>{{action.task}}</span>
+                </dd>
+                <dt><span>Separation Application</span></dt>
+                <dd>
+                    <div *ngIf="action.separationApplication">
+                        <a [routerLink]="['/separation-application', action.separationApplication?.employee, 'view']">{{action.separationApplication?.employee.fname}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/action', action.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
