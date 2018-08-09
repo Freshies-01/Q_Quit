@@ -6,6 +6,7 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IEmployee } from 'app/shared/model/employee.model';
 import { EmployeeService } from './employee.service';
+import { IUser, UserService } from 'app/core';
 import { ILocation } from 'app/shared/model/location.model';
 import { LocationService } from 'app/entities/location';
 import { ISeparationApplication } from 'app/shared/model/separation-application.model';
@@ -25,6 +26,8 @@ export class EmployeeUpdateComponent implements OnInit {
 
     locations: ILocation[];
 
+    users: IUser[];
+
     separationapplications: ISeparationApplication[];
 
     hrreps: IHrReps[];
@@ -34,18 +37,25 @@ export class EmployeeUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private employeeService: EmployeeService,
+        private userService: UserService,
         private locationService: LocationService,
         private separationApplicationService: SeparationApplicationService,
         private hrRepsService: HrRepsService,
         private functionRepsService: FunctionRepsService,
         private activatedRoute: ActivatedRoute
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ employee }) => {
             this.employee = employee;
         });
+        this.userService.query().subscribe(
+            (res: HttpResponse<IUser[]>) => {
+                this.users = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.locationService.query().subscribe(
             (res: HttpResponse<ILocation[]>) => {
                 this.locations = res.body;
@@ -103,6 +113,10 @@ export class EmployeeUpdateComponent implements OnInit {
     }
 
     trackLocationById(index: number, item: ILocation) {
+        return item.id;
+    }
+
+    trackUserById(index: number, item: IUser) {
         return item.id;
     }
 

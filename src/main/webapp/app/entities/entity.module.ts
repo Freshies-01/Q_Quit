@@ -24,4 +24,4 @@ import { QQuitActionModule } from './action/action.module';
     providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class QQuitEntityModule {}
+export class QQuitEntityModule { }
