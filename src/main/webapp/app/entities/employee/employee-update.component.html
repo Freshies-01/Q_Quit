@@ -6,21 +6,26 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!employee.id">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="employee.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="employee.id" readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_fname">Fname</label>
-                    <input type="text" class="form-control" name="fname" id="field_fname"
+                <!-- <div class="form-group">
+                    <label class="form-control-label" for="field_fname">User</label>
+                    <input type="text" class="form-control" name="employee.user?.id" id="field_fname" 
                         [(ngModel)]="employee.fname" required/>
                     <div [hidden]="!(editForm.controls.fname?.dirty && editForm.controls.fname?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.fname?.errors?.required">
-                        This field is required.
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.fname?.errors?.required">
+                            This field is required.
                         </small>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
+                    <label class="form-control-label" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="employee.user">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === employee.user?.id ? employee.user : userOption" *ngFor="let userOPtion of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <!-- <div class="form-group">
                     <label class="form-control-label" for="field_lname">Lname</label>
                     <input type="text" class="form-control" name="lname" id="field_lname"
                         [(ngModel)]="employee.lname" required/>
@@ -30,22 +35,24 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_location">Location</label>
-                    <select class="form-control" id="field_location" name="location" [(ngModel)]="employee.location" >
+                    <select class="form-control" id="field_location" name="location" [(ngModel)]="employee.location">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="locationOption.id === employee.location?.id ? employee.location : locationOption" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.city}}</option>
                     </select>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;
+                    <span>Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;
+                    <span>Save</span>
                 </button>
             </div>
         </form>

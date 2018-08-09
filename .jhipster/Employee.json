@@ -1,21 +1,5 @@
 {
     "name": "Employee",
-    "fields": [
-        {
-            "fieldName": "fname",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "lname",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
     "relationships": [
         {
             "relationshipType": "many-to-one",
@@ -28,6 +12,14 @@
             "relationshipName": "separationApplication",
             "otherEntityName": "separationApplication",
             "ownerSide": false,
+            "otherEntityRelationshipName": "emp"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
             "otherEntityRelationshipName": "employee"
         },
         {
