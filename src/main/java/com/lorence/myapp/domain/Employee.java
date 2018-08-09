@@ -22,13 +22,17 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "fname", nullable = false)
-    private String fname;
+    // @NotNull
+    // @Column(name = "fname", nullable = false)
+    // private String fname;
 
-    @NotNull
-    @Column(name = "lname", nullable = false)
-    private String lname;
+    // @NotNull
+    // @Column(name = "lname", nullable = false)
+    // private String lname;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
 
     @ManyToOne
     @JsonIgnoreProperties("employees")
@@ -55,31 +59,40 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public String getFname() {
-        return fname;
+    public User getUser() {
+        return user;
     }
 
-    public Employee fname(String fname) {
-        this.fname = fname;
+    public Employee user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
+    // public String getFname() {
+    //     return fname;
+    // }
 
-    public String getLname() {
-        return lname;
-    }
+    // public Employee fname(String fname) {
+    //     this.fname = fname;
+    //     return this;
+    // }
 
-    public Employee lname(String lname) {
-        this.lname = lname;
-        return this;
-    }
+    // public void setFname(String fname) {
+    //     this.fname = fname;
+    // }
 
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
+    // public String getLname() {
+    //     return lname;
+    // }
+
+    // public Employee lname(String lname) {
+    //     this.lname = lname;
+    //     return this;
+    // }
+
+    // public void setLname(String lname) {
+    //     this.lname = lname;
+    // }
 
     public Location getLocation() {
         return location;
@@ -158,8 +171,8 @@ public class Employee implements Serializable {
     public String toString() {
         return "Employee{" +
             "id=" + getId() +
-            ", fname='" + getFname() + "'" +
-            ", lname='" + getLname() + "'" +
+            // ", fname='" + getFname() + "'" +
+            // ", lname='" + getLname() + "'" +
             "}";
     }
 }
