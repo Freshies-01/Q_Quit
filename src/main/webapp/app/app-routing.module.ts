@@ -15,11 +15,12 @@ const alternativeMainRoutes = [...errorRoute];
             [
                 {
                     path: 'default',
-                    children: [...LAYOUT_ROUTES,
-                    {
-                        path: 'admin',
-                        loadChildren: './admin/admin.module#QQuitAdminModule'
-                    }
+                    children: [
+                        ...LAYOUT_ROUTES,
+                        {
+                            path: 'admin',
+                            loadChildren: './admin/admin.module#QQuitAdminModule'
+                        }
                     ]
                 },
                 {
