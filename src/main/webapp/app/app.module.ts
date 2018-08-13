@@ -20,6 +20,7 @@ import { QQuitEntityModule } from './entities/entity.module';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { AlternativeMainComponent } from './layouts/alternative-main/alternative-main.component';
 import { NavTopComponent, NavSideComponent } from './layouts';
+import { SeparationApplicationModule } from './custom-entities/separation-application';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { NavTopComponent, NavSideComponent } from './layouts';
         QQuitCoreModule,
         QQuitHomeModule,
         QQuitAccountModule,
-        QQuitEntityModule
+        QQuitEntityModule,
+        SeparationApplicationModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, AlternativeMainComponent, NavTopComponent, NavSideComponent],
