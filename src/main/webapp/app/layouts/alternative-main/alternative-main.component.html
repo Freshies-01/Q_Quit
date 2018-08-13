@@ -1,5 +1,7 @@
 <jhi-nav-top #topNav (toogleNav)="sideNav.setShown(! sideNav.Shown)"></jhi-nav-top>
-<jhi-nav-side #sideNav [elementsPushedBySideBar]='[mainContent]'></jhi-nav-side>
-<div class="main-content-Q_Q" #mainContent>
-    <router-outlet></router-outlet>
+<jhi-nav-side #sideNav [elementsPushedBySideBar]='[mainWrapper]'></jhi-nav-side>
+<div id="mainWrapper" #mainWrapper>
+    <main id="mainContentCard">
+        <router-outlet></router-outlet>
+    </main>
 </div>
