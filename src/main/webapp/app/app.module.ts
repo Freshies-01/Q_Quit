@@ -19,6 +19,7 @@ import { QQuitEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { AlternativeMainComponent } from './layouts/alternative-main/alternative-main.component';
+import { NavTopComponent, NavSideComponent } from './layouts';
 
 @NgModule({
     imports: [
@@ -32,7 +33,7 @@ import { AlternativeMainComponent } from './layouts/alternative-main/alternative
         QQuitEntityModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, AlternativeMainComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, AlternativeMainComponent, NavTopComponent, NavSideComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
