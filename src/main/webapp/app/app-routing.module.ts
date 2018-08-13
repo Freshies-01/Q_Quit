@@ -39,7 +39,7 @@ const alternativeMainRoutes = [...errorRoute];
                     pathMatch: 'full'
                 }
             ],
-            { useHash: true, enableTracing: DEBUG_INFO_ENABLED }
+            { useHash: true /*, enableTracing: DEBUG_INFO_ENABLED */ }
         )
     ],
     exports: [RouterModule]
