@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from 'app/layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { separationApplicationRoute } from 'app/custom-entities/separation-application';
 
 import { AlternativeMainComponent } from './layouts/alternative-main/alternative-main.component';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 const alternativeMainRoutes = [...errorRoute];
 
-/* A bit of an interesting set upt*/
 @NgModule({
     imports: [
         RouterModule.forRoot(
@@ -24,13 +24,11 @@ const alternativeMainRoutes = [...errorRoute];
                     ]
                 },
                 {
-                    path: 'alternative-home-page',
+                    path: 'Q_Q',
+                    component: AlternativeMainComponent,
                     children: [
                         ...alternativeMainRoutes,
-                        {
-                            path: '',
-                            component: AlternativeMainComponent
-                        }
+                        ...separationApplicationRoute
                     ]
                 },
                 {

@@ -1,7 +1,14 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 import { SeparationApplicationListComponent } from './separation-application-list.component';
 
-export const separationApplicationRoute: Route = {
-    path: 'default/alt-separation-application',
-    component: SeparationApplicationListComponent
-};
+export const separationApplicationRoute: Routes = [
+    {
+        path: 'separationApplication',
+        component: SeparationApplicationListComponent
+    },
+    {
+        path: '',
+        redirectTo: 'separationApplication',
+        pathMatch: 'full'
+    }
+];

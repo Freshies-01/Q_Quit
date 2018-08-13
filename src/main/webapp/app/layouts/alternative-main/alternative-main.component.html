@@ -1,5 +1,5 @@
 <jhi-nav-top #topNav (toogleNav)="sideNav.setShown(! sideNav.Shown)"></jhi-nav-top>
 <jhi-nav-side #sideNav [elementsPushedBySideBar]='[mainContent]'></jhi-nav-side>
 <div class="main-content-Q_Q" #mainContent>
-    this is main
+    <router-outlet></router-outlet>
 </div>

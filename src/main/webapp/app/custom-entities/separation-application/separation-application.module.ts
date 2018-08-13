@@ -4,12 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { separationApplicationRoute } from './separation-application.route';
 import { SeparationApplicationListComponent } from './separation-application-list.component';
 
-const entityStates: Routes = [separationApplicationRoute];
-
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule.forChild(entityStates)
+    CommonModule
   ],
   declarations: [SeparationApplicationListComponent]
 })
