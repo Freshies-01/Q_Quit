@@ -5,10 +5,5 @@ export const separationApplicationRoute: Routes = [
     {
         path: 'separationApplication',
         component: SeparationApplicationListComponent
-    },
-    {
-        path: '',
-        redirectTo: 'separationApplication',
-        pathMatch: 'full'
     }
 ];

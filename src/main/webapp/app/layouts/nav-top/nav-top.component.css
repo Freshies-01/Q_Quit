@@ -5,11 +5,18 @@ nav {
     top:0;
     background-color: #ebb529;
     z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.menu-icon {
+i.materialIconContainer {
+    font-size: 32px;
     display: flex;
     align-items: center;
-    font-size: 40px;
+}
+
+.navButton {
     padding: 0 16px;
 }
+
