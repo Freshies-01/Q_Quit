@@ -1,22 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { Routes } from '@angular/router';
-import { ReportListComponent } from './report-list/report-list.component';
+import { Routes } from "@angular/router";
+import { ReportListComponent } from "./report-list/report-list.component";
 
 export const reportsRoutes: Routes = [
   {
-    path: 'report',
+    path: "report",
     component: ReportListComponent
   }
-]
+];
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [ReportListComponent]
 })
-export class ReportsModule {
-
-}
+export class ReportsModule {}

@@ -1,26 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Routes } from "@angular/router";
 
-import { SeparationApplicationModule, separationApplicationRoute } from './separation-application/separation-application.module';
-import { EmployeeModule, employeeRoutes } from './employee/employee.module';
+import {
+  SeparationApplicationModule,
+  separationApplicationRoute
+} from "./separation-application/separation-application.module";
+import { EmployeeModule, employeeRoutes } from "./employee/employee.module";
 
 export const RecordsRouting: Routes = [
   {
-    path: '',
-    children: [
-      ...separationApplicationRoute,
-      ...employeeRoutes,
-    ]
+    path: "record",
+    children: [...separationApplicationRoute, ...employeeRoutes]
   }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SeparationApplicationModule,
-    EmployeeModule
-  ],
+  imports: [CommonModule, SeparationApplicationModule, EmployeeModule],
   declarations: []
 })
-export class RecordsModule { }
+export class RecordsModule {}
