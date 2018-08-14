@@ -8,6 +8,7 @@ import { NavSideComponent } from './nav-side/nav-side.component';
 import { AlternativeMainComponent } from './alternative-main/alternative-main.component';
 import { RecordsModule } from './records/records.module';
 import { ReportsModule } from './reports/reports.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ReportsModule } from './reports/reports.module';
     RecordsModule,
     QQRoutingModule,
     ReportsModule,
+    DashboardModule,
   ],
   declarations: [NavTopComponent, NavSideComponent, AlternativeMainComponent]
 })

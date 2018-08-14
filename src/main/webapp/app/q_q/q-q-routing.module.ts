@@ -7,6 +7,7 @@ import { errorRoute } from 'app/layouts';
 
 import { RecordsRouting } from './records/records.module';
 import { reportsRoutes } from './reports/reports.module'
+import { dashboardRoutes } from './dashboard/dashboard.module';
 
 
 const alternativeMainRoutes = [...errorRoute];
@@ -18,6 +19,7 @@ const routes: Routes = [{
     ...alternativeMainRoutes,
     ...RecordsRouting,
     ...reportsRoutes,
+    ...dashboardRoutes
   ]
 }];
 
