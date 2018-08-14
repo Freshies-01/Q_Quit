@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Routes } from '@angular/router';
 
 import { SeparationApplicationModule, separationApplicationRoute } from './separation-application/separation-application.module';
+import { EmployeeModule, employeeRoutes } from './employee/employee.module';
 
 export const RecordsRouting: Routes = [
   {
     path: '',
     children: [
-      ...separationApplicationRoute
+      ...separationApplicationRoute,
+      ...employeeRoutes,
     ]
   }
 ];
@@ -16,7 +18,8 @@ export const RecordsRouting: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    SeparationApplicationModule
+    SeparationApplicationModule,
+    EmployeeModule
   ],
   declarations: []
 })
