@@ -6,24 +6,25 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!hrReps.id">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="hrReps.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="hrReps.id" readonly />
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_employee">Employee</label>
                     <select class="form-control" id="field_employee" name="employee" [(ngModel)]="hrReps.employee">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="employeeOption.id === hrReps.employee?.id ? hrReps.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.fname}}</option>
+                        <option [ngValue]="employeeOption.id === hrReps.employee?.id ? hrReps.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.user?.firstName}}</option>
                     </select>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;
+                    <span>Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;
+                    <span>Save</span>
                 </button>
             </div>
         </form>

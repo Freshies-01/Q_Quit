@@ -7,8 +7,6 @@ import { User } from 'app/core';
 export interface IEmployee {
     id?: number;
     user?: User;
-    fname?: string;
-    lname?: string;
     location?: ILocation;
     separationApplication?: ISeparationApplication;
     hr?: IHrReps;
@@ -19,8 +17,6 @@ export class Employee implements IEmployee {
     constructor(
         public id?: number,
         public user?: User,
-        public fname?: string,
-        public lname?: string,
         public location?: ILocation,
         public separationApplication?: ISeparationApplication,
         public hr?: IHrReps,

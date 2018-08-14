@@ -1,60 +1,75 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="separationApplication">
-            <h2><span>Separation Application</span> {{separationApplication.id}}</h2>
+            <h2>
+                <span>Separation Application</span> {{separationApplication.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Status</span></dt>
+                <dt>
+                    <span>Status</span>
+                </dt>
                 <dd>
                     <span>{{separationApplication.status}}</span>
                 </dd>
-                <dt><span>Date Of Leave</span></dt>
+                <dt>
+                    <span>Date Of Leave</span>
+                </dt>
                 <dd>
                     <span>{{separationApplication.dateOfLeave}}</span>
                 </dd>
-                <dt><span>Date Sumbitted</span></dt>
+                <dt>
+                    <span>Date Sumbitted</span>
+                </dt>
                 <dd>
                     <span>{{separationApplication.dateSumbitted}}</span>
                 </dd>
-                <dt><span>Date Completed</span></dt>
+                <dt>
+                    <span>Date Completed</span>
+                </dt>
                 <dd>
                     <span>{{separationApplication.dateCompleted}}</span>
                 </dd>
-                <dt><span>Date Approved</span></dt>
+                <dt>
+                    <span>Date Approved</span>
+                </dt>
                 <dd>
                     <span>{{separationApplication.dateApproved}}</span>
                 </dd>
-                <dt><span>Employee</span></dt>
+                <dt>
+                    <span>Employee</span>
+                </dt>
                 <dd>
                     <div *ngIf="separationApplication.employee">
-                        <a [routerLink]="['/employee', separationApplication.employee?.id, 'view']">{{separationApplication.employee?.fname}}</a>
+                        <a [routerLink]="['/employee', separationApplication.employee?.id, 'view']">{{separationApplication.employee?.user?.firstNamee}}</a>
                     </div>
                 </dd>
-                <dt><span>Hr</span></dt>
+                <dt>
+                    <span>Hr</span>
+                </dt>
                 <dd>
                     <div *ngIf="separationApplication.hr">
-                        <a [routerLink]="['/hr-reps', separationApplication.hr?.id, 'view']">{{separationApplication.hr?.employee.fname}}</a>
+                        <a [routerLink]="['/hr-reps', separationApplication.hr?.id, 'view']">{{separationApplication.hr?.employee.user?.firstName}}</a>
                     </div>
                 </dd>
-                <dt><span>Fr</span></dt>
+                <dt>
+                    <span>Fr</span>
+                </dt>
                 <dd>
                     <div *ngIf="separationApplication.fr">
-                        <a [routerLink]="['/function-reps', separationApplication.fr?.id, 'view']">{{separationApplication.fr?.employee.fname}}</a>
+                        <a [routerLink]="['/function-reps', separationApplication.fr?.id, 'view']">{{separationApplication.fr?.employee.user?.firstName}}</a>
                     </div>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;
+                <span> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/separation-application', separationApplication.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            <button type="button" [routerLink]="['/separation-application', separationApplication.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;
+                <span> Edit</span>
             </button>
         </div>
     </div>

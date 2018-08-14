@@ -39,12 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = QQuitApp.class)
 public class EmployeeResourceIntTest {
 
-    private static final String DEFAULT_FNAME = "AAAAAAAAAA";
-    private static final String UPDATED_FNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LNAME = "AAAAAAAAAA";
-    private static final String UPDATED_LNAME = "BBBBBBBBBB";
-
+    
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -83,10 +78,8 @@ public class EmployeeResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Employee createEntity(EntityManager em) {
-        Employee employee = new Employee()
-            .fname(DEFAULT_FNAME)
-            .lname(DEFAULT_LNAME);
-        return employee;
+        Employee employee = new Employee();
+            return employee;
     }
 
     @Before
@@ -109,8 +102,6 @@ public class EmployeeResourceIntTest {
         List<Employee> employeeList = employeeRepository.findAll();
         assertThat(employeeList).hasSize(databaseSizeBeforeCreate + 1);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
-        assertThat(testEmployee.getFname()).isEqualTo(DEFAULT_FNAME);
-        assertThat(testEmployee.getLname()).isEqualTo(DEFAULT_LNAME);
     }
 
     @Test
@@ -132,42 +123,7 @@ public class EmployeeResourceIntTest {
         assertThat(employeeList).hasSize(databaseSizeBeforeCreate);
     }
 
-    @Test
-    @Transactional
-    public void checkFnameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = employeeRepository.findAll().size();
-        // set the field null
-        employee.setFname(null);
-
-        // Create the Employee, which fails.
-
-        restEmployeeMockMvc.perform(post("/api/employees")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(employee)))
-            .andExpect(status().isBadRequest());
-
-        List<Employee> employeeList = employeeRepository.findAll();
-        assertThat(employeeList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkLnameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = employeeRepository.findAll().size();
-        // set the field null
-        employee.setLname(null);
-
-        // Create the Employee, which fails.
-
-        restEmployeeMockMvc.perform(post("/api/employees")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(employee)))
-            .andExpect(status().isBadRequest());
-
-        List<Employee> employeeList = employeeRepository.findAll();
-        assertThat(employeeList).hasSize(databaseSizeBeforeTest);
-    }
-
+    
     @Test
     @Transactional
     public void getAllEmployees() throws Exception {
@@ -178,9 +134,7 @@ public class EmployeeResourceIntTest {
         restEmployeeMockMvc.perform(get("/api/employees?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())))
-            .andExpect(jsonPath("$.[*].fname").value(hasItem(DEFAULT_FNAME.toString())))
-            .andExpect(jsonPath("$.[*].lname").value(hasItem(DEFAULT_LNAME.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())));
     }
     
 
@@ -194,9 +148,7 @@ public class EmployeeResourceIntTest {
         restEmployeeMockMvc.perform(get("/api/employees/{id}", employee.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(employee.getId().intValue()))
-            .andExpect(jsonPath("$.fname").value(DEFAULT_FNAME.toString()))
-            .andExpect(jsonPath("$.lname").value(DEFAULT_LNAME.toString()));
+            .andExpect(jsonPath("$.id").value(employee.getId().intValue()));
     }
     @Test
     @Transactional
@@ -218,9 +170,6 @@ public class EmployeeResourceIntTest {
         Employee updatedEmployee = employeeRepository.findById(employee.getId()).get();
         // Disconnect from session so that the updates on updatedEmployee are not directly saved in db
         em.detach(updatedEmployee);
-        updatedEmployee
-            .fname(UPDATED_FNAME)
-            .lname(UPDATED_LNAME);
 
         restEmployeeMockMvc.perform(put("/api/employees")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -231,8 +180,6 @@ public class EmployeeResourceIntTest {
         List<Employee> employeeList = employeeRepository.findAll();
         assertThat(employeeList).hasSize(databaseSizeBeforeUpdate);
         Employee testEmployee = employeeList.get(employeeList.size() - 1);
-        assertThat(testEmployee.getFname()).isEqualTo(UPDATED_FNAME);
-        assertThat(testEmployee.getLname()).isEqualTo(UPDATED_LNAME);
     }
 
     @Test

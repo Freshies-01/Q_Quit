@@ -1,28 +1,29 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="hrReps">
-            <h2><span>Hr Reps</span> {{hrReps.id}}</h2>
+            <h2>
+                <span>Hr Reps</span> {{hrReps.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Employee</span></dt>
+                <dt>
+                    <span>Employee</span>
+                </dt>
                 <dd>
                     <div *ngIf="hrReps.employee">
-                        <a [routerLink]="['/employee', hrReps.employee?.id, 'view']">{{hrReps.employee?.fname}}</a>
+                        <a [routerLink]="['/employee', hrReps.employee?.id, 'view']">{{hrReps.employee?.user?.firstName}}</a>
                     </div>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;
+                <span> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/hr-reps', hrReps.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            <button type="button" [routerLink]="['/hr-reps', hrReps.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;
+                <span> Edit</span>
             </button>
         </div>
     </div>
