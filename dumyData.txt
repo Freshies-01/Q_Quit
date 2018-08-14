@@ -1,0 +1,39 @@
+INSERT INTO JHI_USER VALUES (7, 'fred', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'Fred', 'Drakus', 'fred@drauks.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (8, 'Hades', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'Death', 'God', 'Underword@Divinity.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (9, 'george', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'George', 'Johnson', 'George@teddybear.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (10, 'jim', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'Jim', 'WhyDoIExist', 'jim@confused.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (11, 'Amaterasu', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'Sun', 'Goddess', 'Japan@Divinity.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (12, 'odin', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'All', 'Father', 'ISeeYou@Divinity.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (13, 'Akira', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'Akira', 'Tomoe', 'Akira@faraway.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+INSERT INTO JHI_USER VALUES (14, 'Jeffery', '$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG', 'Jeffery', 'Novice', 'Jeff@IAmAwesome.com', '', true, 'en', null, null, 'system', '2018-09-13 14:54:2.06', null, 'system', null);
+
+INSERT INTO LOCATION VALUES (1, '400 Michigan Avenue', 'Chicago', 'IL', 'USA');
+INSERT INTO LOCATION VALUES (2, '350 S 600 E', 'Salt Lake City', 'UT', 'USA');
+INSERT INTO LOCATION VALUES (3, '400 S 600 N', 'Divine City', 'GODLY_DOMAIN', 'UPPER_CLASS_GODS');
+
+INSERT INTO EMPLOYEE VALUES (1, 7, 1);
+INSERT INTO EMPLOYEE VALUES (2, 8, 3);
+INSERT INTO EMPLOYEE VALUES (3, 9, 1);
+INSERT INTO EMPLOYEE VALUES (4, 10, 2);
+INSERT INTO EMPLOYEE VALUES (5, 11, 3);
+INSERT INTO EMPLOYEE VALUES (6, 12, 3);
+INSERT INTO EMPLOYEE VALUES (7, 13, 1);
+INSERT INTO EMPLOYEE VALUES (8, 14, 1);
+
+INSERT INTO HR_REPS VALUES (1, 5);
+INSERT INTO HR_REPS VALUES (2, 7);
+
+INSERT INTO FUNCTION_REPS VALUES (1, 6);
+INSERT INTO FUNCTION_REPS VALUES (2, 8);
+
+INSERT INTO SEPARATION_APPLICATION VALUES (1, 'PENDING', NULL, '2018-09-01', NULL, NULL, 1, 2, 2);
+INSERT INTO SEPARATION_APPLICATION VALUES (2, 'IN_PROGRESS', NULL, '2018-09-01', NULL, '2018-09-02', 3, 2, 2);
+INSERT INTO SEPARATION_APPLICATION VALUES (3, 'COMPLETED', '2018-09-01', '2018-09-01', '2018-09-01', '2018-09-01', 2, 1, 1);
+
+INSERT INTO ACTION VALUES (1, TRUE, 'Organize the Underworld', 3);
+INSERT INTO ACTION VALUES (2, TRUE, 'Find Replacement', 3);
+INSERT INTO ACTION VALUES (3, TRUE, 'Kill Replacement', 3);
+
+INSERT INTO ACTION VALUES (4, TRUE, 'Return Laptop', 2);
+INSERT INTO ACTION VALUES (5, FALSE, 'Pay money owed', 2);
+INSERT INTO ACTION VALUES (6, FALSE, 'Recieve money owed', 2);
