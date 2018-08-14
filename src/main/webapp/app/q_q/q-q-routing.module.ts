@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NavTopComponent } from './nav-top/nav-top.component';
-import { NavSideComponent } from './nav-side/nav-side.component';
 import { AlternativeMainComponent } from './alternative-main/alternative-main.component';
-import { separationApplicationRoute } from './separation-application/separation-application.route';
 
 import { errorRoute } from 'app/layouts';
+
+import { RecordsRouting } from './records/records.module';
+
 
 const alternativeMainRoutes = [...errorRoute];
 
@@ -15,7 +15,7 @@ const routes: Routes = [{
   component: AlternativeMainComponent,
   children: [
     ...alternativeMainRoutes,
-    ...separationApplicationRoute
+    ...RecordsRouting
   ]
 }];
 
