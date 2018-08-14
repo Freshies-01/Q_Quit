@@ -6,6 +6,8 @@ import { AlternativeMainComponent } from './alternative-main/alternative-main.co
 import { errorRoute } from 'app/layouts';
 
 import { RecordsRouting } from './records/records.module';
+import { reportsRoutes } from './reports/reports.module'
+import { dashboardRoutes } from './dashboard/dashboard.module';
 
 
 const alternativeMainRoutes = [...errorRoute];
@@ -15,7 +17,9 @@ const routes: Routes = [{
   component: AlternativeMainComponent,
   children: [
     ...alternativeMainRoutes,
-    ...RecordsRouting
+    ...RecordsRouting,
+    ...reportsRoutes,
+    ...dashboardRoutes
   ]
 }];
 
