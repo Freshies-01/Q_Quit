@@ -11,14 +11,14 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 export class EmployeeListComponent implements OnInit {
   employees: IEmployee[];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) { }
 
   loadAll() {
     this.employeeService.query().subscribe(
       (res: HttpResponse<IEmployee[]>) => {
         this.employees = res.body;
       },
-      (res: HttpErrorResponse) => console.console.error(res.message)
+      (res: HttpErrorResponse) => console.error(res.message)
     );
   }
   ngOnInit() {
