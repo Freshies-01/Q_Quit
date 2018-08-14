@@ -14,7 +14,7 @@ import { ISeparationApplication } from 'app/shared/model/separation-application.
 
 @Injectable({ providedIn: 'root' })
 export class SeparationApplicationResolve implements Resolve<ISeparationApplication> {
-    constructor(private service: SeparationApplicationService) {}
+    constructor(private service: SeparationApplicationService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
@@ -44,7 +44,7 @@ export const separationApplicationRoute: Routes = [
             separationApplication: SeparationApplicationResolve
         },
         data: {
-            authorities: ['ROLE_HR', 'ROLE_USER'],
+            authorities: [],
             pageTitle: 'SeparationApplications'
         },
         canActivate: [UserRouteAccessService]
@@ -56,7 +56,7 @@ export const separationApplicationRoute: Routes = [
             separationApplication: SeparationApplicationResolve
         },
         data: {
-            authorities: ['ROLE_HR'],
+            authorities: [],
             pageTitle: 'SeparationApplications'
         },
         canActivate: [UserRouteAccessService]
@@ -68,7 +68,7 @@ export const separationApplicationRoute: Routes = [
             separationApplication: SeparationApplicationResolve
         },
         data: {
-            authorities: ['ROLE_HR'],
+            authorities: [],
             pageTitle: 'SeparationApplications'
         },
         canActivate: [UserRouteAccessService]
@@ -83,7 +83,7 @@ export const separationApplicationPopupRoute: Routes = [
             separationApplication: SeparationApplicationResolve
         },
         data: {
-            authorities: ['ROLE_HR'],
+            authorities: [],
             pageTitle: 'SeparationApplications'
         },
         canActivate: [UserRouteAccessService],

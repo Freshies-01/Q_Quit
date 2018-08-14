@@ -1,0 +1,9 @@
+<nav>
+    <a class="navButton" (click)="toogleNav.emit()">
+        <i class="material-icons materialIconContainer">menu</i>
+    </a>
+    <div [ngSwitch]="isAuthenticated()">
+        <a *ngSwitchCase="false" class="navButton" (click)="signIn()">Sign In</a>
+        <a *ngSwitchCase="true" class="navButton" (click)="signOut()">Sign Out</a>
+    </div>
+</nav>
