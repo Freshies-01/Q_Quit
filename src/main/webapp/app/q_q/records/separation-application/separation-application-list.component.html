@@ -1,2 +1,5 @@
 <h1>Here is a list of SA:</h1>
-{{separationApplications | json}}
+<!-- {{separationApplications | json}} -->
+<li *ngFor="let apps of separationApplications">
+    <span>{{apps.status}}</span>
+</li>
