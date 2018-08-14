@@ -18,9 +18,7 @@ import { QQuitAccountModule } from './account/account.module';
 import { QQuitEntityModule } from './entities/entity.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
-import { AlternativeMainComponent } from './layouts/alternative-main/alternative-main.component';
-import { NavTopComponent, NavSideComponent } from './layouts';
-import { SeparationApplicationModule } from './custom-entities/separation-application';
+import { QQModule } from './Q_Q/q-q.module';
 
 @NgModule({
     imports: [
@@ -32,10 +30,10 @@ import { SeparationApplicationModule } from './custom-entities/separation-applic
         QQuitHomeModule,
         QQuitAccountModule,
         QQuitEntityModule,
-        SeparationApplicationModule
+        QQModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, AlternativeMainComponent, NavTopComponent, NavSideComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

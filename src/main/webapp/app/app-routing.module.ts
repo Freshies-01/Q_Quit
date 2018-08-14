@@ -2,12 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { errorRoute, navbarRoute } from 'app/layouts';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
-import { separationApplicationRoute } from 'app/custom-entities/separation-application';
-
-import { AlternativeMainComponent } from './layouts/alternative-main/alternative-main.component';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
-const alternativeMainRoutes = [...errorRoute];
+
 
 @NgModule({
     imports: [
@@ -21,14 +18,6 @@ const alternativeMainRoutes = [...errorRoute];
                             path: 'admin',
                             loadChildren: './admin/admin.module#QQuitAdminModule'
                         }
-                    ]
-                },
-                {
-                    path: 'Q_Q',
-                    component: AlternativeMainComponent,
-                    children: [
-                        ...alternativeMainRoutes,
-                        ...separationApplicationRoute
                     ]
                 },
                 {
