@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes } from '@angular/router';
 
-import { SeparationApplicationModule } from './separation-application/separation-application.module';
-
-import { separationApplicationRoute } from './separation-application/separation-application.route';
+import { SeparationApplicationModule, separationApplicationRoute } from './separation-application/separation-application.module';
 
 export const RecordsRouting: Routes = [
   {
