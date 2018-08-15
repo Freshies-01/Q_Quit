@@ -18,23 +18,22 @@ export class AlternativeMainComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    if (!this.principal.isAuthenticated()) {
-      this.loginModalService.open();
-    }
-
-    this.authStateSubscription = this.principal
-      .getAuthenticationState()
-      .subscribe(
-        value => {
-          if (value === null) {
-            this.loginModalService.open();
-          }
-        },
-        error => console.log(error)
-      );
+    // if (!this.principal.isAuthenticated()) {
+    //   this.loginModalService.open();
+    // }
+    // this.authStateSubscription = this.principal
+    //   .getAuthenticationState()
+    //   .subscribe(
+    //     value => {
+    //       if (value === null) {
+    //         this.loginModalService.open();
+    //       }
+    //     },
+    //     error => console.log(error)
+    //   );
   }
 
   ngOnDestroy() {
-    this.authStateSubscription.unsubscribe();
+    // this.authStateSubscription.unsubscribe();
   }
 }
