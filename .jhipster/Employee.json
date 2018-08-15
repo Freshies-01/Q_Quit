@@ -1,5 +1,6 @@
 {
-    "name": "Employee",
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipType": "many-to-one",
@@ -35,15 +36,20 @@
             "otherEntityName": "functionReps",
             "ownerSide": false,
             "otherEntityRelationshipName": "employee"
+        },
+        {
+            "relationshipName": "department",
+            "otherEntityName": "department",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
+    "fields": [],
     "changelogDate": "20180808183046",
-    "entityTableName": "employee",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "employee",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

@@ -39,7 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = QQuitApp.class)
 public class EmployeeResourceIntTest {
 
-    
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -79,7 +78,7 @@ public class EmployeeResourceIntTest {
      */
     public static Employee createEntity(EntityManager em) {
         Employee employee = new Employee();
-            return employee;
+        return employee;
     }
 
     @Before
@@ -123,7 +122,6 @@ public class EmployeeResourceIntTest {
         assertThat(employeeList).hasSize(databaseSizeBeforeCreate);
     }
 
-    
     @Test
     @Transactional
     public void getAllEmployees() throws Exception {

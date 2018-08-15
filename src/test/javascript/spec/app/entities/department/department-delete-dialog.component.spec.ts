@@ -11,27 +11,27 @@ import { Observable, of } from "rxjs";
 import { JhiEventManager } from "ng-jhipster";
 
 import { QQuitTestModule } from "../../../test.module";
-import { EmployeeDeleteDialogComponent } from "app/entities/employee/employee-delete-dialog.component";
-import { EmployeeService } from "app/entities/employee/employee.service";
+import { DepartmentDeleteDialogComponent } from "app/entities/department/department-delete-dialog.component";
+import { DepartmentService } from "app/entities/department/department.service";
 
 describe("Component Tests", () => {
-  describe("Employee Management Delete Component", () => {
-    let comp: EmployeeDeleteDialogComponent;
-    let fixture: ComponentFixture<EmployeeDeleteDialogComponent>;
-    let service: EmployeeService;
+  describe("Department Management Delete Component", () => {
+    let comp: DepartmentDeleteDialogComponent;
+    let fixture: ComponentFixture<DepartmentDeleteDialogComponent>;
+    let service: DepartmentService;
     let mockEventManager: any;
     let mockActiveModal: any;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [EmployeeDeleteDialogComponent]
+        declarations: [DepartmentDeleteDialogComponent]
       })
-        .overrideTemplate(EmployeeDeleteDialogComponent, "")
+        .overrideTemplate(DepartmentDeleteDialogComponent, "")
         .compileComponents();
-      fixture = TestBed.createComponent(EmployeeDeleteDialogComponent);
+      fixture = TestBed.createComponent(DepartmentDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(EmployeeService);
+      service = fixture.debugElement.injector.get(DepartmentService);
       mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
       mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
     });

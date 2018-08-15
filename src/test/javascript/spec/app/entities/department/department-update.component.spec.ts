@@ -9,27 +9,27 @@ import { HttpResponse } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 
 import { QQuitTestModule } from "../../../test.module";
-import { EmployeeUpdateComponent } from "app/entities/employee/employee-update.component";
-import { EmployeeService } from "app/entities/employee/employee.service";
-import { Employee } from "app/shared/model/employee.model";
+import { DepartmentUpdateComponent } from "app/entities/department/department-update.component";
+import { DepartmentService } from "app/entities/department/department.service";
+import { Department } from "app/shared/model/department.model";
 
 describe("Component Tests", () => {
-  describe("Employee Management Update Component", () => {
-    let comp: EmployeeUpdateComponent;
-    let fixture: ComponentFixture<EmployeeUpdateComponent>;
-    let service: EmployeeService;
+  describe("Department Management Update Component", () => {
+    let comp: DepartmentUpdateComponent;
+    let fixture: ComponentFixture<DepartmentUpdateComponent>;
+    let service: DepartmentService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [EmployeeUpdateComponent]
+        declarations: [DepartmentUpdateComponent]
       })
-        .overrideTemplate(EmployeeUpdateComponent, "")
+        .overrideTemplate(DepartmentUpdateComponent, "")
         .compileComponents();
 
-      fixture = TestBed.createComponent(EmployeeUpdateComponent);
+      fixture = TestBed.createComponent(DepartmentUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(EmployeeService);
+      service = fixture.debugElement.injector.get(DepartmentService);
     });
 
     describe("save", () => {
@@ -37,11 +37,11 @@ describe("Component Tests", () => {
         "Should call update service on save for existing entity",
         fakeAsync(() => {
           // GIVEN
-          const entity = new Employee(123);
+          const entity = new Department(123);
           spyOn(service, "update").and.returnValue(
             of(new HttpResponse({ body: entity }))
           );
-          comp.employee = entity;
+          comp.department = entity;
           // WHEN
           comp.save();
           tick(); // simulate async
@@ -56,11 +56,11 @@ describe("Component Tests", () => {
         "Should call create service on save for new entity",
         fakeAsync(() => {
           // GIVEN
-          const entity = new Employee();
+          const entity = new Department();
           spyOn(service, "create").and.returnValue(
             of(new HttpResponse({ body: entity }))
           );
-          comp.employee = entity;
+          comp.department = entity;
           // WHEN
           comp.save();
           tick(); // simulate async

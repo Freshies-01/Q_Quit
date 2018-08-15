@@ -4,26 +4,26 @@ import { ActivatedRoute } from "@angular/router";
 import { of } from "rxjs";
 
 import { QQuitTestModule } from "../../../test.module";
-import { EmployeeDetailComponent } from "app/entities/employee/employee-detail.component";
-import { Employee } from "app/shared/model/employee.model";
+import { DepartmentDetailComponent } from "app/entities/department/department-detail.component";
+import { Department } from "app/shared/model/department.model";
 
 describe("Component Tests", () => {
-  describe("Employee Management Detail Component", () => {
-    let comp: EmployeeDetailComponent;
-    let fixture: ComponentFixture<EmployeeDetailComponent>;
+  describe("Department Management Detail Component", () => {
+    let comp: DepartmentDetailComponent;
+    let fixture: ComponentFixture<DepartmentDetailComponent>;
     const route = ({
-      data: of({ employee: new Employee(123) })
+      data: of({ department: new Department(123) })
     } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [EmployeeDetailComponent],
+        declarations: [DepartmentDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }]
       })
-        .overrideTemplate(EmployeeDetailComponent, "")
+        .overrideTemplate(DepartmentDetailComponent, "")
         .compileComponents();
-      fixture = TestBed.createComponent(EmployeeDetailComponent);
+      fixture = TestBed.createComponent(DepartmentDetailComponent);
       comp = fixture.componentInstance;
     });
 
@@ -35,7 +35,7 @@ describe("Component Tests", () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.employee).toEqual(jasmine.objectContaining({ id: 123 }));
+        expect(comp.department).toEqual(jasmine.objectContaining({ id: 123 }));
       });
     });
   });

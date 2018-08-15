@@ -6,6 +6,7 @@ import { QQuitSeparationApplicationModule } from "./separation-application/separ
 import { QQuitHrRepsModule } from "./hr-reps/hr-reps.module";
 import { QQuitFunctionRepsModule } from "./function-reps/function-reps.module";
 import { QQuitActionModule } from "./action/action.module";
+import { QQuitDepartmentModule } from "./department/department.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -17,6 +18,7 @@ import { QQuitActionModule } from "./action/action.module";
         QQuitHrRepsModule,
         QQuitFunctionRepsModule,
         QQuitActionModule,
+        QQuitDepartmentModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
   declarations: [],

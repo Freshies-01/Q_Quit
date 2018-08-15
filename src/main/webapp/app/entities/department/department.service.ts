@@ -4,38 +4,38 @@ import { Observable } from "rxjs";
 
 import { SERVER_API_URL } from "app/app.constants";
 import { createRequestOption } from "app/shared";
-import { IEmployee } from "app/shared/model/employee.model";
+import { IDepartment } from "app/shared/model/department.model";
 
-type EntityResponseType = HttpResponse<IEmployee>;
-type EntityArrayResponseType = HttpResponse<IEmployee[]>;
+type EntityResponseType = HttpResponse<IDepartment>;
+type EntityArrayResponseType = HttpResponse<IDepartment[]>;
 
 @Injectable({ providedIn: "root" })
-export class EmployeeService {
-  private resourceUrl = SERVER_API_URL + "api/employees";
+export class DepartmentService {
+  private resourceUrl = SERVER_API_URL + "api/departments";
 
   constructor(private http: HttpClient) {}
 
-  create(employee: IEmployee): Observable<EntityResponseType> {
-    return this.http.post<IEmployee>(this.resourceUrl, employee, {
+  create(department: IDepartment): Observable<EntityResponseType> {
+    return this.http.post<IDepartment>(this.resourceUrl, department, {
       observe: "response"
     });
   }
 
-  update(employee: IEmployee): Observable<EntityResponseType> {
-    return this.http.put<IEmployee>(this.resourceUrl, employee, {
+  update(department: IDepartment): Observable<EntityResponseType> {
+    return this.http.put<IDepartment>(this.resourceUrl, department, {
       observe: "response"
     });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IEmployee>(`${this.resourceUrl}/${id}`, {
+    return this.http.get<IDepartment>(`${this.resourceUrl}/${id}`, {
       observe: "response"
     });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IEmployee[]>(this.resourceUrl, {
+    return this.http.get<IDepartment[]>(this.resourceUrl, {
       params: options,
       observe: "response"
     });

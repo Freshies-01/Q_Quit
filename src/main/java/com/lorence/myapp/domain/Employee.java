@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,25 +21,17 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // @NotNull
-    // @Column(name = "fname", nullable = false)
-    // private String fname;
-
-    // @NotNull
-    // @Column(name = "lname", nullable = false)
-    // private String lname;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private User user;
-
     @ManyToOne
-    @JsonIgnoreProperties("employees")
+    @JsonIgnoreProperties("")
     private Location location;
 
     @OneToOne(mappedBy = "employee")
     @JsonIgnore
     private SeparationApplication separationApplication;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
 
     @OneToOne(mappedBy = "employee")
     @JsonIgnore
@@ -50,6 +41,10 @@ public class Employee implements Serializable {
     @JsonIgnore
     private FunctionReps fr;
 
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Department department;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -58,41 +53,6 @@ public class Employee implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Employee user(User user) {
-        this.user = user;
-        return this;
-    }
-
-    // public String getFname() {
-    //     return fname;
-    // }
-
-    // public Employee fname(String fname) {
-    //     this.fname = fname;
-    //     return this;
-    // }
-
-    // public void setFname(String fname) {
-    //     this.fname = fname;
-    // }
-
-    // public String getLname() {
-    //     return lname;
-    // }
-
-    // public Employee lname(String lname) {
-    //     this.lname = lname;
-    //     return this;
-    // }
-
-    // public void setLname(String lname) {
-    //     this.lname = lname;
-    // }
 
     public Location getLocation() {
         return location;
@@ -120,6 +80,19 @@ public class Employee implements Serializable {
         this.separationApplication = separationApplication;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public Employee user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public HrReps getHr() {
         return hr;
     }
@@ -144,6 +117,19 @@ public class Employee implements Serializable {
 
     public void setFr(FunctionReps functionReps) {
         this.fr = functionReps;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public Employee department(Department department) {
+        this.department = department;
+        return this;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -171,8 +157,6 @@ public class Employee implements Serializable {
     public String toString() {
         return "Employee{" +
             "id=" + getId() +
-            // ", fname='" + getFname() + "'" +
-            // ", lname='" + getLname() + "'" +
             "}";
     }
 }

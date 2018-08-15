@@ -4,14 +4,14 @@ import {
   HttpClientTestingModule,
   HttpTestingController
 } from "@angular/common/http/testing";
-import { EmployeeService } from "app/entities/employee/employee.service";
-import { Employee } from "app/shared/model/employee.model";
+import { DepartmentService } from "app/entities/department/department.service";
+import { Department } from "app/shared/model/department.model";
 import { SERVER_API_URL } from "app/app.constants";
 
 describe("Service Tests", () => {
-  describe("Employee Service", () => {
+  describe("Department Service", () => {
     let injector: TestBed;
-    let service: EmployeeService;
+    let service: DepartmentService;
     let httpMock: HttpTestingController;
 
     beforeEach(() => {
@@ -19,7 +19,7 @@ describe("Service Tests", () => {
         imports: [HttpClientTestingModule]
       });
       injector = getTestBed();
-      service = injector.get(EmployeeService);
+      service = injector.get(DepartmentService);
       httpMock = injector.get(HttpTestingController);
     });
 
@@ -29,12 +29,12 @@ describe("Service Tests", () => {
 
         const req = httpMock.expectOne({ method: "GET" });
 
-        const resourceUrl = SERVER_API_URL + "api/employees";
+        const resourceUrl = SERVER_API_URL + "api/departments";
         expect(req.request.url).toEqual(resourceUrl + "/" + 123);
       });
 
-      it("should create a Employee", () => {
-        service.create(new Employee(null)).subscribe(received => {
+      it("should create a Department", () => {
+        service.create(new Department(null)).subscribe(received => {
           expect(received.body.id).toEqual(null);
         });
 
@@ -42,8 +42,8 @@ describe("Service Tests", () => {
         req.flush({ id: null });
       });
 
-      it("should update a Employee", () => {
-        service.update(new Employee(123)).subscribe(received => {
+      it("should update a Department", () => {
+        service.update(new Department(123)).subscribe(received => {
           expect(received.body.id).toEqual(123);
         });
 
@@ -51,7 +51,7 @@ describe("Service Tests", () => {
         req.flush({ id: 123 });
       });
 
-      it("should return a Employee", () => {
+      it("should return a Department", () => {
         service.find(123).subscribe(received => {
           expect(received.body.id).toEqual(123);
         });
@@ -60,16 +60,16 @@ describe("Service Tests", () => {
         req.flush({ id: 123 });
       });
 
-      it("should return a list of Employee", () => {
+      it("should return a list of Department", () => {
         service.query(null).subscribe(received => {
           expect(received.body[0].id).toEqual(123);
         });
 
         const req = httpMock.expectOne({ method: "GET" });
-        req.flush([new Employee(123)]);
+        req.flush([new Department(123)]);
       });
 
-      it("should delete a Employee", () => {
+      it("should delete a Department", () => {
         service.delete(123).subscribe(received => {
           expect(received.url).toContain("/" + 123);
         });

@@ -3,30 +3,30 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Subscription } from "rxjs";
 import { JhiEventManager, JhiAlertService } from "ng-jhipster";
 
-import { IEmployee } from "app/shared/model/employee.model";
+import { IDepartment } from "app/shared/model/department.model";
 import { Principal } from "app/core";
-import { EmployeeService } from "./employee.service";
+import { DepartmentService } from "./department.service";
 
 @Component({
-  selector: "jhi-employee",
-  templateUrl: "./employee.component.html"
+  selector: "jhi-department",
+  templateUrl: "./department.component.html"
 })
-export class EmployeeComponent implements OnInit, OnDestroy {
-  employees: IEmployee[];
+export class DepartmentComponent implements OnInit, OnDestroy {
+  departments: IDepartment[];
   currentAccount: any;
   eventSubscriber: Subscription;
 
   constructor(
-    private employeeService: EmployeeService,
+    private departmentService: DepartmentService,
     private jhiAlertService: JhiAlertService,
     private eventManager: JhiEventManager,
     private principal: Principal
   ) {}
 
   loadAll() {
-    this.employeeService.query().subscribe(
-      (res: HttpResponse<IEmployee[]>) => {
-        this.employees = res.body;
+    this.departmentService.query().subscribe(
+      (res: HttpResponse<IDepartment[]>) => {
+        this.departments = res.body;
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
@@ -37,20 +37,20 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.principal.identity().then(account => {
       this.currentAccount = account;
     });
-    this.registerChangeInEmployees();
+    this.registerChangeInDepartments();
   }
 
   ngOnDestroy() {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: IEmployee) {
+  trackId(index: number, item: IDepartment) {
     return item.id;
   }
 
-  registerChangeInEmployees() {
+  registerChangeInDepartments() {
     this.eventSubscriber = this.eventManager.subscribe(
-      "employeeListModification",
+      "departmentListModification",
       response => this.loadAll()
     );
   }

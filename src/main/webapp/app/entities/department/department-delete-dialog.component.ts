@@ -8,18 +8,18 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { JhiEventManager } from "ng-jhipster";
 
-import { IEmployee } from "app/shared/model/employee.model";
-import { EmployeeService } from "./employee.service";
+import { IDepartment } from "app/shared/model/department.model";
+import { DepartmentService } from "./department.service";
 
 @Component({
-  selector: "jhi-employee-delete-dialog",
-  templateUrl: "./employee-delete-dialog.component.html"
+  selector: "jhi-department-delete-dialog",
+  templateUrl: "./department-delete-dialog.component.html"
 })
-export class EmployeeDeleteDialogComponent {
-  employee: IEmployee;
+export class DepartmentDeleteDialogComponent {
+  department: IDepartment;
 
   constructor(
-    private employeeService: EmployeeService,
+    private departmentService: DepartmentService,
     public activeModal: NgbActiveModal,
     private eventManager: JhiEventManager
   ) {}
@@ -29,10 +29,10 @@ export class EmployeeDeleteDialogComponent {
   }
 
   confirmDelete(id: number) {
-    this.employeeService.delete(id).subscribe(response => {
+    this.departmentService.delete(id).subscribe(response => {
       this.eventManager.broadcast({
-        name: "employeeListModification",
-        content: "Deleted an employee"
+        name: "departmentListModification",
+        content: "Deleted an department"
       });
       this.activeModal.dismiss(true);
     });
@@ -40,10 +40,10 @@ export class EmployeeDeleteDialogComponent {
 }
 
 @Component({
-  selector: "jhi-employee-delete-popup",
+  selector: "jhi-department-delete-popup",
   template: ""
 })
-export class EmployeeDeletePopupComponent implements OnInit, OnDestroy {
+export class DepartmentDeletePopupComponent implements OnInit, OnDestroy {
   private ngbModalRef: NgbModalRef;
 
   constructor(
@@ -53,13 +53,13 @@ export class EmployeeDeletePopupComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ employee }) => {
+    this.activatedRoute.data.subscribe(({ department }) => {
       setTimeout(() => {
         this.ngbModalRef = this.modalService.open(
-          EmployeeDeleteDialogComponent as Component,
+          DepartmentDeleteDialogComponent as Component,
           { size: "lg", backdrop: "static" }
         );
-        this.ngbModalRef.componentInstance.employee = employee;
+        this.ngbModalRef.componentInstance.department = department;
         this.ngbModalRef.result.then(
           result => {
             this.router.navigate([{ outlets: { popup: null } }], {

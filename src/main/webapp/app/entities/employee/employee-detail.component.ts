@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
-import { IEmployee } from 'app/shared/model/employee.model';
+import { IEmployee } from "app/shared/model/employee.model";
 
 @Component({
-    selector: 'jhi-employee-detail',
-    templateUrl: './employee-detail.component.html'
+  selector: "jhi-employee-detail",
+  templateUrl: "./employee-detail.component.html"
 })
 export class EmployeeDetailComponent implements OnInit {
-    employee: IEmployee;
+  employee: IEmployee;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ employee }) => {
-            this.employee = employee;
-        });
-    }
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(({ employee }) => {
+      this.employee = employee;
+    });
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  previousState() {
+    window.history.back();
+  }
 }

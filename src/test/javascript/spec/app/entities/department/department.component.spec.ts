@@ -4,28 +4,28 @@ import { Observable, of } from "rxjs";
 import { HttpHeaders, HttpResponse } from "@angular/common/http";
 
 import { QQuitTestModule } from "../../../test.module";
-import { EmployeeComponent } from "app/entities/employee/employee.component";
-import { EmployeeService } from "app/entities/employee/employee.service";
-import { Employee } from "app/shared/model/employee.model";
+import { DepartmentComponent } from "app/entities/department/department.component";
+import { DepartmentService } from "app/entities/department/department.service";
+import { Department } from "app/shared/model/department.model";
 
 describe("Component Tests", () => {
-  describe("Employee Management Component", () => {
-    let comp: EmployeeComponent;
-    let fixture: ComponentFixture<EmployeeComponent>;
-    let service: EmployeeService;
+  describe("Department Management Component", () => {
+    let comp: DepartmentComponent;
+    let fixture: ComponentFixture<DepartmentComponent>;
+    let service: DepartmentService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [EmployeeComponent],
+        declarations: [DepartmentComponent],
         providers: []
       })
-        .overrideTemplate(EmployeeComponent, "")
+        .overrideTemplate(DepartmentComponent, "")
         .compileComponents();
 
-      fixture = TestBed.createComponent(EmployeeComponent);
+      fixture = TestBed.createComponent(DepartmentComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(EmployeeService);
+      service = fixture.debugElement.injector.get(DepartmentService);
     });
 
     it("Should call load all on init", () => {
@@ -34,7 +34,7 @@ describe("Component Tests", () => {
       spyOn(service, "query").and.returnValue(
         of(
           new HttpResponse({
-            body: [new Employee(123)],
+            body: [new Department(123)],
             headers
           })
         )
@@ -45,7 +45,9 @@ describe("Component Tests", () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.employees[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.departments[0]).toEqual(
+        jasmine.objectContaining({ id: 123 })
+      );
     });
   });
 });
