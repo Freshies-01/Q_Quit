@@ -1,0 +1,198 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-separtation-application-log-heading">Create or edit a Separtation Application Log</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!separtationApplicationLog.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="separtationApplicationLog.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" name="status" [(ngModel)]="separtationApplicationLog.status" id="field_status"  required>
+                        <option value="COMPLETED">COMPLETED</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="CLOSED">CLOSED</option>
+                        <option value="IN_PROGRESS">IN_PROGRESS</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.status?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateApproved">Date Approved</label>
+                    <div class="input-group">
+                        <input id="field_dateApproved" type="text" class="form-control" name="dateApproved" ngbDatepicker  #dateApprovedDp="ngbDatepicker" [(ngModel)]="separtationApplicationLog.dateApproved"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateApprovedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateSubmitted">Date Submitted</label>
+                    <div class="input-group">
+                        <input id="field_dateSubmitted" type="text" class="form-control" name="dateSubmitted" ngbDatepicker  #dateSubmittedDp="ngbDatepicker" [(ngModel)]="separtationApplicationLog.dateSubmitted"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateSubmittedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.dateSubmitted?.dirty && editForm.controls.dateSubmitted?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dateSubmitted?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateCompleted">Date Completed</label>
+                    <div class="input-group">
+                        <input id="field_dateCompleted" type="text" class="form-control" name="dateCompleted" ngbDatepicker  #dateCompletedDp="ngbDatepicker" [(ngModel)]="separtationApplicationLog.dateCompleted"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCompletedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateOfLeave">Date Of Leave</label>
+                    <div class="input-group">
+                        <input id="field_dateOfLeave" type="text" class="form-control" name="dateOfLeave" ngbDatepicker  #dateOfLeaveDp="ngbDatepicker" [(ngModel)]="separtationApplicationLog.dateOfLeave"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateOfLeaveDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_actionAdded">Action Added</label>
+                    <input type="checkbox" class="form-control" name="actionAdded" id="field_actionAdded"
+                        [(ngModel)]="separtationApplicationLog.actionAdded" />
+                    <div [hidden]="!(editForm.controls.actionAdded?.dirty && editForm.controls.actionAdded?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.actionAdded?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateEdited">Date Edited</label>
+                    <div class="input-group">
+                        <input id="field_dateEdited" type="text" class="form-control" name="dateEdited" ngbDatepicker  #dateEditedDp="ngbDatepicker" [(ngModel)]="separtationApplicationLog.dateEdited"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateEditedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.dateEdited?.dirty && editForm.controls.dateEdited?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dateEdited?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_editType">Edit Type</label>
+                    <select class="form-control" name="editType" [(ngModel)]="separtationApplicationLog.editType" id="field_editType"  required>
+                        <option value="CREATE">CREATE</option>
+                        <option value="UPDATE">UPDATE</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.editType?.dirty && editForm.controls.editType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.editType?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_editor">Editor</label>
+                    <select class="form-control" id="field_editor" name="editor" [(ngModel)]="separtationApplicationLog.editor" required>
+                        <option *ngIf="!editForm.value.editor" [ngValue]="null" selected></option>
+                        <option [ngValue]="employeeOption.id === separtationApplicationLog.editor?.id ? separtationApplicationLog.editor : employeeOption" *ngFor="let employeeOption of editors; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.editor?.dirty && editForm.controls.editor?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.editor?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_action">Action</label>
+                    <select class="form-control" id="field_action" name="action" [(ngModel)]="separtationApplicationLog.action">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="actionOption.id === separtationApplicationLog.action?.id ? separtationApplicationLog.action : actionOption" *ngFor="let actionOption of actions; trackBy: trackActionById">{{actionOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_hrReps">Hr Reps</label>
+                    <select class="form-control" id="field_hrReps" name="hrReps" [(ngModel)]="separtationApplicationLog.hrReps" required>
+                        <option *ngIf="!editForm.value.hrReps" [ngValue]="null" selected></option>
+                        <option [ngValue]="hrRepsOption.id === separtationApplicationLog.hrReps?.id ? separtationApplicationLog.hrReps : hrRepsOption" *ngFor="let hrRepsOption of hrreps; trackBy: trackHrRepsById">{{hrRepsOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.hrReps?.dirty && editForm.controls.hrReps?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.hrReps?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_functionReps">Function Reps</label>
+                    <select class="form-control" id="field_functionReps" name="functionReps" [(ngModel)]="separtationApplicationLog.functionReps" required>
+                        <option *ngIf="!editForm.value.functionReps" [ngValue]="null" selected></option>
+                        <option [ngValue]="functionRepsOption.id === separtationApplicationLog.functionReps?.id ? separtationApplicationLog.functionReps : functionRepsOption" *ngFor="let functionRepsOption of functionreps; trackBy: trackFunctionRepsById">{{functionRepsOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.functionReps?.dirty && editForm.controls.functionReps?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.functionReps?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_employee">Employee</label>
+                    <select class="form-control" id="field_employee" name="employee" [(ngModel)]="separtationApplicationLog.employee" required>
+                        <option *ngIf="!editForm.value.employee" [ngValue]="null" selected></option>
+                        <option [ngValue]="employeeOption.id === separtationApplicationLog.employee?.id ? separtationApplicationLog.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.employee?.dirty && editForm.controls.employee?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.employee?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_separationApplication">Separation Application</label>
+                    <select class="form-control" id="field_separationApplication" name="separationApplication" [(ngModel)]="separtationApplicationLog.separationApplication" required>
+                        <option *ngIf="!editForm.value.separationApplication" [ngValue]="null" selected></option>
+                        <option [ngValue]="separationApplicationOption.id === separtationApplicationLog.separationApplication?.id ? separtationApplicationLog.separationApplication : separationApplicationOption" *ngFor="let separationApplicationOption of separationapplications; trackBy: trackSeparationApplicationById">{{separationApplicationOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.separationApplication?.dirty && editForm.controls.separationApplication?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.separationApplication?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -7,6 +7,7 @@ import { QQuitHrRepsModule } from "./hr-reps/hr-reps.module";
 import { QQuitFunctionRepsModule } from "./function-reps/function-reps.module";
 import { QQuitActionModule } from "./action/action.module";
 import { QQuitDepartmentModule } from "./department/department.module";
+import { QQuitSepartationApplicationLogModule } from "./separtation-application-log/separtation-application-log.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -19,6 +20,7 @@ import { QQuitDepartmentModule } from "./department/department.module";
         QQuitFunctionRepsModule,
         QQuitActionModule,
         QQuitDepartmentModule,
+        QQuitSepartationApplicationLogModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
   declarations: [],
