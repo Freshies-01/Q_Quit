@@ -1,0 +1,40 @@
+{
+    "applications": [
+        {
+            "id": 1,
+            "status": "PENDING",
+            "date_of_leave": "2018-08-14",
+            "date_submitted": "2018-07-29",
+            "date_approved": "",
+            "date_completed": "",
+            "employee": "Josh",
+            "actions": "eat Steve's enchilada",
+            "function_rep": "Drake",
+            "hr_rep": "Helen"
+        },
+        {
+            "id": 2,
+            "status": "COMPLETED",
+            "date_of_leave": "2018-08-14",
+            "date_submitted": "2018-07-29",
+            "date_approved": "2018-08-02",
+            "date_completed": "2018-08-04",
+            "employee": "John",
+            "actions": "be generic",
+            "function_rep": "Jaun",
+            "hr_rep": "Jeanne"
+        },
+        {
+            "id": 3,
+            "status": "IN_PROGRESS",
+            "date_of_leave": "2018-08-14",
+            "date_submitted": "2018-07-29",
+            "date_approved": "2018-08-02",
+            "date_completed": "",
+            "employee": "Zell",
+            "actions": "punch a train",
+            "function_rep": "Quistis",
+            "hr_rep": "Squall"
+        }
+    ]
+}
