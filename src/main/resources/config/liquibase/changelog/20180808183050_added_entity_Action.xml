@@ -30,6 +30,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="date_completed" type="date">
+                <constraints nullable="true" />
+            </column>
+
             <column name="separation_application_id" type="bigint">
                 <constraints nullable="true" />
             </column>

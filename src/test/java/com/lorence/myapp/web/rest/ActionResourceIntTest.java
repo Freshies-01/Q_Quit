@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -44,6 +46,9 @@ public class ActionResourceIntTest {
 
     private static final String DEFAULT_TASK = "AAAAAAAAAA";
     private static final String UPDATED_TASK = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_DATE_COMPLETED = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_COMPLETED = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private ActionRepository actionRepository;
@@ -85,7 +90,8 @@ public class ActionResourceIntTest {
     public static Action createEntity(EntityManager em) {
         Action action = new Action()
             .isCompleted(DEFAULT_IS_COMPLETED)
-            .task(DEFAULT_TASK);
+            .task(DEFAULT_TASK)
+            .dateCompleted(DEFAULT_DATE_COMPLETED);
         return action;
     }
 
@@ -111,6 +117,7 @@ public class ActionResourceIntTest {
         Action testAction = actionList.get(actionList.size() - 1);
         assertThat(testAction.isIsCompleted()).isEqualTo(DEFAULT_IS_COMPLETED);
         assertThat(testAction.getTask()).isEqualTo(DEFAULT_TASK);
+        assertThat(testAction.getDateCompleted()).isEqualTo(DEFAULT_DATE_COMPLETED);
     }
 
     @Test
@@ -144,7 +151,8 @@ public class ActionResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(action.getId().intValue())))
             .andExpect(jsonPath("$.[*].isCompleted").value(hasItem(DEFAULT_IS_COMPLETED.booleanValue())))
-            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())));
+            .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())))
+            .andExpect(jsonPath("$.[*].dateCompleted").value(hasItem(DEFAULT_DATE_COMPLETED.toString())));
     }
     
 
@@ -160,7 +168,8 @@ public class ActionResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(action.getId().intValue()))
             .andExpect(jsonPath("$.isCompleted").value(DEFAULT_IS_COMPLETED.booleanValue()))
-            .andExpect(jsonPath("$.task").value(DEFAULT_TASK.toString()));
+            .andExpect(jsonPath("$.task").value(DEFAULT_TASK.toString()))
+            .andExpect(jsonPath("$.dateCompleted").value(DEFAULT_DATE_COMPLETED.toString()));
     }
     @Test
     @Transactional
@@ -184,7 +193,8 @@ public class ActionResourceIntTest {
         em.detach(updatedAction);
         updatedAction
             .isCompleted(UPDATED_IS_COMPLETED)
-            .task(UPDATED_TASK);
+            .task(UPDATED_TASK)
+            .dateCompleted(UPDATED_DATE_COMPLETED);
 
         restActionMockMvc.perform(put("/api/actions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -197,6 +207,7 @@ public class ActionResourceIntTest {
         Action testAction = actionList.get(actionList.size() - 1);
         assertThat(testAction.isIsCompleted()).isEqualTo(UPDATED_IS_COMPLETED);
         assertThat(testAction.getTask()).isEqualTo(UPDATED_TASK);
+        assertThat(testAction.getDateCompleted()).isEqualTo(UPDATED_DATE_COMPLETED);
     }
 
     @Test

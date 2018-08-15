@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -26,8 +27,11 @@ public class Action implements Serializable {
     @Column(name = "task")
     private String task;
 
+    @Column(name = "date_completed")
+    private LocalDate dateCompleted;
+
     @ManyToOne
-    @JsonIgnoreProperties("actions")
+    @JsonIgnoreProperties("")
     private SeparationApplication separationApplication;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -63,6 +67,19 @@ public class Action implements Serializable {
 
     public void setTask(String task) {
         this.task = task;
+    }
+
+    public LocalDate getDateCompleted() {
+        return dateCompleted;
+    }
+
+    public Action dateCompleted(LocalDate dateCompleted) {
+        this.dateCompleted = dateCompleted;
+        return this;
+    }
+
+    public void setDateCompleted(LocalDate dateCompleted) {
+        this.dateCompleted = dateCompleted;
     }
 
     public SeparationApplication getSeparationApplication() {
@@ -105,6 +122,7 @@ public class Action implements Serializable {
             "id=" + getId() +
             ", isCompleted='" + isIsCompleted() + "'" +
             ", task='" + getTask() + "'" +
+            ", dateCompleted='" + getDateCompleted() + "'" +
             "}";
     }
 }
