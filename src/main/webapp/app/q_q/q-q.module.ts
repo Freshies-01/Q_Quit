@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 import { QQRoutingModule } from "./q-q-routing.module";
 
@@ -17,7 +18,8 @@ import { LoginPageComponent } from "./login-page/login-page.component";
     RecordsModule,
     QQRoutingModule,
     ReportsModule,
-    DashboardModule
+    DashboardModule,
+    FormsModule
   ],
   declarations: [
     NavTopComponent,
