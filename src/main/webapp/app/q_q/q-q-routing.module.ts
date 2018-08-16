@@ -9,22 +9,30 @@ import { RecordsRouting } from "./records/records.module";
 import { reportsRoutes } from "./reports/reports.module";
 import { dashboardRoutes } from "./dashboard/dashboard.module";
 import { LoginPageComponent } from "./login-page/login-page.component";
+import { UserRouteAccessService } from "app/core/auth/user-route-access-service";
 
 const alternativeMainRoutes = [...errorRoute];
 
 const routes: Routes = [
   {
+    path: "Q_Q/login",
+    component: LoginPageComponent
+  },
+  {
     path: "Q_Q",
     component: AlternativeMainComponent,
+
+    data: {
+      authorities: ["ROLE_ADMIN"],
+
+      pageTitle: "Separation Applications"
+    },
+    canActivate: [UserRouteAccessService],
     children: [
       ...alternativeMainRoutes,
       ...RecordsRouting,
       ...reportsRoutes,
-      ...dashboardRoutes,
-      {
-        path: "login",
-        component: LoginPageComponent
-      }
+      ...dashboardRoutes
     ]
   }
 ];
