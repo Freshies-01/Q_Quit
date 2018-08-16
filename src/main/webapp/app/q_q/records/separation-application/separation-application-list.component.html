@@ -1,17 +1,5 @@
 <h1>Here is a list of SA:</h1>
 <!-- {{separationApplications | json}} -->
-<<<<<<< HEAD
-<ul>
-    <li *ngFor="let apps of separationApplications">
-        Name: {{apps.employee?.user?.firstName}} {{apps.employee?.user?.lastName}} <br/>
-        HR: {{apps.hr?.employee?.user?.firstName}} {{apps.hr?.employee?.user?.lastName}} <br/>
-        FR: {{apps.fr?.employee?.user?.firstName}} {{apps.fr?.employee?.user?.lastName}} <br/>
-        Location: {{apps.employee?.location?.city}} <br/>
-        Status: {{apps.status}}
-    </li>
-</ul></ul>
-</ul>
-=======
 
 <ul>
     <li *ngFor="let app of separationApplications">
@@ -26,16 +14,15 @@
                     </mat-card-subtitle>
                 </div>
                 <div>
-                    <mat-progress-spinner></mat-progress-spinner>
-                    <br/>
-                    <mat-card-subtitle>Status: {{app.status}}</mat-card-subtitle>
+                    <mat-progress-spinner class="status-progress" [mode]="mode" [value]="value"></mat-progress-spinner><br/>
+                    <mat-card-subtitle>Status: sample status</mat-card-subtitle>
                 </div>
             </div>
         </mat-card>
         <br/>
     </li>
 </ul>
-<!-- <mat-card>
+<mat-card>
     <div class="flex-container">
         <div>
             <mat-card-title>sample name</mat-card-title>
@@ -46,7 +33,7 @@
             </mat-card-subtitle>
         </div>
         <div>
-            <mat-spinner></mat-spinner><br/>
+            <mat-progress-spinner class="status-progress" [mode]="mode" [value]="value"></mat-progress-spinner><br/>
             <mat-card-subtitle>Status: sample status</mat-card-subtitle>
         </div>
     </div>
@@ -84,5 +71,4 @@
             <mat-card-subtitle>Status: sample status</mat-card-subtitle>
         </div>
     </div>
-</mat-card> -->
->>>>>>> 80c648b7a880047019da128928bbdee88a5a0603
+</mat-card>

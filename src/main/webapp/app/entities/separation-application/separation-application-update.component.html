@@ -11,10 +11,11 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_status">Status</label>
                     <select class="form-control" name="status" [(ngModel)]="separationApplication.status" id="field_status" required>
-                        <option value="COMPLETED">COMPLETED</option>
-                        <option value="PENDING">PENDING</option>
-                        <option value="CLOSED">CLOSED</option>
-                        <option value="IN_PROGRESS">IN_PROGRESS</option>
+                        <option value="PENDING">Pending</option>
+                        <option value="UNDER_REVIEW_FR">Under Function Review</option>
+                        <option value="EMPLOYEE_TASKS_IN_PROGRESS">Employee Tasks in Progress</option>
+                        <option value="EMPLOYEE_TASKS_COMPLETED">Employee Tasks Completed</option>
+                        <option value="CLOSED">Closed</option>
                     </select>
                     <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.status?.errors?.required">
