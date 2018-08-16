@@ -25,15 +25,15 @@
     "@angular-devkit/core" "0.6.0"
     rxjs "^6.0.0"
 
-"@angular/animations@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-6.0.0.tgz#cfc825dbfdf33bf3bf75962d1e12495aed5e3c32"
+"@angular/animations@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-6.1.3.tgz#c7b1cf407e5087a499532999cb412a546f9ba855"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cdk@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-6.0.0.tgz#0e1736eca8900ce1c4e66699d09e91d4ce151f56"
+"@angular/cdk@~6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-6.1.0.tgz#14ae46730315d40b5a642daa8f5f80815930085c"
   dependencies:
     tslib "^1.7.1"
 
@@ -54,9 +54,9 @@
     symbol-observable "^1.2.0"
     yargs-parser "^10.0.0"
 
-"@angular/common@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-6.0.0.tgz#ca3b6b6b96837fe048861da897c31991aa04954f"
+"@angular/common@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-6.1.3.tgz#ae3d45224348fd8b682c104ced6345e7bd7e2a64"
   dependencies:
     tslib "^1.9.0"
 
@@ -69,47 +69,45 @@
     reflect-metadata "^0.1.2"
     tsickle "^0.27.2"
 
-"@angular/compiler@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-6.0.0.tgz#9092a0f02f33dd1108276ab93cc48142e36a1e95"
+"@angular/compiler@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-6.1.3.tgz#a02efd29e70bb7d1230ca877f9c720518bdf364c"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.0.0.tgz#785cc8a37b7fb784a6b7dcbd0984abb4f10e5dfe"
+"@angular/core@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.1.3.tgz#6561ba0b40a12758e5237fc05186b56d6d0bdbc9"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/forms@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-6.0.0.tgz#436e2df39dc57db124da5a5c02bc63909fdf7046"
+"@angular/forms@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-6.1.3.tgz#92ff08518bafae3c6a8019ac55dada3a9b2f0232"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/material@angular/material2-builds":
-  version "6.4.5-7e74b5d"
-  resolved "https://codeload.github.com/angular/material2-builds/tar.gz/13793eb0a1820ad9efc33c73325964b77727c8ce"
+"@angular/material@~6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-6.1.0.tgz#c13f4fb38ae6f52c7c49cd8d3ae4baca4abd36ab"
   dependencies:
     tslib "^1.7.1"
-  optionalDependencies:
-    parse5 "^5.0.0"
 
-"@angular/platform-browser-dynamic@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-6.0.0.tgz#66a34b65136446cb3ec39362fd6d2dbb5482ba70"
+"@angular/platform-browser-dynamic@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-6.1.3.tgz#108c42b7eeee57325b686008323d8ddc46addd8c"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-6.0.0.tgz#848b687ea46786483fddcdbbbd17b29c7adcc768"
+"@angular/platform-browser@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-6.1.3.tgz#b918dfd05250e47c650dfe70f65173c65caaab91"
   dependencies:
     tslib "^1.9.0"
 
-"@angular/router@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-6.0.0.tgz#09a5c6f6220084c3575df81e8b36cbe9fff10d1f"
+"@angular/router@~6.1.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-6.1.3.tgz#c11d4b9a9bfaa21d11c2464c82639f6dac3e8170"
   dependencies:
     tslib "^1.9.0"
 
@@ -3885,6 +3883,10 @@ gulp-filter@5.1.0:
     plugin-error "^0.1.2"
     streamfilter "^1.0.5"
 
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -6570,10 +6572,6 @@ parse5@^3.0.3:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-3.0.3.tgz#042f792ffdd36851551cf4e9e066b3874ab45b5c"
   dependencies:
     "@types/node" "*"
-
-parse5@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.0.tgz#c59341c9723f414c452975564c7c00a68d58acd2"
 
 parseqs@0.0.5:
   version "0.0.5"

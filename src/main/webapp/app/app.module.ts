@@ -31,6 +31,7 @@ import {
 import { QQModule } from "./Q_Q/q-q.module";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AngularMaterialModule } from "app/shared/angular-material.module";
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     QQuitAccountModule,
     QQuitEntityModule,
     QQModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularMaterialModule
     // jhipster-needle-angular-add-module JHipster will add new module here
   ],
   declarations: [
