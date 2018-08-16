@@ -57,7 +57,7 @@
                     <td>{{separationApplication.dateApproved | date:'mediumDate'}}</td>
                     <td>
                         <div *ngIf="separationApplication.employee">
-                            <a [routerLink]="['../employee', separationApplication.employee?.id, 'view' ]">{{separationApplication.employee?.user?.firstNamee}}</a>
+                            <a [routerLink]="['../employee', separationApplication.employee?.id, 'view' ]">{{separationApplication.employee?.user?.firstName}}</a>
                         </div>
                     </td>
                     <td>
