@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { JhiAlertService } from "ng-jhipster";
 
 import { IAction } from "app/shared/model/action.model";
-import { ActionService } from "./action.service";
+import { ActionService } from "app/entities/action/action.service";
 import { ISeparationApplication } from "app/shared/model/separation-application.model";
 import { SeparationApplicationService } from "app/entities/separation-application";
 

@@ -10,7 +10,7 @@ import {
   EmployeeDeleteDialogComponent,
   employeeRoute,
   employeePopupRoute
-} from "./";
+} from "app/entities/employee";
 
 const ENTITY_STATES = [...employeeRoute, ...employeePopupRoute];
 

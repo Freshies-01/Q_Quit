@@ -1,5 +1,9 @@
 package com.lorence.myapp.web.rest;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+
 import com.lorence.myapp.config.Constants;
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.User;
@@ -73,6 +77,19 @@ public class UserResource {
         this.mailService = mailService;
     }
 
+    
+    public String getCurrentUserLogin() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String login = null;
+        if (authentication != null) {
+            if (authentication.getPrincipal() instanceof UserDTO)
+             login = ((UserDTO) authentication.getPrincipal()).getLogin();
+            else if (authentication.getPrincipal() instanceof String)
+             login = (String) authentication.getPrincipal();
+        }
+        return login; 
+    }
     /**
      * POST  /users  : Creates a new user.
      * <p>

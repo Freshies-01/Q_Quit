@@ -4,29 +4,29 @@ import { ActivatedRoute } from "@angular/router";
 import { of } from "rxjs";
 
 import { QQuitTestModule } from "../../../test.module";
-import { SepartationApplicationLogDetailComponent } from "app/entities/separtation-application-log/separtation-application-log-detail.component";
-import { SepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
+import { SeparationApplicationLogDetailComponent } from "app/entities/separation-application-log/separation-application-log-detail.component";
+import { SeparationApplicationLog } from "app/shared/model/separation-application-log.model";
 
 describe("Component Tests", () => {
-  describe("SepartationApplicationLog Management Detail Component", () => {
-    let comp: SepartationApplicationLogDetailComponent;
-    let fixture: ComponentFixture<SepartationApplicationLogDetailComponent>;
+  describe("SeparationApplicationLog Management Detail Component", () => {
+    let comp: SeparationApplicationLogDetailComponent;
+    let fixture: ComponentFixture<SeparationApplicationLogDetailComponent>;
     const route = ({
       data: of({
-        separtationApplicationLog: new SepartationApplicationLog(123)
+        separationApplicationLog: new SeparationApplicationLog(123)
       })
     } as any) as ActivatedRoute;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [SepartationApplicationLogDetailComponent],
+        declarations: [SeparationApplicationLogDetailComponent],
         providers: [{ provide: ActivatedRoute, useValue: route }]
       })
-        .overrideTemplate(SepartationApplicationLogDetailComponent, "")
+        .overrideTemplate(SeparationApplicationLogDetailComponent, "")
         .compileComponents();
       fixture = TestBed.createComponent(
-        SepartationApplicationLogDetailComponent
+        SeparationApplicationLogDetailComponent
       );
       comp = fixture.componentInstance;
     });
@@ -39,7 +39,7 @@ describe("Component Tests", () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.separtationApplicationLog).toEqual(
+        expect(comp.separationApplicationLog).toEqual(
           jasmine.objectContaining({ id: 123 })
         );
       });

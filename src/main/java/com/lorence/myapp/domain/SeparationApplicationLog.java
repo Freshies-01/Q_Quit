@@ -13,11 +13,11 @@ import com.lorence.myapp.domain.enumeration.Status;
 import com.lorence.myapp.domain.enumeration.EditType;
 
 /**
- * A SepartationApplicationLog.
+ * A SeparationApplicationLog.
  */
 @Entity
-@Table(name = "separtation_application_log")
-public class SepartationApplicationLog implements Serializable {
+@Table(name = "separation_Application_Log")
+public class SeparationApplicationLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -98,7 +98,7 @@ public class SepartationApplicationLog implements Serializable {
         return status;
     }
 
-    public SepartationApplicationLog status(Status status) {
+    public SeparationApplicationLog status(Status status) {
         this.status = status;
         return this;
     }
@@ -111,7 +111,7 @@ public class SepartationApplicationLog implements Serializable {
         return dateApproved;
     }
 
-    public SepartationApplicationLog dateApproved(LocalDate dateApproved) {
+    public SeparationApplicationLog dateApproved(LocalDate dateApproved) {
         this.dateApproved = dateApproved;
         return this;
     }
@@ -124,7 +124,7 @@ public class SepartationApplicationLog implements Serializable {
         return dateSubmitted;
     }
 
-    public SepartationApplicationLog dateSubmitted(LocalDate dateSubmitted) {
+    public SeparationApplicationLog dateSubmitted(LocalDate dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
         return this;
     }
@@ -137,7 +137,7 @@ public class SepartationApplicationLog implements Serializable {
         return dateCompleted;
     }
 
-    public SepartationApplicationLog dateCompleted(LocalDate dateCompleted) {
+    public SeparationApplicationLog dateCompleted(LocalDate dateCompleted) {
         this.dateCompleted = dateCompleted;
         return this;
     }
@@ -150,7 +150,7 @@ public class SepartationApplicationLog implements Serializable {
         return dateOfLeave;
     }
 
-    public SepartationApplicationLog dateOfLeave(LocalDate dateOfLeave) {
+    public SeparationApplicationLog dateOfLeave(LocalDate dateOfLeave) {
         this.dateOfLeave = dateOfLeave;
         return this;
     }
@@ -163,7 +163,7 @@ public class SepartationApplicationLog implements Serializable {
         return actionAdded;
     }
 
-    public SepartationApplicationLog actionAdded(Boolean actionAdded) {
+    public SeparationApplicationLog actionAdded(Boolean actionAdded) {
         this.actionAdded = actionAdded;
         return this;
     }
@@ -176,7 +176,7 @@ public class SepartationApplicationLog implements Serializable {
         return dateEdited;
     }
 
-    public SepartationApplicationLog dateEdited(LocalDate dateEdited) {
+    public SeparationApplicationLog dateEdited(LocalDate dateEdited) {
         this.dateEdited = dateEdited;
         return this;
     }
@@ -189,7 +189,7 @@ public class SepartationApplicationLog implements Serializable {
         return editType;
     }
 
-    public SepartationApplicationLog editType(EditType editType) {
+    public SeparationApplicationLog editType(EditType editType) {
         this.editType = editType;
         return this;
     }
@@ -202,7 +202,7 @@ public class SepartationApplicationLog implements Serializable {
         return editor;
     }
 
-    public SepartationApplicationLog editor(Employee employee) {
+    public SeparationApplicationLog editor(Employee employee) {
         this.editor = employee;
         return this;
     }
@@ -215,7 +215,7 @@ public class SepartationApplicationLog implements Serializable {
         return action;
     }
 
-    public SepartationApplicationLog action(Action action) {
+    public SeparationApplicationLog action(Action action) {
         this.action = action;
         return this;
     }
@@ -228,7 +228,7 @@ public class SepartationApplicationLog implements Serializable {
         return hrReps;
     }
 
-    public SepartationApplicationLog hrReps(HrReps hrReps) {
+    public SeparationApplicationLog hrReps(HrReps hrReps) {
         this.hrReps = hrReps;
         return this;
     }
@@ -241,7 +241,7 @@ public class SepartationApplicationLog implements Serializable {
         return functionReps;
     }
 
-    public SepartationApplicationLog functionReps(FunctionReps functionReps) {
+    public SeparationApplicationLog functionReps(FunctionReps functionReps) {
         this.functionReps = functionReps;
         return this;
     }
@@ -254,7 +254,7 @@ public class SepartationApplicationLog implements Serializable {
         return employee;
     }
 
-    public SepartationApplicationLog employee(Employee employee) {
+    public SeparationApplicationLog employee(Employee employee) {
         this.employee = employee;
         return this;
     }
@@ -267,7 +267,7 @@ public class SepartationApplicationLog implements Serializable {
         return separationApplication;
     }
 
-    public SepartationApplicationLog separationApplication(SeparationApplication separationApplication) {
+    public SeparationApplicationLog separationApplication(SeparationApplication separationApplication) {
         this.separationApplication = separationApplication;
         return this;
     }
@@ -285,11 +285,11 @@ public class SepartationApplicationLog implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SepartationApplicationLog separtationApplicationLog = (SepartationApplicationLog) o;
-        if (separtationApplicationLog.getId() == null || getId() == null) {
+        SeparationApplicationLog SeparationApplicationLog = (SeparationApplicationLog) o;
+        if (SeparationApplicationLog.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), separtationApplicationLog.getId());
+        return Objects.equals(getId(), SeparationApplicationLog.getId());
     }
 
     @Override
@@ -299,7 +299,7 @@ public class SepartationApplicationLog implements Serializable {
 
     @Override
     public String toString() {
-        return "SepartationApplicationLog{" +
+        return "SeparationApplicationLog{" +
             "id=" + getId() +
             ", status='" + getStatus() + "'" +
             ", dateApproved='" + getDateApproved() + "'" +

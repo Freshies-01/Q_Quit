@@ -5,8 +5,11 @@ import { Routes } from "@angular/router";
 import {
   SeparationApplicationModule,
   separationApplicationRoute
-} from "./separation-application/separation-application.module";
-import { EmployeeModule, employeeRoutes } from "./employee/employee.module";
+} from "app/Q_Q/records/separation-application/separation-application.module";
+import {
+  EmployeeModule,
+  employeeRoutes
+} from "app/Q_Q/records/employee/employee.module";
 
 export const RecordsRouting: Routes = [
   {

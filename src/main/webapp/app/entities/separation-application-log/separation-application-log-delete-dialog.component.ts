@@ -8,18 +8,18 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { JhiEventManager } from "ng-jhipster";
 
-import { ISepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
-import { SepartationApplicationLogService } from "./separtation-application-log.service";
+import { ISeparationApplicationLog } from "app/shared/model/separation-application-log.model";
+import { SeparationApplicationLogService } from "app/entities/separation-application-log/separation-application-log.service";
 
 @Component({
-  selector: "jhi-separtation-application-log-delete-dialog",
-  templateUrl: "./separtation-application-log-delete-dialog.component.html"
+  selector: "jhi-separation-application-log-delete-dialog",
+  templateUrl: "./separation-application-log-delete-dialog.component.html"
 })
-export class SepartationApplicationLogDeleteDialogComponent {
-  separtationApplicationLog: ISepartationApplicationLog;
+export class SeparationApplicationLogDeleteDialogComponent {
+  separationApplicationLog: ISeparationApplicationLog;
 
   constructor(
-    private separtationApplicationLogService: SepartationApplicationLogService,
+    private separationApplicationLogService: SeparationApplicationLogService,
     public activeModal: NgbActiveModal,
     private eventManager: JhiEventManager
   ) {}
@@ -29,10 +29,10 @@ export class SepartationApplicationLogDeleteDialogComponent {
   }
 
   confirmDelete(id: number) {
-    this.separtationApplicationLogService.delete(id).subscribe(response => {
+    this.separationApplicationLogService.delete(id).subscribe(response => {
       this.eventManager.broadcast({
-        name: "separtationApplicationLogListModification",
-        content: "Deleted an separtationApplicationLog"
+        name: "separationApplicationLogListModification",
+        content: "Deleted an separationApplicationLog"
       });
       this.activeModal.dismiss(true);
     });
@@ -40,10 +40,10 @@ export class SepartationApplicationLogDeleteDialogComponent {
 }
 
 @Component({
-  selector: "jhi-separtation-application-log-delete-popup",
+  selector: "jhi-separation-application-log-delete-popup",
   template: ""
 })
-export class SepartationApplicationLogDeletePopupComponent
+export class SeparationApplicationLogDeletePopupComponent
   implements OnInit, OnDestroy {
   private ngbModalRef: NgbModalRef;
 
@@ -54,16 +54,16 @@ export class SepartationApplicationLogDeletePopupComponent
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ separtationApplicationLog }) => {
+    this.activatedRoute.data.subscribe(({ separationApplicationLog }) => {
       setTimeout(() => {
         this.ngbModalRef = this.modalService.open(
-          SepartationApplicationLogDeleteDialogComponent as Component,
+          SeparationApplicationLogDeleteDialogComponent as Component,
           {
             size: "lg",
             backdrop: "static"
           }
         );
-        this.ngbModalRef.componentInstance.separtationApplicationLog = separtationApplicationLog;
+        this.ngbModalRef.componentInstance.separationApplicationLog = separationApplicationLog;
         this.ngbModalRef.result.then(
           result => {
             this.router.navigate([{ outlets: { popup: null } }], {

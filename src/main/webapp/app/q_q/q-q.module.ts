@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { QQRoutingModule } from './q-q-routing.module';
+import { QQRoutingModule } from "app/Q_Q/q-q-routing.module";
 
-import { NavTopComponent } from './nav-top/nav-top.component';
-import { NavSideComponent } from './nav-side/nav-side.component';
-import { AlternativeMainComponent } from './alternative-main/alternative-main.component';
-import { RecordsModule } from './records/records.module';
-import { ReportsModule } from './reports/reports.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { NavTopComponent } from "app/Q_Q/nav-top/nav-top.component";
+import { NavSideComponent } from "app/Q_Q/nav-side/nav-side.component";
+import { AlternativeMainComponent } from "app/Q_Q/alternative-main/alternative-main.component";
+import { RecordsModule } from "app/Q_Q/records/records.module";
+import { ReportsModule } from "app/Q_Q/reports/reports.module";
+import { DashboardModule } from "app/Q_Q/dashboard/dashboard.module";
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     RecordsModule,
     QQRoutingModule,
     ReportsModule,
-    DashboardModule,
+    DashboardModule
   ],
   declarations: [NavTopComponent, NavSideComponent, AlternativeMainComponent]
 })
-export class QQModule { }
+export class QQModule {}

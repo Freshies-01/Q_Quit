@@ -11,32 +11,32 @@ import { Observable, of } from "rxjs";
 import { JhiEventManager } from "ng-jhipster";
 
 import { QQuitTestModule } from "../../../test.module";
-import { SepartationApplicationLogDeleteDialogComponent } from "app/entities/separtation-application-log/separtation-application-log-delete-dialog.component";
-import { SepartationApplicationLogService } from "app/entities/separtation-application-log/separtation-application-log.service";
+import { SeparationApplicationLogDeleteDialogComponent } from "app/entities/separation-application-log/separation-application-log-delete-dialog.component";
+import { SeparationApplicationLogService } from "app/entities/separation-application-log/separation-application-log.service";
 
 describe("Component Tests", () => {
-  describe("SepartationApplicationLog Management Delete Component", () => {
-    let comp: SepartationApplicationLogDeleteDialogComponent;
+  describe("SeparationApplicationLog Management Delete Component", () => {
+    let comp: SeparationApplicationLogDeleteDialogComponent;
     let fixture: ComponentFixture<
-      SepartationApplicationLogDeleteDialogComponent
+      SeparationApplicationLogDeleteDialogComponent
     >;
-    let service: SepartationApplicationLogService;
+    let service: SeparationApplicationLogService;
     let mockEventManager: any;
     let mockActiveModal: any;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [SepartationApplicationLogDeleteDialogComponent]
+        declarations: [SeparationApplicationLogDeleteDialogComponent]
       })
-        .overrideTemplate(SepartationApplicationLogDeleteDialogComponent, "")
+        .overrideTemplate(SeparationApplicationLogDeleteDialogComponent, "")
         .compileComponents();
       fixture = TestBed.createComponent(
-        SepartationApplicationLogDeleteDialogComponent
+        SeparationApplicationLogDeleteDialogComponent
       );
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(
-        SepartationApplicationLogService
+        SeparationApplicationLogService
       );
       mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
       mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);

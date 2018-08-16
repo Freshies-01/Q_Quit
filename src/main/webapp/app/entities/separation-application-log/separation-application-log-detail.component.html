@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="separationApplicationLog">
+            <h2><span>Separation Application Log</span> {{separationApplicationLog.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.status}}</span>
+                </dd>
+                <dt><span>Date Approved</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.dateApproved}}</span>
+                </dd>
+                <dt><span>Date Submitted</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.dateSubmitted}}</span>
+                </dd>
+                <dt><span>Date Completed</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.dateCompleted}}</span>
+                </dd>
+                <dt><span>Date Of Leave</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.dateOfLeave}}</span>
+                </dd>
+                <dt><span>Action Added</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.actionAdded}}</span>
+                </dd>
+                <dt><span>Date Edited</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.dateEdited}}</span>
+                </dd>
+                <dt><span>Edit Type</span></dt>
+                <dd>
+                    <span>{{separationApplicationLog.editType}}</span>
+                </dd>
+                <dt><span>Editor</span></dt>
+                <dd>
+                    <div *ngIf="separationApplicationLog.editor">
+                        <a [routerLink]="['/employee', separationApplicationLog.editor?.id, 'view']">{{separationApplicationLog.editor?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="separationApplicationLog.action">
+                        <a [routerLink]="['/action', separationApplicationLog.action?.id, 'view']">{{separationApplicationLog.action?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Hr Reps</span></dt>
+                <dd>
+                    <div *ngIf="separationApplicationLog.hrReps">
+                        <a [routerLink]="['/hr-reps', separationApplicationLog.hrReps?.id, 'view']">{{separationApplicationLog.hrReps?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Function Reps</span></dt>
+                <dd>
+                    <div *ngIf="separationApplicationLog.functionReps">
+                        <a [routerLink]="['/function-reps', separationApplicationLog.functionReps?.id, 'view']">{{separationApplicationLog.functionReps?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Employee</span></dt>
+                <dd>
+                    <div *ngIf="separationApplicationLog.employee">
+                        <a [routerLink]="['/employee', separationApplicationLog.employee?.id, 'view']">{{separationApplicationLog.employee?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Separation Application</span></dt>
+                <dd>
+                    <div *ngIf="separationApplicationLog.separationApplication">
+                        <a [routerLink]="['/separation-application', separationApplicationLog.separationApplication?.id, 'view']">{{separationApplicationLog.separationApplication?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/separation-application-log', separationApplicationLog.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

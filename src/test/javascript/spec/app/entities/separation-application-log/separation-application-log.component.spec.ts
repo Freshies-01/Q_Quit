@@ -5,20 +5,20 @@ import { HttpHeaders, HttpResponse } from "@angular/common/http";
 import { ActivatedRoute, Data } from "@angular/router";
 
 import { QQuitTestModule } from "../../../test.module";
-import { SepartationApplicationLogComponent } from "app/entities/separtation-application-log/separtation-application-log.component";
-import { SepartationApplicationLogService } from "app/entities/separtation-application-log/separtation-application-log.service";
-import { SepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
+import { SeparationApplicationLogComponent } from "app/entities/separation-application-log/separation-application-log.component";
+import { SeparationApplicationLogService } from "app/entities/separation-application-log/separation-application-log.service";
+import { SeparationApplicationLog } from "app/shared/model/separation-application-log.model";
 
 describe("Component Tests", () => {
-  describe("SepartationApplicationLog Management Component", () => {
-    let comp: SepartationApplicationLogComponent;
-    let fixture: ComponentFixture<SepartationApplicationLogComponent>;
-    let service: SepartationApplicationLogService;
+  describe("SeparationApplicationLog Management Component", () => {
+    let comp: SeparationApplicationLogComponent;
+    let fixture: ComponentFixture<SeparationApplicationLogComponent>;
+    let service: SeparationApplicationLogService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [SepartationApplicationLogComponent],
+        declarations: [SeparationApplicationLogComponent],
         providers: [
           {
             provide: ActivatedRoute,
@@ -37,13 +37,13 @@ describe("Component Tests", () => {
           }
         ]
       })
-        .overrideTemplate(SepartationApplicationLogComponent, "")
+        .overrideTemplate(SeparationApplicationLogComponent, "")
         .compileComponents();
 
-      fixture = TestBed.createComponent(SepartationApplicationLogComponent);
+      fixture = TestBed.createComponent(SeparationApplicationLogComponent);
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(
-        SepartationApplicationLogService
+        SeparationApplicationLogService
       );
     });
 
@@ -53,7 +53,7 @@ describe("Component Tests", () => {
       spyOn(service, "query").and.returnValue(
         of(
           new HttpResponse({
-            body: [new SepartationApplicationLog(123)],
+            body: [new SeparationApplicationLog(123)],
             headers
           })
         )
@@ -64,7 +64,7 @@ describe("Component Tests", () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.separtationApplicationLogs[0]).toEqual(
+      expect(comp.separationApplicationLogs[0]).toEqual(
         jasmine.objectContaining({ id: 123 })
       );
     });
@@ -75,7 +75,7 @@ describe("Component Tests", () => {
       spyOn(service, "query").and.returnValue(
         of(
           new HttpResponse({
-            body: [new SepartationApplicationLog(123)],
+            body: [new SeparationApplicationLog(123)],
             headers
           })
         )
@@ -86,7 +86,7 @@ describe("Component Tests", () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.separtationApplicationLogs[0]).toEqual(
+      expect(comp.separationApplicationLogs[0]).toEqual(
         jasmine.objectContaining({ id: 123 })
       );
     });
@@ -107,7 +107,7 @@ describe("Component Tests", () => {
       spyOn(service, "query").and.returnValue(
         of(
           new HttpResponse({
-            body: [new SepartationApplicationLog(123)],
+            body: [new SeparationApplicationLog(123)],
             headers
           })
         )
@@ -120,7 +120,7 @@ describe("Component Tests", () => {
       // THEN
       expect(comp.page).toEqual(0);
       expect(service.query).toHaveBeenCalledTimes(2);
-      expect(comp.separtationApplicationLogs[0]).toEqual(
+      expect(comp.separationApplicationLogs[0]).toEqual(
         jasmine.objectContaining({ id: 123 })
       );
     });

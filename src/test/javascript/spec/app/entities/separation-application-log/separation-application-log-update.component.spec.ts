@@ -9,30 +9,30 @@ import { HttpResponse } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 
 import { QQuitTestModule } from "../../../test.module";
-import { SepartationApplicationLogUpdateComponent } from "app/entities/separtation-application-log/separtation-application-log-update.component";
-import { SepartationApplicationLogService } from "app/entities/separtation-application-log/separtation-application-log.service";
-import { SepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
+import { SeparationApplicationLogUpdateComponent } from "app/entities/separation-application-log/separation-application-log-update.component";
+import { SeparationApplicationLogService } from "app/entities/separation-application-log/separation-application-log.service";
+import { SeparationApplicationLog } from "app/shared/model/separation-application-log.model";
 
 describe("Component Tests", () => {
-  describe("SepartationApplicationLog Management Update Component", () => {
-    let comp: SepartationApplicationLogUpdateComponent;
-    let fixture: ComponentFixture<SepartationApplicationLogUpdateComponent>;
-    let service: SepartationApplicationLogService;
+  describe("SeparationApplicationLog Management Update Component", () => {
+    let comp: SeparationApplicationLogUpdateComponent;
+    let fixture: ComponentFixture<SeparationApplicationLogUpdateComponent>;
+    let service: SeparationApplicationLogService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [QQuitTestModule],
-        declarations: [SepartationApplicationLogUpdateComponent]
+        declarations: [SeparationApplicationLogUpdateComponent]
       })
-        .overrideTemplate(SepartationApplicationLogUpdateComponent, "")
+        .overrideTemplate(SeparationApplicationLogUpdateComponent, "")
         .compileComponents();
 
       fixture = TestBed.createComponent(
-        SepartationApplicationLogUpdateComponent
+        SeparationApplicationLogUpdateComponent
       );
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(
-        SepartationApplicationLogService
+        SeparationApplicationLogService
       );
     });
 
@@ -41,11 +41,11 @@ describe("Component Tests", () => {
         "Should call update service on save for existing entity",
         fakeAsync(() => {
           // GIVEN
-          const entity = new SepartationApplicationLog(123);
+          const entity = new SeparationApplicationLog(123);
           spyOn(service, "update").and.returnValue(
             of(new HttpResponse({ body: entity }))
           );
-          comp.separtationApplicationLog = entity;
+          comp.separationApplicationLog = entity;
           // WHEN
           comp.save();
           tick(); // simulate async
@@ -60,11 +60,11 @@ describe("Component Tests", () => {
         "Should call create service on save for new entity",
         fakeAsync(() => {
           // GIVEN
-          const entity = new SepartationApplicationLog();
+          const entity = new SeparationApplicationLog();
           spyOn(service, "create").and.returnValue(
             of(new HttpResponse({ body: entity }))
           );
-          comp.separtationApplicationLog = entity;
+          comp.separationApplicationLog = entity;
           // WHEN
           comp.save();
           tick(); // simulate async

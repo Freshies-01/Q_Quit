@@ -4,8 +4,8 @@ import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { JhiAlertService } from "ng-jhipster";
 
-import { ISepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
-import { SepartationApplicationLogService } from "./separtation-application-log.service";
+import { ISeparationApplicationLog } from "app/shared/model/separation-application-log.model";
+import { SeparationApplicationLogService } from "app/entities/separation-application-log/separation-application-log.service";
 import { IEmployee } from "app/shared/model/employee.model";
 import { EmployeeService } from "app/entities/employee";
 import { IAction } from "app/shared/model/action.model";
@@ -18,11 +18,11 @@ import { ISeparationApplication } from "app/shared/model/separation-application.
 import { SeparationApplicationService } from "app/entities/separation-application";
 
 @Component({
-  selector: "jhi-separtation-application-log-update",
-  templateUrl: "./separtation-application-log-update.component.html"
+  selector: "jhi-separation-application-log-update",
+  templateUrl: "./separation-application-log-update.component.html"
 })
-export class SepartationApplicationLogUpdateComponent implements OnInit {
-  private _separtationApplicationLog: ISepartationApplicationLog;
+export class SeparationApplicationLogUpdateComponent implements OnInit {
+  private _separationApplicationLog: ISeparationApplicationLog;
   isSaving: boolean;
 
   editors: IEmployee[];
@@ -44,7 +44,7 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
 
   constructor(
     private jhiAlertService: JhiAlertService,
-    private separtationApplicationLogService: SepartationApplicationLogService,
+    private separationApplicationLogService: SeparationApplicationLogService,
     private employeeService: EmployeeService,
     private actionService: ActionService,
     private hrRepsService: HrRepsService,
@@ -55,19 +55,19 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ separtationApplicationLog }) => {
-      this.separtationApplicationLog = separtationApplicationLog;
+    this.activatedRoute.data.subscribe(({ separationApplicationLog }) => {
+      this.separationApplicationLog = separationApplicationLog;
     });
     this.employeeService.query({ filter: "log-is-null" }).subscribe(
       (res: HttpResponse<IEmployee[]>) => {
         if (
-          !this.separtationApplicationLog.editor ||
-          !this.separtationApplicationLog.editor.id
+          !this.separationApplicationLog.editor ||
+          !this.separationApplicationLog.editor.id
         ) {
           this.editors = res.body;
         } else {
           this.employeeService
-            .find(this.separtationApplicationLog.editor.id)
+            .find(this.separationApplicationLog.editor.id)
             .subscribe(
               (subRes: HttpResponse<IEmployee>) => {
                 this.editors = [subRes.body].concat(res.body);
@@ -81,13 +81,13 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
     this.actionService.query({ filter: "log-is-null" }).subscribe(
       (res: HttpResponse<IAction[]>) => {
         if (
-          !this.separtationApplicationLog.action ||
-          !this.separtationApplicationLog.action.id
+          !this.separationApplicationLog.action ||
+          !this.separationApplicationLog.action.id
         ) {
           this.actions = res.body;
         } else {
           this.actionService
-            .find(this.separtationApplicationLog.action.id)
+            .find(this.separationApplicationLog.action.id)
             .subscribe(
               (subRes: HttpResponse<IAction>) => {
                 this.actions = [subRes.body].concat(res.body);
@@ -101,13 +101,13 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
     this.hrRepsService.query({ filter: "log-is-null" }).subscribe(
       (res: HttpResponse<IHrReps[]>) => {
         if (
-          !this.separtationApplicationLog.hrReps ||
-          !this.separtationApplicationLog.hrReps.id
+          !this.separationApplicationLog.hrReps ||
+          !this.separationApplicationLog.hrReps.id
         ) {
           this.hrreps = res.body;
         } else {
           this.hrRepsService
-            .find(this.separtationApplicationLog.hrReps.id)
+            .find(this.separationApplicationLog.hrReps.id)
             .subscribe(
               (subRes: HttpResponse<IHrReps>) => {
                 this.hrreps = [subRes.body].concat(res.body);
@@ -121,13 +121,13 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
     this.functionRepsService.query({ filter: "log-is-null" }).subscribe(
       (res: HttpResponse<IFunctionReps[]>) => {
         if (
-          !this.separtationApplicationLog.functionReps ||
-          !this.separtationApplicationLog.functionReps.id
+          !this.separationApplicationLog.functionReps ||
+          !this.separationApplicationLog.functionReps.id
         ) {
           this.functionreps = res.body;
         } else {
           this.functionRepsService
-            .find(this.separtationApplicationLog.functionReps.id)
+            .find(this.separationApplicationLog.functionReps.id)
             .subscribe(
               (subRes: HttpResponse<IFunctionReps>) => {
                 this.functionreps = [subRes.body].concat(res.body);
@@ -141,13 +141,13 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
     this.employeeService.query({ filter: "log-is-null" }).subscribe(
       (res: HttpResponse<IEmployee[]>) => {
         if (
-          !this.separtationApplicationLog.employee ||
-          !this.separtationApplicationLog.employee.id
+          !this.separationApplicationLog.employee ||
+          !this.separationApplicationLog.employee.id
         ) {
           this.employees = res.body;
         } else {
           this.employeeService
-            .find(this.separtationApplicationLog.employee.id)
+            .find(this.separationApplicationLog.employee.id)
             .subscribe(
               (subRes: HttpResponse<IEmployee>) => {
                 this.employees = [subRes.body].concat(res.body);
@@ -163,13 +163,13 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
       .subscribe(
         (res: HttpResponse<ISeparationApplication[]>) => {
           if (
-            !this.separtationApplicationLog.separationApplication ||
-            !this.separtationApplicationLog.separationApplication.id
+            !this.separationApplicationLog.separationApplication ||
+            !this.separationApplicationLog.separationApplication.id
           ) {
             this.separationapplications = res.body;
           } else {
             this.separationApplicationService
-              .find(this.separtationApplicationLog.separationApplication.id)
+              .find(this.separationApplicationLog.separationApplication.id)
               .subscribe(
                 (subRes: HttpResponse<ISeparationApplication>) => {
                   this.separationapplications = [subRes.body].concat(res.body);
@@ -188,26 +188,26 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    if (this.separtationApplicationLog.id !== undefined) {
+    if (this.separationApplicationLog.id !== undefined) {
       this.subscribeToSaveResponse(
-        this.separtationApplicationLogService.update(
-          this.separtationApplicationLog
+        this.separationApplicationLogService.update(
+          this.separationApplicationLog
         )
       );
     } else {
       this.subscribeToSaveResponse(
-        this.separtationApplicationLogService.create(
-          this.separtationApplicationLog
+        this.separationApplicationLogService.create(
+          this.separationApplicationLog
         )
       );
     }
   }
 
   private subscribeToSaveResponse(
-    result: Observable<HttpResponse<ISepartationApplicationLog>>
+    result: Observable<HttpResponse<ISeparationApplicationLog>>
   ) {
     result.subscribe(
-      (res: HttpResponse<ISepartationApplicationLog>) => this.onSaveSuccess(),
+      (res: HttpResponse<ISeparationApplicationLog>) => this.onSaveSuccess(),
       (res: HttpErrorResponse) => this.onSaveError()
     );
   }
@@ -244,13 +244,13 @@ export class SepartationApplicationLogUpdateComponent implements OnInit {
   trackSeparationApplicationById(index: number, item: ISeparationApplication) {
     return item.id;
   }
-  get separtationApplicationLog() {
-    return this._separtationApplicationLog;
+  get separationApplicationLog() {
+    return this._separationApplicationLog;
   }
 
-  set separtationApplicationLog(
-    separtationApplicationLog: ISepartationApplicationLog
+  set separationApplicationLog(
+    separationApplicationLog: ISeparationApplicationLog
   ) {
-    this._separtationApplicationLog = separtationApplicationLog;
+    this._separationApplicationLog = separationApplicationLog;
   }
 }

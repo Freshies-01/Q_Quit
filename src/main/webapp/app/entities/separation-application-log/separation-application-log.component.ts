@@ -8,19 +8,19 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from "ng-jhipster";
 
-import { ISepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
+import { ISeparationApplicationLog } from "app/shared/model/separation-application-log.model";
 import { Principal } from "app/core";
 
 import { ITEMS_PER_PAGE } from "app/shared";
-import { SepartationApplicationLogService } from "./separtation-application-log.service";
+import { SeparationApplicationLogService } from "app/entities/separation-application-log/separation-application-log.service";
 
 @Component({
-  selector: "jhi-separtation-application-log",
-  templateUrl: "./separtation-application-log.component.html"
+  selector: "jhi-separation-application-log",
+  templateUrl: "./separation-application-log.component.html"
 })
-export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
+export class SeparationApplicationLogComponent implements OnInit, OnDestroy {
   currentAccount: any;
-  separtationApplicationLogs: ISepartationApplicationLog[];
+  separationApplicationLogs: ISeparationApplicationLog[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -35,7 +35,7 @@ export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
   reverse: any;
 
   constructor(
-    private separtationApplicationLogService: SepartationApplicationLogService,
+    private separationApplicationLogService: SeparationApplicationLogService,
     private parseLinks: JhiParseLinks,
     private jhiAlertService: JhiAlertService,
     private principal: Principal,
@@ -53,15 +53,15 @@ export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
   }
 
   loadAll() {
-    this.separtationApplicationLogService
+    this.separationApplicationLogService
       .query({
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<ISepartationApplicationLog[]>) =>
-          this.paginateSepartationApplicationLogs(res.body, res.headers),
+        (res: HttpResponse<ISeparationApplicationLog[]>) =>
+          this.paginateseparationApplicationLogs(res.body, res.headers),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
@@ -74,7 +74,7 @@ export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
   }
 
   transition() {
-    this.router.navigate(["/separtation-application-log"], {
+    this.router.navigate(["/separation-application-log"], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
@@ -87,7 +87,7 @@ export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
   clear() {
     this.page = 0;
     this.router.navigate([
-      "/separtation-application-log",
+      "/separation-application-log",
       {
         page: this.page,
         sort: this.predicate + "," + (this.reverse ? "asc" : "desc")
@@ -101,20 +101,20 @@ export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
     this.principal.identity().then(account => {
       this.currentAccount = account;
     });
-    this.registerChangeInSepartationApplicationLogs();
+    this.registerChangeInseparationApplicationLogs();
   }
 
   ngOnDestroy() {
     this.eventManager.destroy(this.eventSubscriber);
   }
 
-  trackId(index: number, item: ISepartationApplicationLog) {
+  trackId(index: number, item: ISeparationApplicationLog) {
     return item.id;
   }
 
-  registerChangeInSepartationApplicationLogs() {
+  registerChangeInseparationApplicationLogs() {
     this.eventSubscriber = this.eventManager.subscribe(
-      "separtationApplicationLogListModification",
+      "separationApplicationLogListModification",
       response => this.loadAll()
     );
   }
@@ -127,14 +127,14 @@ export class SepartationApplicationLogComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  private paginateSepartationApplicationLogs(
-    data: ISepartationApplicationLog[],
+  private paginateseparationApplicationLogs(
+    data: ISeparationApplicationLog[],
     headers: HttpHeaders
   ) {
     this.links = this.parseLinks.parse(headers.get("link"));
     this.totalItems = parseInt(headers.get("X-Total-Count"), 10);
     this.queryCount = this.totalItems;
-    this.separtationApplicationLogs = data;
+    this.separationApplicationLogs = data;
   }
 
   private onError(errorMessage: string) {

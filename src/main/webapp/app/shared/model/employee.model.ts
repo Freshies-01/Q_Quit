@@ -1,9 +1,9 @@
-import { ILocation } from "app/shared/model//location.model";
-import { ISeparationApplication } from "app/shared/model//separation-application.model";
+import { ILocation } from "app/shared/model/location.model";
+import { ISeparationApplication } from "app/shared/model/separation-application.model";
 import { IUser } from "app/core/user/user.model";
-import { IHrReps } from "app/shared/model//hr-reps.model";
-import { IFunctionReps } from "app/shared/model//function-reps.model";
-import { IDepartment } from "app/shared/model//department.model";
+import { IHrReps } from "app/shared/model/hr-reps.model";
+import { IFunctionReps } from "app/shared/model/function-reps.model";
+import { IDepartment } from "app/shared/model/department.model";
 
 export interface IEmployee {
   id?: number;

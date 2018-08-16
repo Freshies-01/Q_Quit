@@ -1,6 +1,6 @@
 package com.lorence.myapp.repository;
 
-import com.lorence.myapp.domain.SepartationApplicationLog;
+import com.lorence.myapp.domain.SeparationApplicationLog;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SepartationApplicationLogRepository extends JpaRepository<SepartationApplicationLog, Long> {
+public interface SeparationApplicationLogRepository extends JpaRepository<SeparationApplicationLog, Long> {
 
 }

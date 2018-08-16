@@ -121,7 +121,7 @@
     "dto": "no",
     "searchEngine": false,
     "service": "serviceImpl",
-    "entityTableName": "separtation_application_log",
+    "entityTableName": "separation_application_log",
     "jpaMetamodelFiltering": false,
     "pagination": "pagination"
 }

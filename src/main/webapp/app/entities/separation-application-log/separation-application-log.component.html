@@ -1,16 +1,16 @@
 <div>
     <h2 id="page-heading">
-        <span>Separtation Application Logs</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-separtation-application-log" [routerLink]="['/separtation-application-log/new']">
+        <span>Separation Application Logs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-separation-application-log" [routerLink]="['/separation-application-log/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Separtation Application Log
+            Create new Separation Application Log
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="separtationApplicationLogs">
+    <div class="table-responsive" *ngIf="separationApplicationLogs">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -33,62 +33,62 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let separtationApplicationLog of separtationApplicationLogs ;trackBy: trackId">
-                <td><a [routerLink]="['/separtation-application-log', separtationApplicationLog.id, 'view' ]">{{separtationApplicationLog.id}}</a></td>
-                <td>{{separtationApplicationLog.status}}</td>
-                <td>{{separtationApplicationLog.dateApproved | date:'mediumDate'}}</td>
-                <td>{{separtationApplicationLog.dateSubmitted | date:'mediumDate'}}</td>
-                <td>{{separtationApplicationLog.dateCompleted | date:'mediumDate'}}</td>
-                <td>{{separtationApplicationLog.dateOfLeave | date:'mediumDate'}}</td>
-                <td>{{separtationApplicationLog.actionAdded}}</td>
-                <td>{{separtationApplicationLog.dateEdited | date:'mediumDate'}}</td>
-                <td>{{separtationApplicationLog.editType}}</td>
+            <tr *ngFor="let separationApplicationLog of separationApplicationLogs ;trackBy: trackId">
+                <td><a [routerLink]="['/separation-application-log', separationApplicationLog.id, 'view' ]">{{separationApplicationLog.id}}</a></td>
+                <td>{{separationApplicationLog.status}}</td>
+                <td>{{separationApplicationLog.dateApproved | date:'mediumDate'}}</td>
+                <td>{{separationApplicationLog.dateSubmitted | date:'mediumDate'}}</td>
+                <td>{{separationApplicationLog.dateCompleted | date:'mediumDate'}}</td>
+                <td>{{separationApplicationLog.dateOfLeave | date:'mediumDate'}}</td>
+                <td>{{separationApplicationLog.actionAdded}}</td>
+                <td>{{separationApplicationLog.dateEdited | date:'mediumDate'}}</td>
+                <td>{{separationApplicationLog.editType}}</td>
                 <td>
-                    <div *ngIf="separtationApplicationLog.editor">
-                        <a [routerLink]="['../employee', separtationApplicationLog.editor?.id, 'view' ]" >{{separtationApplicationLog.editor?.id}}</a>
+                    <div *ngIf="separationApplicationLog.editor">
+                        <a [routerLink]="['../employee', separationApplicationLog.editor?.id, 'view' ]" >{{separationApplicationLog.editor?.id}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="separtationApplicationLog.action">
-                        <a [routerLink]="['../action', separtationApplicationLog.action?.id, 'view' ]" >{{separtationApplicationLog.action?.id}}</a>
+                    <div *ngIf="separationApplicationLog.action">
+                        <a [routerLink]="['../action', separationApplicationLog.action?.id, 'view' ]" >{{separationApplicationLog.action?.id}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="separtationApplicationLog.hrReps">
-                        <a [routerLink]="['../hr-reps', separtationApplicationLog.hrReps?.id, 'view' ]" >{{separtationApplicationLog.hrReps?.id}}</a>
+                    <div *ngIf="separationApplicationLog.hrReps">
+                        <a [routerLink]="['../hr-reps', separationApplicationLog.hrReps?.id, 'view' ]" >{{separationApplicationLog.hrReps?.id}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="separtationApplicationLog.functionReps">
-                        <a [routerLink]="['../function-reps', separtationApplicationLog.functionReps?.id, 'view' ]" >{{separtationApplicationLog.functionReps?.id}}</a>
+                    <div *ngIf="separationApplicationLog.functionReps">
+                        <a [routerLink]="['../function-reps', separationApplicationLog.functionReps?.id, 'view' ]" >{{separationApplicationLog.functionReps?.id}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="separtationApplicationLog.employee">
-                        <a [routerLink]="['../employee', separtationApplicationLog.employee?.id, 'view' ]" >{{separtationApplicationLog.employee?.id}}</a>
+                    <div *ngIf="separationApplicationLog.employee">
+                        <a [routerLink]="['../employee', separationApplicationLog.employee?.id, 'view' ]" >{{separationApplicationLog.employee?.id}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="separtationApplicationLog.separationApplication">
-                        <a [routerLink]="['../separation-application', separtationApplicationLog.separationApplication?.id, 'view' ]" >{{separtationApplicationLog.separationApplication?.id}}</a>
+                    <div *ngIf="separationApplicationLog.separationApplication">
+                        <a [routerLink]="['../separation-application', separationApplicationLog.separationApplication?.id, 'view' ]" >{{separationApplicationLog.separationApplication?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/separtation-application-log', separtationApplicationLog.id, 'view' ]"
+                                [routerLink]="['/separation-application-log', separationApplicationLog.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/separtation-application-log', separtationApplicationLog.id, 'edit']"
+                                [routerLink]="['/separation-application-log', separationApplicationLog.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'separtation-application-log/'+ separtationApplicationLog.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'separation-application-log/'+ separationApplicationLog.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -101,7 +101,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="separtationApplicationLogs && separtationApplicationLogs.length">
+    <div *ngIf="separationApplicationLogs && separationApplicationLogs.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
