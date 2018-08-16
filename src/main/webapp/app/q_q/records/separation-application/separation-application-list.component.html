@@ -1,9 +1,75 @@
 <h1>Here is a list of SA:</h1>
 <!-- {{separationApplications | json}} -->
 
-<mat-card>
-    shalalal
-    <li *ngFor="let apps of separationApplications">
-        <span>{{apps.status}}</span>
+<ul>
+    <li *ngFor="let app of separationApplications">
+        <mat-card>
+            <div class="flex-container">
+                <div>
+                    <mat-card-title>Name: {{app.employee?.user?.firstName}} {{app.employee?.user?.lastName}}</mat-card-title>
+                    <mat-card-subtitle>
+                        HR: {{app.hr?.user?.firstName}}
+                        <br/> FR: {{app.fr?.user?.firstName}}
+                        <br/> Location: {{app.employee?.location?.city}}
+                    </mat-card-subtitle>
+                </div>
+                <div>
+                    <mat-progress-spinner></mat-progress-spinner>
+                    <br/>
+                    <mat-card-subtitle>Status: {{app.status}}</mat-card-subtitle>
+                </div>
+            </div>
+        </mat-card>
+        <br/>
     </li>
+</ul>
+<!-- <mat-card>
+    <div class="flex-container">
+        <div>
+            <mat-card-title>sample name</mat-card-title>
+            <mat-card-subtitle>
+                    HR: sample name <br/>
+                    FR: sample name <br/>
+                    Location: sample location
+            </mat-card-subtitle>
+        </div>
+        <div>
+            <mat-spinner></mat-spinner><br/>
+            <mat-card-subtitle>Status: sample status</mat-card-subtitle>
+        </div>
+    </div>
 </mat-card>
+<br/>
+<mat-card>
+    <div class="flex-container">
+        <div>
+            <mat-card-title>sample name</mat-card-title>
+            <mat-card-subtitle>
+                    HR: sample name <br/>
+                    FR: sample name <br/>
+                    Location: sample location
+            </mat-card-subtitle>
+        </div>
+        <div>
+            <mat-spinner></mat-spinner><br/>
+            <mat-card-subtitle>Status: sample status</mat-card-subtitle>
+        </div>
+    </div>
+</mat-card>
+<br/>
+<mat-card>
+    <div class="flex-container">
+        <div>
+            <mat-card-title>sample name</mat-card-title>
+            <mat-card-subtitle>
+                    HR: sample name <br/>
+                    FR: sample name <br/>
+                    Location: sample location
+            </mat-card-subtitle>
+        </div>
+        <div>
+            <mat-spinner></mat-spinner><br/>
+            <mat-card-subtitle>Status: sample status</mat-card-subtitle>
+        </div>
+    </div>
+</mat-card> -->
