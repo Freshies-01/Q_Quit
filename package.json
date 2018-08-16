@@ -4,26 +4,25 @@
   "description": "Description for Q_Quit",
   "private": true,
   "license": "UNLICENSED",
-  "cacheDirectories": [
-    "node_modules"
-  ],
+  "cacheDirectories": ["node_modules"],
   "dependencies": {
-    "@angular/animations": "^6.1.2",
-    "@angular/cdk": "^6.4.5",
-    "@angular/common": "6.0.0",
-    "@angular/compiler": "6.0.0",
-    "@angular/core": "6.0.0",
-    "@angular/forms": "6.0.0",
-    "@angular/material": "^6.4.5",
-    "@angular/platform-browser": "6.0.0",
-    "@angular/platform-browser-dynamic": "6.0.0",
-    "@angular/router": "6.0.0",
+    "@angular/animations": "~6.1.0",
+    "@angular/cdk": "~6.1.0",
+    "@angular/common": "~6.1.0",
+    "@angular/compiler": "~6.1.0",
+    "@angular/core": "~6.1.0",
+    "@angular/forms": "~6.1.0",
+    "@angular/material": "~6.1.0",
+    "@angular/platform-browser": "~6.1.0",
+    "@angular/platform-browser-dynamic": "~6.1.0",
+    "@angular/router": "~6.1.0",
     "@fortawesome/angular-fontawesome": "0.1.0-9",
     "@fortawesome/fontawesome-svg-core": "1.2.0-11",
     "@fortawesome/free-solid-svg-icons": "5.1.0-8",
     "@ng-bootstrap/ng-bootstrap": "2.0.0",
     "bootstrap": "4.0.0",
     "core-js": "2.5.3",
+    "hammerjs": "^2.0.8",
     "jquery": "3.3.1",
     "moment": "2.21.0",
     "ng-jhipster": "0.5.4",
@@ -96,10 +95,7 @@
     "yarn": ">=1.3.2"
   },
   "lint-staged": {
-    "src/**/*.{ts,css,scss}": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/**/*.{ts,css,scss}": ["prettier --write", "git add"]
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -112,17 +108,25 @@
     "start": "yarn run webpack:dev",
     "serve": "yarn run start",
     "build": "yarn run webpack:prod",
-    "test": "yarn run lint && jest --coverage --logHeapUsage -w=2 --config src/test/javascript/jest.conf.js",
+    "test":
+      "yarn run lint && jest --coverage --logHeapUsage -w=2 --config src/test/javascript/jest.conf.js",
     "test:watch": "yarn test --watch --clearCache",
-    "webpack:dev": "yarn run webpack-dev-server --config webpack/webpack.dev.js --inline --hot --port=9060 --watch-content-base --env.stats=minimal",
-    "webpack:dev-verbose": "yarn run webpack-dev-server --config webpack/webpack.dev.js --inline --hot --port=9060 --watch-content-base --profile --progress --env.stats=normal",
-    "webpack:build:main": "yarn run webpack --config webpack/webpack.dev.js --env.stats=normal",
+    "webpack:dev":
+      "yarn run webpack-dev-server --config webpack/webpack.dev.js --inline --hot --port=9060 --watch-content-base --env.stats=minimal",
+    "webpack:dev-verbose":
+      "yarn run webpack-dev-server --config webpack/webpack.dev.js --inline --hot --port=9060 --watch-content-base --profile --progress --env.stats=normal",
+    "webpack:build:main":
+      "yarn run webpack --config webpack/webpack.dev.js --env.stats=normal",
     "webpack:build": "yarn run cleanup && yarn run webpack:build:main",
-    "webpack:prod:main": "yarn run webpack --config webpack/webpack.prod.js --profile",
-    "webpack:prod": "yarn run cleanup && yarn run webpack:prod:main && yarn run clean-www",
+    "webpack:prod:main":
+      "yarn run webpack --config webpack/webpack.prod.js --profile",
+    "webpack:prod":
+      "yarn run cleanup && yarn run webpack:prod:main && yarn run clean-www",
     "webpack:test": "yarn run test",
-    "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
+    "webpack-dev-server":
+      "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "webpack":
+      "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
   "jestSonar": {
     "reportPath": "target/test-results/jest",
