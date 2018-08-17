@@ -3,19 +3,15 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { AlternativeMainComponent } from "./alternative-main/alternative-main.component";
 
-import { errorRoute } from "app/layouts";
-
 import { RecordsRouting } from "./records/records.module";
 import { reportsRoutes } from "./reports/reports.module";
 import { dashboardRoutes } from "./dashboard/dashboard.module";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { UserRouteAccessService } from "app/core/auth/user-route-access-service";
 
-const alternativeMainRoutes = [...errorRoute];
-
 const routes: Routes = [
   {
-    path: "Q_Q/login",
+    path: "login",
     component: LoginPageComponent
   },
   {
@@ -28,12 +24,7 @@ const routes: Routes = [
       pageTitle: "Separation Applications"
     },
     canActivate: [UserRouteAccessService],
-    children: [
-      ...alternativeMainRoutes,
-      ...RecordsRouting,
-      ...reportsRoutes,
-      ...dashboardRoutes
-    ]
+    children: [...RecordsRouting, ...reportsRoutes, ...dashboardRoutes]
   }
 ];
 
