@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { QQRoutingModule } from './q-q-routing.module';
+import { QQRoutingModule } from "./q-q-routing.module";
 
-import { NavTopComponent } from './nav-top/nav-top.component';
-import { NavSideComponent } from './nav-side/nav-side.component';
-import { AlternativeMainComponent } from './alternative-main/alternative-main.component';
-import { RecordsModule } from './records/records.module';
-import { ReportsModule } from './reports/reports.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { NavTopComponent } from "./nav-top/nav-top.component";
+import { NavSideComponent } from "./nav-side/nav-side.component";
+import { AlternativeMainComponent } from "./alternative-main/alternative-main.component";
+import { RecordsModule } from "./records/records.module";
+import { ReportsModule } from "./reports/reports.module";
+import { DashboardModule } from "./dashboard/dashboard.module";
+import { LoginPageComponent } from "./login-page/login-page.component";
 
 @NgModule({
   imports: [
@@ -17,7 +19,13 @@ import { DashboardModule } from './dashboard/dashboard.module';
     QQRoutingModule,
     ReportsModule,
     DashboardModule,
+    FormsModule
   ],
-  declarations: [NavTopComponent, NavSideComponent, AlternativeMainComponent]
+  declarations: [
+    NavTopComponent,
+    NavSideComponent,
+    AlternativeMainComponent,
+    LoginPageComponent
+  ]
 })
-export class QQModule { }
+export class QQModule {}
