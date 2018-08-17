@@ -42,7 +42,7 @@ import com.lorence.myapp.domain.enumeration.Status;
 @SpringBootTest(classes = QQuitApp.class)
 public class SeparationApplicationResourceIntTest {
 
-    private static final Status DEFAULT_STATUS = Status.COMPLETED;
+    private static final Status DEFAULT_STATUS = Status.PENDING;
     private static final Status UPDATED_STATUS = Status.PENDING;
 
     private static final LocalDate DEFAULT_DATE_OF_LEAVE = LocalDate.ofEpochDay(0L);
