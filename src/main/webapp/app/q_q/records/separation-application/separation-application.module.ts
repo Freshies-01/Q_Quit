@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes } from "@angular/router";
 import { SeparationApplicationListComponent } from "./separation-application-list.component";
-
+import { AngularMaterialModule } from "app/shared/angular-material.module";
 
 export const separationApplicationRoute: Routes = [
   {
@@ -12,7 +12,7 @@ export const separationApplicationRoute: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, AngularMaterialModule],
   declarations: [SeparationApplicationListComponent]
 })
 export class SeparationApplicationModule {}
