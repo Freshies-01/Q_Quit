@@ -27,7 +27,6 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {}
 
   login() {
-    console.log("whatsup");
     this.loginService
       .login({
         username: this.username,
