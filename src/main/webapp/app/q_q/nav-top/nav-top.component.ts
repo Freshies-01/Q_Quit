@@ -26,7 +26,7 @@ export class NavTopComponent {
 
   signOut() {
     this.loginService.logout();
-    this.router.navigate(["/Q_Q/login"]);
+    this.router.navigate([""]);
   }
 
   isAuthenticated(): Boolean {
