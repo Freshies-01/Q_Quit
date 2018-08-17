@@ -52,9 +52,8 @@ export class UserRouteAccessService implements CanActivate {
             return false;
           });
         }
-
         this.stateStorageService.storeUrl(url);
-        this.router.navigate(["Q_Q/login"]);
+        this.router.navigate(["login"]);
         return false;
       })
     );

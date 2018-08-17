@@ -1,7 +1,5 @@
-import { Component, AfterViewInit, Renderer, ElementRef } from "@angular/core";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { JhiEventManager } from "ng-jhipster";
 
 import { LoginService } from "app/core/login/login.service";
 import { StateStorageService } from "app/core/auth/state-storage.service";
@@ -10,7 +8,7 @@ import { StateStorageService } from "app/core/auth/state-storage.service";
   selector: "jhi-login-page",
   templateUrl: "./login-page.component.html"
 })
-export class LoginPageComponent implements AfterViewInit {
+export class LoginPageComponent implements OnInit {
   authenticationError: boolean;
   password: string;
   rememberMe: boolean;
@@ -20,29 +18,13 @@ export class LoginPageComponent implements AfterViewInit {
   constructor(
     private loginService: LoginService,
     private stateStorageService: StateStorageService,
-    private elementRef: ElementRef,
-    private renderer: Renderer,
     private router: Router
   ) {
-    this.credentials = {};
+    this.credentials = { test: "sdfsd" };
+    this.loginService.logout();
   }
 
-  ngAfterViewInit() {
-    this.renderer.invokeElementMethod(
-      this.elementRef.nativeElement.querySelector("#username"),
-      "focus",
-      []
-    );
-  }
-
-  cancel() {
-    this.credentials = {
-      username: null,
-      password: null,
-      rememberMe: true
-    };
-    this.authenticationError = false;
-  }
+  ngOnInit() {}
 
   login() {
     this.loginService
@@ -72,13 +54,5 @@ export class LoginPageComponent implements AfterViewInit {
       .catch(() => {
         this.authenticationError = true;
       });
-  }
-
-  register() {
-    this.router.navigate(["/register"]);
-  }
-
-  requestResetPassword() {
-    this.router.navigate(["/reset", "request"]);
   }
 }
