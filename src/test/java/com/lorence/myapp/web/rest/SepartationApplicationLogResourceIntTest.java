@@ -49,7 +49,7 @@ import com.lorence.myapp.domain.enumeration.EditType;
 @SpringBootTest(classes = QQuitApp.class)
 public class SepartationApplicationLogResourceIntTest {
 
-    private static final Status DEFAULT_STATUS = Status.COMPLETED;
+    private static final Status DEFAULT_STATUS = Status.PENDING;
     private static final Status UPDATED_STATUS = Status.PENDING;
 
     private static final LocalDate DEFAULT_DATE_APPROVED = LocalDate.ofEpochDay(0L);
