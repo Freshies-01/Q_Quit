@@ -1,11 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span>Employees</span>
-        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-employee"
-            [routerLink]="['/employee/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-employee" [routerLink]="['/employee/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span>
-                Create new Employee
+            <span >
+            Create new Employee
             </span>
         </button>
     </h2>
@@ -14,24 +13,13 @@
     <div class="table-responsive" *ngIf="employees">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>
-                        <span>ID</span>
-                    </th>
-                    <th>
-                        <span>User</span>
-                    </th>
-                    <!-- <th>
-                        <span>Fname</span>
-                    </th>
-                    <th>
-                        <span>Lname</span>
-                    </th> -->
-                    <th>
-                        <span>Location</span>
-                    </th>
-                    <th></th>
-                </tr>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Location</span></th>
+            <th><span>User</span></th>
+            <th><span>Department</span></th>
+            <th></th>
+            </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let employee of employees ;trackBy: trackId">
@@ -42,6 +30,11 @@
                     <td>
                         <div *ngIf="employee.location">
                             <a [routerLink]="['../location', employee.location?.id, 'view' ]">{{employee.location?.city}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="employee.department">
+                            <a [routerLink]="['../department', employee.department?.id, 'view' ]" >{{employee.department?.name}}</a>
                         </div>
                     </td>
                     <td class="text-right">

@@ -1,15 +1,6 @@
 {
-    "name": "Action",
-    "fields": [
-        {
-            "fieldName": "isCompleted",
-            "fieldType": "Boolean"
-        },
-        {
-            "fieldName": "task",
-            "fieldType": "String"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipType": "many-to-one",
@@ -18,13 +9,25 @@
             "otherEntityField": "id"
         }
     ],
+    "fields": [
+        {
+            "fieldName": "isCompleted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "task",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCompleted",
+            "fieldType": "LocalDate"
+        }
+    ],
     "changelogDate": "20180808183050",
-    "entityTableName": "action",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "action",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }
