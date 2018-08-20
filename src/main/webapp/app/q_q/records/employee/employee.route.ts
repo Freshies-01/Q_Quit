@@ -15,7 +15,7 @@ export class UserRecordResolver implements Resolve<any> {
   constructor(private service: UserService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const id = route.params["employeeId"] ? route.params["employeeId"] : null;
+    const id = route.params["username"] ? route.params["username"] : null;
     if (id) {
       return this.service.find(id);
     } else {
@@ -29,7 +29,14 @@ export const employeeRoutes: Routes = [
     path: "employee",
     children: [
       {
-        path: ":employeeId",
+        path: "edit/:username",
+        component: EmployeeChangeComponent,
+        resolve: {
+          user: UserRecordResolver
+        }
+      },
+      {
+        path: "edit",
         component: EmployeeChangeComponent,
         resolve: {
           user: UserRecordResolver

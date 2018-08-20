@@ -14,7 +14,6 @@ export class EmployeeChangeComponent implements OnInit {
 
   ngOnInit() {
     this.activetedRoute.data.subscribe((data: { user: User }) => {
-      console.log(data.user);
       this.user = data.user;
     });
   }
