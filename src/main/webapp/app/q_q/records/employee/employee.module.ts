@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Routes } from "@angular/router";
 import { EmployeeListComponent } from "app/Q_Q/records/employee/employee-list/employee-list.component";
 import { EmployeeChangeComponent } from "app/q_q/records/employee/employee-change/employee-change.component";
+import { EmployeeContainerComponent } from "./employee-container.component";
 
 export const employeeRoutes: Routes = [
   {
@@ -13,6 +14,10 @@ export const employeeRoutes: Routes = [
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [EmployeeListComponent, EmployeeChangeComponent]
+  declarations: [
+    EmployeeListComponent,
+    EmployeeChangeComponent,
+    EmployeeContainerComponent
+  ]
 })
 export class EmployeeModule {}
