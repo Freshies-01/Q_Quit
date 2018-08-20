@@ -10,9 +10,10 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 })
 export class SeparationApplicationListComponent implements OnInit {
   separationApplications: ISeparationApplication[];
+  separationApplication: ISeparationApplication;
 
   mode = "determinate";
-  value = 66;
+  value = 25;
 
   constructor(
     private separationApplicationService: SeparationApplicationService
