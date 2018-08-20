@@ -1,29 +1,29 @@
-import { IEmployee } from 'app/shared/model//employee.model';
+import { IEmployee } from "app/shared/model/employee.model";
 
 export const enum State {
-    IL = 'IL'
+  IL = "IL"
 }
 
 export const enum Country {
-    USA = 'USA'
+  USA = "USA"
 }
 
 export interface ILocation {
-    id?: number;
-    address?: string;
-    city?: string;
-    state?: State;
-    country?: Country;
-    employees?: IEmployee[];
+  id?: number;
+  address?: string;
+  city?: string;
+  state?: State;
+  country?: Country;
+  employees?: IEmployee[];
 }
 
 export class Location implements ILocation {
-    constructor(
-        public id?: number,
-        public address?: string,
-        public city?: string,
-        public state?: State,
-        public country?: Country,
-        public employees?: IEmployee[]
-    ) {}
+  constructor(
+    public id?: number,
+    public address?: string,
+    public city?: string,
+    public state?: State,
+    public country?: Country,
+    public employees?: IEmployee[]
+  ) {}
 }

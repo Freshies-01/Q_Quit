@@ -1,8 +1,8 @@
 import { Moment } from "moment";
-import { IEmployee } from "app/shared/model//employee.model";
-import { IAction } from "app/shared/model//action.model";
-import { IHrReps } from "app/shared/model//hr-reps.model";
-import { IFunctionReps } from "app/shared/model//function-reps.model";
+import { IEmployee } from "app/shared/model/employee.model";
+import { IAction } from "app/shared/model/action.model";
+import { IHrReps } from "app/shared/model/hr-reps.model";
+import { IFunctionReps } from "app/shared/model/function-reps.model";
 
 export const enum Status {
   PENDING = 0,
