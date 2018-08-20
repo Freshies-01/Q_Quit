@@ -1,7 +1,7 @@
 version: '2'
 services:
     q_quit-mysql:
-        image: mysql:5.7.20
+        image: mysql:5.7.23
         # volumes:
         #     - ~/volumes/jhipster/Q_Quit/mysql/:/var/lib/mysql/
         environment:
