@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Component } from "@angular/core";
 import {
   Resolve,
   ActivatedRouteSnapshot,
@@ -6,72 +6,60 @@ import {
   Routes,
   CanActivate
 } from "@angular/router";
-import { JhiPaginationUtil, JhiResolvePagingParams } from "ng-jhipster";
 
 import { Principal, User, UserService } from "app/core";
-import { UserMgmtComponent } from "./user-management.component";
-import { UserMgmtDetailComponent } from "./user-management-detail.component";
-import { UserMgmtUpdateComponent } from "./user-management-update.component";
+import { EmployeeContainerComponent } from "./employee-container.component";
+import { EmployeeListComponent } from "./employee-list/employee-list.component";
+import { EmployeeRecordChangeComponent } from "./employee-change/employee-change.component";
 
-@Injectable({ providedIn: "root" })
-export class UserResolve implements CanActivate {
-  constructor(private principal: Principal) {}
-
-  canActivate() {
-    return this.principal
-      .identity()
-      .then(account => this.principal.hasAnyAuthority(["ROLE_ADMIN"]));
+export const employeeRoutes: Routes = [
+  {
+    path: "employee",
+    component: EmployeeContainerComponent,
+    children: [
+      {
+        path: "list",
+        component: EmployeeListComponent
+      },
+      {
+        path: ":employeeId",
+        component: EmployeeRecordChangeComponent
+      }
+    ]
   }
-}
-
-@Injectable({ providedIn: "root" })
-export class UserMgmtResolve implements Resolve<any> {
-  constructor(private service: UserService) {}
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const id = route.params["login"] ? route.params["login"] : null;
-    if (id) {
-      return this.service.find(id);
-    } else {
-      return new User();
-    }
-  }
-}
-
-export const userMgmtRoute: Routes = [
-  {
-    path: "user-management",
-    component: UserMgmtComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
-    data: {
-      pageTitle: "Users",
-      defaultSort: "id,asc"
-    }
-  },
-  {
-    path: "user-management/:login/view",
-    component: UserMgmtDetailComponent,
-    resolve: {
-      user: UserMgmtResolve
-    },
-    data: {
-      pageTitle: "Users"
-    }
-  },
-  {
-    path: "user-management/new",
-    component: UserMgmtUpdateComponent,
-    resolve: {
-      user: UserMgmtResolve
-    }
-  },
-  {
-    path: "user-management/:login/edit",
-    component: UserMgmtUpdateComponent,
-    resolve: {
-      user: UserMgmtResolve
-    }
-  }
+  // {
+  //   path: "user-management",
+  //   component: UserMgmtComponent,
+  //   resolve: {
+  //     pagingParams: JhiResolvePagingParams
+  //   },
+  //   data: {
+  //     pageTitle: "Users",
+  //     defaultSort: "id,asc"
+  //   }
+  // },
+  // {
+  //   path: "user-management/:login/view",
+  //   component: UserMgmtDetailComponent,
+  //   resolve: {
+  //     user: UserMgmtResolve
+  //   },
+  //   data: {
+  //     pageTitle: "Users"
+  //   }
+  // },
+  // {
+  //   path: "user-management/new",
+  //   component: UserMgmtUpdateComponent,
+  //   resolve: {
+  //     user: UserMgmtResolve
+  //   }
+  // },
+  // {
+  //   path: "user-management/:login/edit",
+  //   component: UserMgmtUpdateComponent,
+  //   resolve: {
+  //     user: UserMgmtResolve
+  //   }
+  // }
 ];
