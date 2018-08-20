@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+
+import { User } from "app/core";
 
 @Component({
   selector: "jhi-employee-change",
@@ -6,7 +9,13 @@ import { Component, OnInit } from "@angular/core";
   styles: []
 })
 export class EmployeeChangeComponent implements OnInit {
-  constructor() {}
+  user: User;
+  constructor(private activetedRoute: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.activetedRoute.data.subscribe((data: { user: User }) => {
+      console.log(data.user);
+      this.user = data.user;
+    });
+  }
 }
