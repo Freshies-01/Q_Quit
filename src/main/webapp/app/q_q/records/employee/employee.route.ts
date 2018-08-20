@@ -17,39 +17,4 @@ export const employeeRoutes: Routes = [
       }
     ]
   }
-  // {
-  //   path: "user-management",
-  //   component: UserMgmtComponent,
-  //   resolve: {
-  //     pagingParams: JhiResolvePagingParams
-  //   },
-  //   data: {
-  //     pageTitle: "Users",
-  //     defaultSort: "id,asc"
-  //   }
-  // },
-  // {
-  //   path: "user-management/:login/view",
-  //   component: UserMgmtDetailComponent,
-  //   resolve: {
-  //     user: UserMgmtResolve
-  //   },
-  //   data: {
-  //     pageTitle: "Users"
-  //   }
-  // },
-  // {
-  //   path: "user-management/new",
-  //   component: UserMgmtUpdateComponent,
-  //   resolve: {
-  //     user: UserMgmtResolve
-  //   }
-  // },
-  // {
-  //   path: "user-management/:login/edit",
-  //   component: UserMgmtUpdateComponent,
-  //   resolve: {
-  //     user: UserMgmtResolve
-  //   }
-  // }
 ];
