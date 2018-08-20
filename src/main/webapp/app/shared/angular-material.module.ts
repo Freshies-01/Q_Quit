@@ -5,7 +5,15 @@ import {
   MatCheckboxModule,
   MatCardModule,
   MatSliderModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatListModule,
+  MatStepperModule,
+  MatSelectModule
 } from "@angular/material";
 
 @NgModule({
@@ -15,7 +23,15 @@ import {
     MatCheckboxModule,
     MatCardModule,
     MatSliderModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatListModule,
+    MatStepperModule,
+    MatSelectModule
   ],
   exports: [
     // BrowserAnimationsModule,
@@ -23,7 +39,15 @@ import {
     MatCheckboxModule,
     MatCardModule,
     MatSliderModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatListModule,
+    MatStepperModule,
+    MatSelectModule
   ]
 })
 export class AngularMaterialModule {}
