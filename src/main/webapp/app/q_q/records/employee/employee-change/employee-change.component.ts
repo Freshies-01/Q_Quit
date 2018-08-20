@@ -24,12 +24,6 @@ export class EmployeeChangeComponent implements OnInit {
   constructor(private activetedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    // TODO: remove this debug stuff
-    this.userFormGroup.valueChanges.subscribe(r => {
-      console.log(r);
-      this.DebugFormRawValue = r;
-    });
-
     this.activetedRoute.data.subscribe((data: { user: User }) => {
       this.userFormGroup.patchValue({
         login: data.user.login,
