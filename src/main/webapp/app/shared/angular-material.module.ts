@@ -19,7 +19,8 @@ import {
     MatSliderModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ],
   exports: [
     // BrowserAnimationsModule,
@@ -29,7 +30,8 @@ import {
     MatSliderModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialModule {}

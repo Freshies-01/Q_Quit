@@ -14,10 +14,11 @@ import { UserService, User } from "app/core";
 export class UserRecordResolver implements Resolve<any> {
   constructor(private service: UserService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const id = route.params["username"] ? route.params["username"] : null;
     if (id) {
-      return this.service.find(id);
+      const user = await this.service.find(id).toPromise();
+      return user.body;
     } else {
       return new User();
     }
