@@ -30,8 +30,5 @@
         <mat-checkbox formControlName="humanResourcesAuthorization">Human Resources</mat-checkbox>
         <mat-checkbox formControlName="functionalRepAuthorization">Functional Representative</mat-checkbox>
     </p>
-    <button type="submit">Save</button>
+    <button mat-raised-button type="submit">Save</button>
 </form>
-
-<h1> Debug </h1>
-{{ userFormGroup.getRawValue() | json}}
