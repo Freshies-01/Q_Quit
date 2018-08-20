@@ -1,13 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
-import { EmployeeService } from "app/entities/employee";
-
 @Component({
-  selector: "jhi-record-employee-change",
+  selector: "jhi-employee-change",
   templateUrl: "./employee-change.component.html",
   styles: []
 })
-export class EmployeeRecordChangeComponent implements OnInit {
+export class EmployeeChangeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
