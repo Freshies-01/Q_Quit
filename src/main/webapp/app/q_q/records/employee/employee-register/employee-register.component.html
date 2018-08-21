@@ -1,6 +1,6 @@
 <h1>Update User</h1>
 
-<form [formGroup]="userFormGroup" (click)="SaveUserForm()">
+<form [formGroup]="userFormGroup" (ngSubmit)="SaveUserForm()">
   <p>
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
