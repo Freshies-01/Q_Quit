@@ -20,7 +20,7 @@ import {
 
 @NgModule({
   imports: [
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
@@ -39,7 +39,7 @@ import {
     FormsModule
   ],
   exports: [
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
