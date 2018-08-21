@@ -9,6 +9,7 @@ import { Injectable } from "@angular/core";
 import { EmployeeListComponent } from "./employee-list/employee-list.component";
 import { EmployeeChangeComponent } from "./employee-change/employee-change.component";
 import { UserService, User } from "app/core";
+import { EmployeeRegisterComponent } from "./employee-register/employee-register.component";
 
 @Injectable({ providedIn: "root" })
 export class UserRecordResolver implements Resolve<any> {
@@ -42,6 +43,10 @@ export const employeeRoutes: Routes = [
         resolve: {
           user: UserRecordResolver
         }
+      },
+      {
+        path: "create",
+        component: EmployeeRegisterComponent
       },
       {
         path: "",
