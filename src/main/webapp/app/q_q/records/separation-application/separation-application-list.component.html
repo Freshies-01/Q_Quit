@@ -1,14 +1,14 @@
 <h1>Here is a list of SA:</h1>
 
 <ul>
-    <li *ngFor="let app of separationApplications">
+    <li style="list-style-type: none;" *ngFor="let app of separationApplications ;trackBy: trackId">
         <mat-card>
             <div class="flex-container">
                 <div>
                     <mat-card-title>Name: {{app.employee?.user?.firstName}} {{app.employee?.user?.lastName}}</mat-card-title>
                     <mat-card-subtitle>
-                        HR: {{app.hr?.user?.firstName}}
-                        <br/> FR: {{app.fr?.user?.firstName}}
+                        HR: {{app.hr?.employee?.user?.firstName}}
+                        <br/> FR: {{app.fr?.employee?.user?.firstName}}
                         <br/> Location: {{app.employee?.location?.city}}
                         <li *ngFor="let action of app.actions">
                         <div>
@@ -19,62 +19,17 @@
                         </li>
                     </mat-card-subtitle>
                 </div>
-                <div>
+                <div style="justify-content: center">
                     <mat-progress-spinner class="status-progress" [mode]="mode" [value]="value"></mat-progress-spinner><br/>
                     <mat-card-subtitle>Status: {{app.status}}</mat-card-subtitle>
+                    <a [routerLink]="['/Q_Q/record/separationApplicationForm', app.id, 'view' ]">
+                        <button mat-raised-button>
+                            View
+                        </button>
+                    </a>
                 </div>
             </div>
         </mat-card>
         <br/>
     </li>
 </ul>
-<mat-card>
-    <div class="flex-container">
-        <div>
-            <mat-card-title>sample name</mat-card-title>
-            <mat-card-subtitle>
-                    HR: sample name <br/>
-                    FR: sample name <br/>
-                    Location: sample location
-            </mat-card-subtitle>
-        </div>
-        <div>
-            <mat-progress-spinner class="status-progress" [mode]="mode" [value]="25"></mat-progress-spinner><br/>
-            <mat-card-subtitle>Status: sample status</mat-card-subtitle>
-        </div>
-    </div>
-</mat-card>
-<br/>
-<mat-card>
-    <div class="flex-container">
-        <div>
-            <mat-card-title>sample name</mat-card-title>
-            <mat-card-subtitle>
-                    HR: sample name <br/>
-                    FR: sample name <br/>
-                    Location: sample location
-            </mat-card-subtitle>
-        </div>
-        <div>
-            <mat-progress-spinner class="status-progress" [mode]="mode" [value]="50"></mat-progress-spinner><br/>
-            <mat-card-subtitle>Status: sample status</mat-card-subtitle>
-        </div>
-    </div>
-</mat-card>
-<br/>
-<mat-card>
-    <div class="flex-container">
-        <div>
-            <mat-card-title>sample name</mat-card-title>
-            <mat-card-subtitle>
-                    HR: sample name <br/>
-                    FR: sample name <br/>
-                    Location: sample location
-            </mat-card-subtitle>
-        </div>
-        <div>
-            <mat-progress-spinner class="status-progress" [mode]="mode" [value]="75"></mat-progress-spinner><br/>
-            <mat-card-subtitle>Status: sample status</mat-card-subtitle>
-        </div>
-    </div>
-</mat-card>

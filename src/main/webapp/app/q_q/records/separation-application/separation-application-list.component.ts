@@ -10,9 +10,10 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 })
 export class SeparationApplicationListComponent implements OnInit {
   separationApplications: ISeparationApplication[];
+  separationApplication: ISeparationApplication;
 
   mode = "determinate";
-  value = 66;
+  value = 100;
 
   constructor(
     private separationApplicationService: SeparationApplicationService
@@ -29,5 +30,9 @@ export class SeparationApplicationListComponent implements OnInit {
 
   ngOnInit() {
     this.loadAll();
+  }
+
+  trackId(index: number, item: ISeparationApplication) {
+    return item.id;
   }
 }
