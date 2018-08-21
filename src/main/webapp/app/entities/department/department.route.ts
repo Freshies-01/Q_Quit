@@ -10,11 +10,11 @@ import { UserRouteAccessService } from "app/core";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
 import { Department } from "app/shared/model/department.model";
-import { DepartmentService } from "./department.service";
-import { DepartmentComponent } from "./department.component";
-import { DepartmentDetailComponent } from "./department-detail.component";
-import { DepartmentUpdateComponent } from "./department-update.component";
-import { DepartmentDeletePopupComponent } from "./department-delete-dialog.component";
+import { DepartmentService } from "app/entities/department/department.service";
+import { DepartmentComponent } from "app/entities/department/department.component";
+import { DepartmentDetailComponent } from "app/entities/department/department-detail.component";
+import { DepartmentUpdateComponent } from "app/entities/department/department-update.component";
+import { DepartmentDeletePopupComponent } from "app/entities/department/department-delete-dialog.component";
 import { IDepartment } from "app/shared/model/department.model";
 
 @Injectable({ providedIn: "root" })

@@ -10,7 +10,7 @@ import {
   DepartmentDeleteDialogComponent,
   departmentRoute,
   departmentPopupRoute
-} from "./";
+} from "app/entities/department";
 
 const ENTITY_STATES = [...departmentRoute, ...departmentPopupRoute];
 

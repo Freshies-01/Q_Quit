@@ -9,7 +9,7 @@ import {
 import { JhiEventManager } from "ng-jhipster";
 
 import { IEmployee } from "app/shared/model/employee.model";
-import { EmployeeService } from "./employee.service";
+import { EmployeeService } from "app/entities/employee/employee.service";
 
 @Component({
   selector: "jhi-employee-delete-dialog",

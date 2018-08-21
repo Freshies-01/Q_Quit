@@ -1,47 +1,51 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { QQuitSharedModule } from 'app/shared';
-import { QQuitEntityModule } from '../entities/entity.module';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { QQuitSharedModule } from "app/shared";
+import { QQuitEntityModule } from "app/entities/entity.module";
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
 
 import {
-    adminState,
+  adminState,
+  AuditsComponent,
+  UserMgmtComponent,
+  UserMgmtDetailComponent,
+  UserMgmtUpdateComponent,
+  UserMgmtDeleteDialogComponent,
+  LogsComponent,
+  JhiMetricsMonitoringModalComponent,
+  JhiMetricsMonitoringComponent,
+  JhiHealthModalComponent,
+  JhiHealthCheckComponent,
+  JhiConfigurationComponent,
+  JhiDocsComponent
+} from "app/admin";
+
+@NgModule({
+  imports: [
+    QQuitSharedModule,
+    RouterModule.forChild(adminState),
+    QQuitEntityModule
+    /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
+  ],
+  declarations: [
     AuditsComponent,
     UserMgmtComponent,
     UserMgmtDetailComponent,
     UserMgmtUpdateComponent,
     UserMgmtDeleteDialogComponent,
     LogsComponent,
-    JhiMetricsMonitoringModalComponent,
-    JhiMetricsMonitoringComponent,
-    JhiHealthModalComponent,
-    JhiHealthCheckComponent,
     JhiConfigurationComponent,
+    JhiHealthCheckComponent,
+    JhiHealthModalComponent,
     JhiDocsComponent,
-} from './';
-
-@NgModule({
-    imports: [
-        QQuitSharedModule,
-        RouterModule.forChild(adminState),
-        QQuitEntityModule
-        /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
-    ],
-    declarations: [
-        AuditsComponent,
-        UserMgmtComponent,
-        UserMgmtDetailComponent,
-        UserMgmtUpdateComponent,
-        UserMgmtDeleteDialogComponent,
-        LogsComponent,
-        JhiConfigurationComponent,
-        JhiHealthCheckComponent,
-        JhiHealthModalComponent,
-        JhiDocsComponent,
-        JhiMetricsMonitoringComponent,
-        JhiMetricsMonitoringModalComponent
-    ],
-    entryComponents: [UserMgmtDeleteDialogComponent, JhiHealthModalComponent, JhiMetricsMonitoringModalComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    JhiMetricsMonitoringComponent,
+    JhiMetricsMonitoringModalComponent
+  ],
+  entryComponents: [
+    UserMgmtDeleteDialogComponent,
+    JhiHealthModalComponent,
+    JhiMetricsMonitoringModalComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class QQuitAdminModule { }
+export class QQuitAdminModule {}
