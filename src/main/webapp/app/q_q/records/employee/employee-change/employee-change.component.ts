@@ -24,7 +24,7 @@ export class EmployeeChangeComponent implements OnInit {
   constructor(private activetedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    populateUserFormWithDataFromRouteData();
+    this.populateUserFormWithDataFromRouteData();
   }
 
   populateUserFormWithDataFromRouteData() {
