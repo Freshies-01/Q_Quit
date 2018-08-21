@@ -24,6 +24,10 @@ export class EmployeeChangeComponent implements OnInit {
   constructor(private activetedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    populateUserFormWithDataFromRouteData();
+  }
+
+  populateUserFormWithDataFromRouteData() {
     this.activetedRoute.data.subscribe((data: { user: User }) => {
       this.userFormGroup.patchValue({
         login: data.user.login,
