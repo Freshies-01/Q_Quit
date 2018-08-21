@@ -13,7 +13,7 @@ export class SeparationApplicationListComponent implements OnInit {
   separationApplication: ISeparationApplication;
 
   mode = "determinate";
-  value = 25;
+  value = 100;
 
   constructor(
     private separationApplicationService: SeparationApplicationService
@@ -30,5 +30,9 @@ export class SeparationApplicationListComponent implements OnInit {
 
   ngOnInit() {
     this.loadAll();
+  }
+
+  trackId(index: number, item: ISeparationApplication) {
+    return item.id;
   }
 }

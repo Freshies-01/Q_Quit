@@ -1,7 +1,7 @@
 <h1>Here is a list of SA:</h1>
 
 <ul>
-    <li style="list-style-type: none;" *ngFor="let app of separationApplications">
+    <li style="list-style-type: none;" *ngFor="let app of separationApplications ;trackBy: trackId">
         <mat-card>
             <div class="flex-container">
                 <div>
@@ -12,13 +12,15 @@
                         <br/> Location: {{app.employee?.location?.city}}
                     </mat-card-subtitle>
                 </div>
-                <div>
+                <div style="justify-content: center">
                     <mat-progress-spinner class="status-progress" [mode]="mode" [value]="value"></mat-progress-spinner><br/>
                     <mat-card-subtitle>Status: {{app.status}}</mat-card-subtitle>
+                    <a [routerLink]="['/Q_Q/record/separationApplicationForm', app.id, 'view' ]">
+                        <button mat-raised-button>
+                            View
+                        </button>
+                    </a>
                 </div>
-                <button mat-raised-button type="submit">
-                    View
-                </button>
             </div>
         </mat-card>
         <br/>
