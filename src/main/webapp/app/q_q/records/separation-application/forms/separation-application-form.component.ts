@@ -13,6 +13,8 @@ import { HrRepsService } from "app/entities/hr-reps";
 import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
 
+import { FormGroup, FormControl } from "@angular/forms";
+
 @Component({
   selector: "jhi-separation-application-form",
   templateUrl: "./separation-application-form.component.html",
@@ -32,6 +34,15 @@ export class SeparationApplicationFormComponent implements OnInit {
   dateSumbittedDp: any;
   dateCompletedDp: any;
   dateApprovedDp: any;
+
+  public appForm = new FormGroup({
+    firstName: new FormControl(""),
+    lastName: new FormControl(""),
+    dateOfLeave: new FormControl(""),
+    dateSubmitted: new FormControl(""),
+    dateApproved: new FormControl(""),
+    location: new FormControl("")
+  });
 
   constructor(
     private separationApplicationService: SeparationApplicationService,
