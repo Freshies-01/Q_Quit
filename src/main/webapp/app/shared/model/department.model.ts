@@ -1,4 +1,4 @@
-import { IEmployee } from "app/shared/model//employee.model";
+import { IEmployee } from "app/shared/model/employee.model";
 
 export const enum DepartmentCodes {
   IT = "IT",

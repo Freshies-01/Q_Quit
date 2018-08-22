@@ -1,12 +1,15 @@
 import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { Routes } from "@angular/router";
 
 import {
   SeparationApplicationModule,
   separationApplicationRoute
-} from "./separation-application/separation-application.module";
-import { EmployeeModule, employeeRoutes } from "./employee/employee.module";
+} from "app/Q_Q/records/separation-application/separation-application.module";
+import { MyEmployeeModule } from "app/Q_Q/records/employee/employee.module";
+
+import { employeeRoutes } from "./employee/employee.route";
 
 export const RecordsRouting: Routes = [
   {
@@ -16,7 +19,12 @@ export const RecordsRouting: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SeparationApplicationModule, EmployeeModule],
+  imports: [
+    CommonModule,
+    SeparationApplicationModule,
+    MyEmployeeModule,
+    RouterModule
+  ],
   declarations: []
 })
 export class RecordsModule {}

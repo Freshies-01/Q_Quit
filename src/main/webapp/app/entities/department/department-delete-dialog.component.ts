@@ -9,7 +9,7 @@ import {
 import { JhiEventManager } from "ng-jhipster";
 
 import { IDepartment } from "app/shared/model/department.model";
-import { DepartmentService } from "./department.service";
+import { DepartmentService } from "app/entities/department/department.service";
 
 @Component({
   selector: "jhi-department-delete-dialog",
