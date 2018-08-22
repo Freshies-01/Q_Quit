@@ -3,11 +3,9 @@ import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { Routes } from "@angular/router";
 
-import {
-  SeparationApplicationModule,
-  separationApplicationRoute
-} from "app/Q_Q/records/separation-application/separation-application.module";
+import { SeparationApplicationModule } from "app/Q_Q/records/separation-application/separation-application.module";
 import { MyEmployeeModule } from "app/Q_Q/records/employee/employee.module";
+import { separationApplicationRoute } from "./separation-application/separation-application.route";
 
 import { employeeRoutes } from "./employee/employee.route";
 
