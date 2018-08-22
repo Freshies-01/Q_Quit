@@ -20,6 +20,7 @@ export class ActionService {
 
   create(action: IAction): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(action);
+    action.separationApplication.actions.push(action);
     return this.http
       .post<IAction>(this.resourceUrl, copy, { observe: "response" })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
