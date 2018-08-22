@@ -26,12 +26,15 @@
                     <td>
                         <a [routerLink]="['/employee', employee.id, 'view' ]">{{employee.id}}</a>
                     </td>
-                    <td>{{employee.user?.firstName}} {{employee.user?.lastName}}</td>
                     <td>
                         <div *ngIf="employee.location">
                             <a [routerLink]="['../location', employee.location?.id, 'view' ]">{{employee.location?.city}}</a>
                         </div>
                     </td>
+                    <td><div *ngIf="employee.user">
+                        <a [routerLink]="['../user', employee.user?.id, 'view' ]">{{employee.user?.firstName}} {{employee.user?.lastName}}</a>
+                    </div>
+                </td>
                     <td>
                         <div *ngIf="employee.department">
                             <a [routerLink]="['../department', employee.department?.id, 'view' ]" >{{employee.department?.name}}</a>
