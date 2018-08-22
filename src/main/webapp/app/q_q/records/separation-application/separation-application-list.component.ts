@@ -10,6 +10,9 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 })
 export class SeparationApplicationListComponent implements OnInit {
   separationApplications: ISeparationApplication[];
+  pendingApplications: ISeparationApplication[];
+  closedApplications: ISeparationApplication[];
+  applications: ISeparationApplication[];
   separationApplication: ISeparationApplication;
 
   mode = "determinate";
@@ -23,13 +26,38 @@ export class SeparationApplicationListComponent implements OnInit {
     this.separationApplicationService.query().subscribe(
       (res: HttpResponse<ISeparationApplication[]>) => {
         this.separationApplications = res.body;
+        this.applications = this.separationApplications;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+  loadPending() {
+    this.separationApplicationService.queryPending().subscribe(
+      (res: HttpResponse<ISeparationApplication[]>) => {
+        this.pendingApplications = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+  loadClosed() {
+    this.separationApplicationService.queryClosed().subscribe(
+      (res: HttpResponse<ISeparationApplication[]>) => {
+        this.closedApplications = res.body;
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
   }
 
+  reload() {
+    this.value = parseFloat(
+      (<HTMLInputElement>document.getElementById("list-filter")).value
+    );
+  }
+
   ngOnInit() {
     this.loadAll();
+    this.loadPending();
+    this.loadClosed();
   }
 
   trackId(index: number, item: ISeparationApplication) {

@@ -1,7 +1,13 @@
 <h1>Here is a list of SA:</h1>
-
+<mat-form-field>
+    <mat-select id="list-filter" placeholder="Filter" (onclick)="reload()">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="pending">Pending</mat-option>
+        <mat-option value="closed">Closed</mat-option>
+    </mat-select>
+</mat-form-field>
 <ul>
-    <li style="list-style-type: none;" *ngFor="let app of separationApplications ;trackBy: trackId">
+    <li style="list-style-type: none;" *ngFor="let app of applications ;trackBy: trackId">
         <mat-card>
             <div class="flex-container">
                 <div>

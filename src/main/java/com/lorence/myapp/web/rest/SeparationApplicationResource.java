@@ -89,6 +89,20 @@ public class SeparationApplicationResource {
         return separationApplicationRepository.findAll();
     }
 
+    @GetMapping("/pending-applications")
+    @Timed
+    public List<SeparationApplication> getAllPendingApplications() {
+        log.debug("REST request to get all pending SeparationApplications");
+        return separationApplicationRepository.findAllPendingApplications();
+    }
+
+    @GetMapping("/closed-applications")
+    @Timed
+    public List<SeparationApplication> getAllClosedApplications() {
+        log.debug("REST request to get all closed SeparationApplications");
+        return separationApplicationRepository.findAllClosedApplications();
+    }
+
     /**
      * GET  /separation-applications/:id : get the "id" separationApplication.
      *
