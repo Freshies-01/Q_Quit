@@ -16,7 +16,12 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+          <div>{{card.content}}</div>
+          <div>
+            <ul *ngFor="let app of separationApplications">
+              {{separationApplications.length}}
+            </ul>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
