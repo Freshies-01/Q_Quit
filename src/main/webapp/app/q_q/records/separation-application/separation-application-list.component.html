@@ -10,6 +10,13 @@
                         HR: {{app.hr?.employee?.user?.firstName}}
                         <br/> FR: {{app.fr?.employee?.user?.firstName}}
                         <br/> Location: {{app.employee?.location?.city}}
+                        <li *ngFor="let action of app.actions">
+                        <div>
+                            <p>action.task</p>
+                            <p>action.isCompleted</p>
+                            <p>action.dateCompleted</p>
+                        </div>
+                        </li>
                     </mat-card-subtitle>
                 </div>
                 <div style="justify-content: center">
