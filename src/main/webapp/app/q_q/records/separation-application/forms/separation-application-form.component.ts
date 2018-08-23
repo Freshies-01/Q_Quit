@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
-import { ISeparationApplication } from "app/shared/model/separation-application.model";
+import {
+  ISeparationApplication,
+  SeparationApplication
+} from "app/shared/model/separation-application.model";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { JhiAlertService } from "ng-jhipster";
@@ -21,19 +24,12 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  separationApplications: ISeparationApplication[];
   private _separationApplication: ISeparationApplication;
+
   isSaving: boolean;
-
   employees: IEmployee[];
-
   hrreps: IHrReps[];
-
   functionreps: IFunctionReps[];
-  dateOfLeaveDp: any;
-  dateSumbittedDp: any;
-  dateCompletedDp: any;
-  dateApprovedDp: any;
 
   public appForm = new FormGroup({
     firstName: new FormControl(""),
@@ -53,21 +49,16 @@ export class SeparationApplicationFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  loadAll() {
-    this.separationApplicationService.query().subscribe(
-      (res: HttpResponse<ISeparationApplication[]>) => {
-        this.separationApplications = res.body;
-      },
-      (res: HttpErrorResponse) => console.log(res.message)
-    );
+  mapSeparationApplicationToAppForm() {
+    this.activatedRoute.data.subscribe((sa: separationapplication) => {
+      // this.appForm.setValue({});
+      console.log(sa);
+    });
   }
 
   ngOnInit() {
-    this.loadAll();
     this.isSaving = false;
-    this.activatedRoute.data.subscribe(({ separationApplication }) => {
-      this.separationApplication = separationApplication;
-    });
+    mapSeparationApplicationToAppForm();
     this.employeeService
       .query({ filter: "separationapplication-is-null" })
       .subscribe(
@@ -103,6 +94,7 @@ export class SeparationApplicationFormComponent implements OnInit {
       (res: HttpErrorResponse) => this.onError(res.message)
     );
   }
+
   save() {
     this.isSaving = true;
     if (this.separationApplication.id !== undefined) {
