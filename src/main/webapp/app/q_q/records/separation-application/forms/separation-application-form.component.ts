@@ -25,11 +25,10 @@ import { FormGroup, FormControl } from "@angular/forms";
 })
 export class SeparationApplicationFormComponent implements OnInit {
   private _separationApplication: ISeparationApplication;
-
-  isSaving: boolean;
-  employees: IEmployee[];
-  hrreps: IHrReps[];
-  functionreps: IFunctionReps[];
+  isSaving = false;
+  employeeOptions: IEmployee[];
+  hrRepOptions: IHrReps[];
+  functionRepOptions: IFunctionReps[];
 
   public appForm = new FormGroup({
     firstName: new FormControl(""),
@@ -49,16 +48,39 @@ export class SeparationApplicationFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  ngOnInit() {
+    this.mapSeparationApplicationToAppForm();
+    this.populateEmployeeOptions();
+    this.populateFrOptions();
+    this.populateHrOptions();
+  }
+
   mapSeparationApplicationToAppForm() {
-    this.activatedRoute.data.subscribe((sa: separationapplication) => {
+    this.activatedRoute.data.subscribe((sa: SeparationApplication) => {
       // this.appForm.setValue({});
       console.log(sa);
     });
   }
 
-  ngOnInit() {
-    this.isSaving = false;
-    mapSeparationApplicationToAppForm();
+  populateFrOptions() {
+    this.functionRepsService.query().subscribe(
+      (res: HttpResponse<IFunctionReps[]>) => {
+        this.functionRepOptions = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+  }
+
+  populateHrOptions() {
+    this.hrRepsService.query().subscribe(
+      (res: HttpResponse<IHrReps[]>) => {
+        this.hrRepOptions = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+  }
+
+  populateEmployeeOptions() {
     this.employeeService
       .query({ filter: "separationapplication-is-null" })
       .subscribe(
@@ -67,13 +89,13 @@ export class SeparationApplicationFormComponent implements OnInit {
             !this.separationApplication.employee ||
             !this.separationApplication.employee.id
           ) {
-            this.employees = res.body;
+            this.employeeOptions = res.body;
           } else {
             this.employeeService
               .find(this.separationApplication.employee.id)
               .subscribe(
                 (subRes: HttpResponse<IEmployee>) => {
-                  this.employees = [subRes.body].concat(res.body);
+                  this.employeeOptions = [subRes.body].concat(res.body);
                 },
                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
               );
@@ -81,18 +103,6 @@ export class SeparationApplicationFormComponent implements OnInit {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.hrRepsService.query().subscribe(
-      (res: HttpResponse<IHrReps[]>) => {
-        this.hrreps = res.body;
-      },
-      (res: HttpErrorResponse) => this.onError(res.message)
-    );
-    this.functionRepsService.query().subscribe(
-      (res: HttpResponse<IFunctionReps[]>) => {
-        this.functionreps = res.body;
-      },
-      (res: HttpErrorResponse) => this.onError(res.message)
-    );
   }
 
   save() {
