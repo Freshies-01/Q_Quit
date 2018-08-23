@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
@@ -36,7 +37,8 @@ import {
     MatSelectModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -55,7 +57,8 @@ import {
     MatSelectModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ]
 })
 export class AngularMaterialModule {}

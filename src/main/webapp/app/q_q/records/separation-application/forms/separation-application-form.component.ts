@@ -31,7 +31,7 @@ export class SeparationApplicationFormComponent implements OnInit {
   functionRepOptions: IFunctionReps[];
 
   public appForm = new FormGroup({
-    firstName: new FormControl(""),
+    firstName: new FormControl("test"),
     lastName: new FormControl(""),
     dateOfLeave: new FormControl(""),
     dateSubmitted: new FormControl(""),
@@ -81,41 +81,41 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   populateEmployeeOptions() {
-    this.employeeService
-      .query({ filter: "separationapplication-is-null" })
-      .subscribe(
-        (res: HttpResponse<IEmployee[]>) => {
-          if (
-            !this.separationApplication.employee ||
-            !this.separationApplication.employee.id
-          ) {
-            this.employeeOptions = res.body;
-          } else {
-            this.employeeService
-              .find(this.separationApplication.employee.id)
-              .subscribe(
-                (subRes: HttpResponse<IEmployee>) => {
-                  this.employeeOptions = [subRes.body].concat(res.body);
-                },
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    // this.employeeService
+    //   .query({ filter: 'separationapplication-is-null' })
+    //   .subscribe(
+    //     (res: HttpResponse<IEmployee[]>) => {
+    //       if (
+    //         !this.separationApplication.employee ||
+    //         !this.separationApplication.employee.id
+    //       ) {
+    //         this.employeeOptions = res.body;
+    //       } else {
+    //         this.employeeService
+    //           .find(this.separationApplication.employee.id)
+    //           .subscribe(
+    //             (subRes: HttpResponse<IEmployee>) => {
+    //               this.employeeOptions = [subRes.body].concat(res.body);
+    //             },
+    //             (subRes: HttpErrorResponse) => this.onError(subRes.message)
+    //           );
+    //       }
+    //     },
+    //     (res: HttpErrorResponse) => this.onError(res.message)
+    //   );
   }
 
   save() {
     this.isSaving = true;
-    if (this.separationApplication.id !== undefined) {
-      this.subscribeToSaveResponse(
-        this.separationApplicationService.update(this.separationApplication)
-      );
-    } else {
-      this.subscribeToSaveResponse(
-        this.separationApplicationService.create(this.separationApplication)
-      );
-    }
+    // if (this.separationApplication.id !== undefined) {
+    //   this.subscribeToSaveResponse(
+    //     this.separationApplicationService.update(this.separationApplication)
+    //   );
+    // } else {
+    //   this.subscribeToSaveResponse(
+    //     this.separationApplicationService.create(this.separationApplication)
+    //   );
+    // }
   }
 
   private onSaveSuccess() {
@@ -151,11 +151,11 @@ export class SeparationApplicationFormComponent implements OnInit {
   trackFunctionRepsById(index: number, item: IFunctionReps) {
     return item.id;
   }
-  get separationApplication() {
-    return this._separationApplication;
-  }
+  // get separationApplication() {
+  //   return this._separationApplication;
+  // }
 
-  set separationApplication(separationApplication: ISeparationApplication) {
-    this._separationApplication = separationApplication;
-  }
+  // set separationApplication(separationApplication: ISeparationApplication) {
+  //   this._separationApplication = separationApplication;
+  // }
 }

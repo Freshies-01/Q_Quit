@@ -1,75 +1,69 @@
-<div *ngIf="separationApplication">
-    <h1>Employee: {{separationApplication.employee?.user?.firstName}} {{separationApplication.employee?.user?.lastName}}</h1>
-    <h3>HR: {{separationApplication.hr?.employee?.user?.firstName}} {{separationApplication.hr?.employee?.user?.lastName}}</h3>
-    <h3>Status: {{separationApplication.status}}</h3>
-    <br/>
+<div>
+    <h1>Employee: WIP</h1>
+    <h3>HR: WIP</h3>
+    <h3>Status: WIP</h3>
     <mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
-    <br/>
-    <form (ngSubmit)="save()" [formGroup]="appForm">
-        <div class="flex-container">
-            <div>
-                <br/>
+    <form class="flex-container" (ngSubmit)="save()" [formGroup]="appForm">
+        <div>
+            <p>
                 <mat-form-field class="form" appearance="outline">
-                    <mat-label>Expected Date of Leave</mat-label>
+                    <mat-label>Date of Leave</mat-label>
                     <input matInput [matDatepicker]="picker2" placeholder="Date of Leave">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
-                <br/>
+            </p>
+            <p>
                 <mat-form-field class="form" appearance="outline">
                     <mat-label>Date Approved</mat-label>
-                    <input matInput [matDatepicker]="picker3" placeholder="Date Approved">
+                    <input matInput [matDatepicker]="picker3" placeholder="Date">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field class="form" appearance="outline">
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
                     <mat-label>Location</mat-label>
                     <mat-select placeholder="Location">
                         <mat-option>
-                            Chicaboop
+                            WIP_Placeholder
                         </mat-option>
                         <mat-option>
-                            Sesaboop
-                        </mat-option>
-                        <mat-option>
-                            Boop city
+                            WIP_Placeholder
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
+            </p>
+        </div>
+        <div>
             <div>
-                <div>
-                    <h6>Function Representatives</h6>
-                    <mat-list>
-                        <mat-list-item>
-                            {{separationApplication.fr?.employee?.user?.firstName}} {{separationApplication.fr?.employee?.user?.lastName}}
-                        </mat-list-item>
-                    </mat-list>
-                </div>
-                <br/>
-                <div>
-                    <h6>To be completed</h6>
-                    <mat-selection-list #actions>
-                        <mat-list-option>
-                            Take the enchilada from the fridge
-                        </mat-list-option>
-                        <mat-list-option>
-                            Enjoy the enchilada
-                        </mat-list-option>
-                        <mat-list-option>
-                            Run from Steve
-                        </mat-list-option>
-                    </mat-selection-list>
-                    <p>
-                        Actions completed: {{actions.selectedOptions.selected.length}}
-                    </p>
-                </div>
+                <h6>Function Representatives</h6>
+                <mat-list>
+                    <mat-list-item>
+                        WIP
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <br/>
+            <div>
+                <h6>To be completed</h6>
+                <mat-selection-list #actions>
+                    <mat-list-option>
+                        WIP_Placeholder
+                    </mat-list-option>
+                    <mat-list-option>
+                        WIP_Placeholder
+                    </mat-list-option>
+                </mat-selection-list>
+                <p>
+                    Actions completed: {{actions.selectedOptions.selected.length}}
+                </p>
             </div>
         </div>
     </form>
     <br/>
     <div>
-        <button mat-raised-button class="save" type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving">
+        <button mat-raised-button type="submit" [disabled]="isSaving">
             Save
         </button>
     </div>
