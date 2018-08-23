@@ -60,15 +60,6 @@
                         <a [routerLink]="['/function-reps', separationApplication.fr?.id, 'view']">{{separationApplication.fr?.employee.user?.firstName}}</a>
                     </div>
                 </dd>
-                <dd>
-                    <li *ngFor="let action of separationApplication.actions">
-                        <div>
-                            Task: {{action.task}}
-                            Completed:{{action.isCompleted}}
-                            Date Completed: {{action.dateCompleted}}
-                        </div>
-                    </li>
-                </dd>
             </dl>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">
