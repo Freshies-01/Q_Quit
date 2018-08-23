@@ -6,18 +6,21 @@ import { JhiEventManager, JhiAlertService } from "ng-jhipster";
 import { ISeparationApplication } from "app/shared/model/separation-application.model";
 import { Principal } from "app/core";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
-
+import { ActionService } from "app/entities/action";
+import { IAction } from "app/shared/model/action.model";
 @Component({
   selector: "jhi-separation-application",
   templateUrl: "./separation-application.component.html"
 })
 export class SeparationApplicationComponent implements OnInit, OnDestroy {
   separationApplications: ISeparationApplication[];
+  actions: IAction[];
   currentAccount: any;
   eventSubscriber: Subscription;
 
   constructor(
     private separationApplicationService: SeparationApplicationService,
+    private actionSerivce: ActionService,
     private jhiAlertService: JhiAlertService,
     private eventManager: JhiEventManager,
     private principal: Principal
@@ -30,6 +33,9 @@ export class SeparationApplicationComponent implements OnInit, OnDestroy {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
+    this.actionSerivce.test(2).subscribe((res: HttpResponse<IAction[]>) => {
+      this.actions = res.body;
+    });
   }
 
   ngOnInit() {

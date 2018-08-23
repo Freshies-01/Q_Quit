@@ -101,7 +101,13 @@ public class ActionResource {
         Optional<Action> action = actionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(action);
     }
-
+    @GetMapping("/actions-sa/{id}")
+    @Timed
+    public List<Action> getActionsInSeparationApplication(@PathVariable Long id) {
+        log.debug("REST request to get Action : {}", id);
+        List<Action> actions = actionRepository.findAllBySeparationApplicationId(id);
+        return actions;
+    }
     /**
      * DELETE  /actions/:id : delete the "id" action.
      *
