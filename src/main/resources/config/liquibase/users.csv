@@ -5,3 +5,4 @@ id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;c
 4;user;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user@localhost;;true;en;system;system
 5;hr;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;HR;HR;hr@localhost;;true;en;system;system
 6;fr;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;FR;FR;fr@localhost;;true;en;system;system
+7;god;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;Jeff;Goldblum;grandmaster@localhost;;true;en;system;system

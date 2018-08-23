@@ -15,7 +15,7 @@
                         <option value="UNDER_REVIEW_FR">Under Function Review</option>
                         <option value="EMPLOYEE_TASKS_IN_PROGRESS">Employee Tasks in Progress</option>
                         <option value="EMPLOYEE_TASKS_COMPLETED">Employee Tasks Completed</option>
-                        <option value="CLOSED">Closed</option>
+                        <option value="CLOSED_BY_HR">Closed</option>
                     </select>
                     <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.status?.errors?.required">
