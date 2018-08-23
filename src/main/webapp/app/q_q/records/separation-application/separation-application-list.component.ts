@@ -35,6 +35,7 @@ export class SeparationApplicationListComponent implements OnInit {
     this.separationApplicationService.queryPending().subscribe(
       (res: HttpResponse<ISeparationApplication[]>) => {
         this.pendingApplications = res.body;
+        this.applications = this.pendingApplications;
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
@@ -43,21 +44,26 @@ export class SeparationApplicationListComponent implements OnInit {
     this.separationApplicationService.queryClosed().subscribe(
       (res: HttpResponse<ISeparationApplication[]>) => {
         this.closedApplications = res.body;
+        this.applications = this.closedApplications;
       },
       (res: HttpErrorResponse) => console.log(res.message)
     );
   }
 
-  reload() {
-    this.value = parseFloat(
-      (<HTMLInputElement>document.getElementById("list-filter")).value
-    );
+  filterAll() {
+    this.loadAll();
+  }
+
+  filterPending() {
+    this.loadPending();
+  }
+
+  filterClosed() {
+    this.loadClosed();
   }
 
   ngOnInit() {
     this.loadAll();
-    this.loadPending();
-    this.loadClosed();
   }
 
   trackId(index: number, item: ISeparationApplication) {

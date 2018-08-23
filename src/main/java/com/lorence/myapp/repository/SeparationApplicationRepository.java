@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SeparationApplicationRepository extends JpaRepository<SeparationApplication, Long> {
 
-    @Query("SELECT app FROM SeparationApplication app WHERE app.status = 'PENDING'")
+    @Query("SELECT app FROM SeparationApplication app WHERE app.status != 'CLOSED_BY_HR'")
     public List<SeparationApplication> findAllPendingApplications();
 
     @Query("SELECT app FROM SeparationApplication app WHERE app.status = 'CLOSED_BY_HR'")
