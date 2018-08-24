@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ActionRepository extends JpaRepository<Action, Long> {
 
-    //@Query("SELECT action FROM Action action WHERE action.separationApplication = id")
+    @Query("SELECT action FROM Action action WHERE action.separationApplication.id = ?1")
     public List<Action> findAllBySeparationApplicationId(long id);
 }

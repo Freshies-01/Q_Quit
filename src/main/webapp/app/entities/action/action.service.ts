@@ -38,7 +38,7 @@ export class ActionService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  test(id: number): Observable<EntityArrayResponseType> {
+  findActionsBySAID(id: number): Observable<EntityArrayResponseType> {
     return this.http.get<IAction[]>(`${this.testUrl}/${id}`, {
       observe: "response"
     });

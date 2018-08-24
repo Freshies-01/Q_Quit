@@ -33,9 +33,11 @@ export class SeparationApplicationComponent implements OnInit, OnDestroy {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
-    this.actionSerivce.test(2).subscribe((res: HttpResponse<IAction[]>) => {
-      this.actions = res.body;
-    });
+    this.actionSerivce
+      .findActionsBySAID(2)
+      .subscribe((res: HttpResponse<IAction[]>) => {
+        this.actions = res.body;
+      });
   }
 
   ngOnInit() {
