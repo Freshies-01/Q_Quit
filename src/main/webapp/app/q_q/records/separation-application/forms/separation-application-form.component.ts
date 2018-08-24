@@ -18,6 +18,8 @@ import { FunctionRepsService } from "app/entities/function-reps";
 
 import { FormGroup, FormControl } from "@angular/forms";
 
+import * as moment from "moment";
+
 @Component({
   selector: "jhi-separation-application-form",
   templateUrl: "./separation-application-form.component.html",
@@ -59,11 +61,14 @@ export class SeparationApplicationFormComponent implements OnInit {
 
   mapSeparationApplicationToAppForm(sa: SeparationApplication) {
     // If the record we got here has id, then this record allready exists and we need to populate the form with it
-    // If not, then then we just stick with defaults.
+    // If not, then then we just stick empty values that form is initialized with
     const adjustedSa: any = sa;
-    console.log(sa);
-    adjustedSa.dateOfLeave = sa.dateOfLeave.toDate();
-    adjustedSa.dateApproved = sa.dateApproved.toDate();
+    if (sa.dateOfLeave) {
+      adjustedSa = sa.dateOfLeave.toDate();
+    }
+    if (sa.dateApproved) {
+      adjustedSa = sa.dateApproved.toDate();
+    }
     this.appForm.patchValue(adjustedSa);
   }
 
@@ -97,6 +102,13 @@ export class SeparationApplicationFormComponent implements OnInit {
     console.log("save was triggered");
     this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();
+    // we have to convert dates back to momment because that is what jhipster expects
+    sa.dateOfLeave = moment(sa.dateOfLeave);
+    sa.dateApproved = moment(sa.dateApproved);
+    // DEBUG: API demands that we submit these date fields - these values are not correct
+    sa.dateSumbitted = moment(sa.dateOfLeave);
+    sa.dateCompleted = moment(sa.dateOfLeave);
+    sa.status = "UNDER_REVIEW_FR";
     if (sa.id !== undefined) {
       this.subscribeToSaveResponse(
         this.separationApplicationService.update(sa)
