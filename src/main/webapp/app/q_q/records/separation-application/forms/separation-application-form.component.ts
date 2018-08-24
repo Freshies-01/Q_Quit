@@ -24,17 +24,15 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  private _separationApplication: ISeparationApplication;
   isSaving = false;
   employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
 
   public appForm = new FormGroup({
-    firstName: new FormControl("test"),
+    firstName: new FormControl(""),
     lastName: new FormControl(""),
     dateOfLeave: new FormControl(""),
-    dateSubmitted: new FormControl(""),
     dateApproved: new FormControl(""),
     location: new FormControl("")
   });
@@ -49,17 +47,22 @@ export class SeparationApplicationFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mapSeparationApplicationToAppForm();
+    this.activatedRoute.data.subscribe((sa: SeparationApplication) => {
+      this.mapSeparationApplicationToAppForm(sa);
+    });
     this.populateEmployeeOptions();
     this.populateFrOptions();
     this.populateHrOptions();
   }
 
-  mapSeparationApplicationToAppForm() {
-    this.activatedRoute.data.subscribe((sa: SeparationApplication) => {
-      // this.appForm.setValue({});
-      console.log(sa);
-    });
+  mapSeparationApplicationToAppForm(sa: SeparationApplication) {
+    // If the record we got here has id, then this record allready exists and we need to populate the form with it
+    // If not, then then we just stick with defaults.
+    if (sa.id) {
+      const adjustedSa: any = sa;
+      adjustedSa.dateOfLeave = sa.dateOfLeave.toDate();
+      adjustedSa.dateApproved = sa.dateApproved.toDate();
+    }
   }
 
   populateFrOptions() {
@@ -81,32 +84,15 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   populateEmployeeOptions() {
-    // this.employeeService
-    //   .query({ filter: 'separationapplication-is-null' })
-    //   .subscribe(
-    //     (res: HttpResponse<IEmployee[]>) => {
-    //       if (
-    //         !this.separationApplication.employee ||
-    //         !this.separationApplication.employee.id
-    //       ) {
-    //         this.employeeOptions = res.body;
-    //       } else {
-    //         this.employeeService
-    //           .find(this.separationApplication.employee.id)
-    //           .subscribe(
-    //             (subRes: HttpResponse<IEmployee>) => {
-    //               this.employeeOptions = [subRes.body].concat(res.body);
-    //             },
-    //             (subRes: HttpErrorResponse) => this.onError(subRes.message)
-    //           );
-    //       }
-    //     },
-    //     (res: HttpErrorResponse) => this.onError(res.message)
-    //   );
+    this.employeeService
+      .query({ filter: "separationapplication-is-null" })
+      .subscribe((res: HttpResponse<IEmployee[]>) => {
+        this.employeeOptions = res.body;
+      });
   }
 
   save() {
-    this.isSaving = true;
+    // this.isSaving = true;
     // if (this.separationApplication.id !== undefined) {
     //   this.subscribeToSaveResponse(
     //     this.separationApplicationService.update(this.separationApplication)
@@ -151,11 +137,4 @@ export class SeparationApplicationFormComponent implements OnInit {
   trackFunctionRepsById(index: number, item: IFunctionReps) {
     return item.id;
   }
-  // get separationApplication() {
-  //   return this._separationApplication;
-  // }
-
-  // set separationApplication(separationApplication: ISeparationApplication) {
-  //   this._separationApplication = separationApplication;
-  // }
 }
