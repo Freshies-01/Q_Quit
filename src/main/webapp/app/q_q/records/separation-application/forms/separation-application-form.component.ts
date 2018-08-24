@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
   ISeparationApplication,
@@ -24,19 +25,31 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  private _separationApplication: ISeparationApplication;
   isSaving = false;
+
+  // 3 variables here are populated so that the drowpdown can have data.  I would like to extract the drowpdown for these into a pop up component sometime.
   employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
 
+  // The form group represents structure of the JSON we get from API.
+  // This allows us to avoid writting a lot of custom partsing/serializing function,
+  // By just leting us yse appForm.getRawValues()
+  // We still have to do some of it... for example, converting separation applications gives us momment object, but we need to convert it to date
   public appForm = new FormGroup({
-    firstName: new FormControl("test"),
-    lastName: new FormControl(""),
+    id: new FormControl(""),
+    status: new FormControl(""),
     dateOfLeave: new FormControl(""),
-    dateSubmitted: new FormControl(""),
     dateApproved: new FormControl(""),
-    location: new FormControl("")
+    fr: new FormGroup({
+      id: new FormControl("")
+    }),
+    hr: new FormGroup({
+      id: new FormControl("")
+    }),
+    employee: new FormGroup({
+      id: new FormControl("")
+    })
   });
 
   constructor(
@@ -49,17 +62,22 @@ export class SeparationApplicationFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mapSeparationApplicationToAppForm();
-    this.populateEmployeeOptions();
+    this.activatedRoute.data.subscribe(routeData => {
+      const sa: SeparationApplication = routeData.separationApplication;
+      this.populateFormWithData(sa);
+    });
     this.populateFrOptions();
     this.populateHrOptions();
   }
 
-  mapSeparationApplicationToAppForm() {
-    this.activatedRoute.data.subscribe((sa: SeparationApplication) => {
-      // this.appForm.setValue({});
-      console.log(sa);
-    });
+  populateFormWithData(sa: SeparationApplication) {
+    // JHipster uses external lib called momment to manage dates.
+    // I am converting momment objects to Date object because ngMAterial' date picker expects that.
+    // There is a way to make date component work with momment... but it's more trouble than it's worth it now
+    const adjustedSA: any = sa;
+    adjustedSA.dateOfLeave = sa.dateOfLeave.toDate();
+    adjustedSA.dateApproved = sa.dateApproved.toDate();
+    this.appForm.patchValue(adjustedSA);
   }
 
   populateFrOptions() {
@@ -81,46 +99,33 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   populateEmployeeOptions() {
-    // this.employeeService
-    //   .query({ filter: 'separationapplication-is-null' })
-    //   .subscribe(
-    //     (res: HttpResponse<IEmployee[]>) => {
-    //       if (
-    //         !this.separationApplication.employee ||
-    //         !this.separationApplication.employee.id
-    //       ) {
-    //         this.employeeOptions = res.body;
-    //       } else {
-    //         this.employeeService
-    //           .find(this.separationApplication.employee.id)
-    //           .subscribe(
-    //             (subRes: HttpResponse<IEmployee>) => {
-    //               this.employeeOptions = [subRes.body].concat(res.body);
-    //             },
-    //             (subRes: HttpErrorResponse) => this.onError(subRes.message)
-    //           );
-    //       }
-    //     },
-    //     (res: HttpErrorResponse) => this.onError(res.message)
-    //   );
+    this.employeeService
+      .query({ filter: "separationapplication-is-null" })
+      .subscribe(
+        (res: HttpResponse<IEmployee[]>) => {
+          this.employeeOptions = res.body;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
   }
 
   save() {
     this.isSaving = true;
-    // if (this.separationApplication.id !== undefined) {
-    //   this.subscribeToSaveResponse(
-    //     this.separationApplicationService.update(this.separationApplication)
-    //   );
-    // } else {
-    //   this.subscribeToSaveResponse(
-    //     this.separationApplicationService.create(this.separationApplication)
-    //   );
-    // }
+    // DEBUG: Rememmber that we converted memment objects to date... can we pass date into momment here?
+    const sa = this.appForm.getRawValue() as SeparationApplication;
+    if (this.appForm.get("id").value() !== undefined) {
+      this.subscribeToSaveResponse(
+        this.separationApplicationService.update(sa)
+      );
+    } else {
+      this.subscribeToSaveResponse(
+        this.separationApplicationService.create(sa)
+      );
+    }
   }
 
   private onSaveSuccess() {
     this.isSaving = false;
-    // this.previousState();
   }
 
   private onSaveError() {
@@ -139,23 +144,4 @@ export class SeparationApplicationFormComponent implements OnInit {
   private onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }
-
-  trackEmployeeById(index: number, item: IEmployee) {
-    return item.id;
-  }
-
-  trackHrRepsById(index: number, item: IHrReps) {
-    return item.id;
-  }
-
-  trackFunctionRepsById(index: number, item: IFunctionReps) {
-    return item.id;
-  }
-  // get separationApplication() {
-  //   return this._separationApplication;
-  // }
-
-  // set separationApplication(separationApplication: ISeparationApplication) {
-  //   this._separationApplication = separationApplication;
-  // }
 }
