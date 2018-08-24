@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { Routes } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { SeparationApplicationModule } from "app/Q_Q/records/separation-application/separation-application.module";
 import { MyEmployeeModule } from "app/Q_Q/records/employee/employee.module";
@@ -18,6 +19,7 @@ export const RecordsRouting: Routes = [
 
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     SeparationApplicationModule,
     MyEmployeeModule,
