@@ -1,4 +1,4 @@
-<h1>Here is a list of SA:</h1>
+<h1>Here is a list of SA for {{account.login}}:</h1>
 <mat-form-field>
     <mat-select id="list-filter" placeholder="Filter">
         <mat-option value="all" (click)="filterAll()">All</mat-option>
@@ -8,7 +8,9 @@
 </mat-form-field>
 <ul>
     <li style="list-style-type: none;" *ngFor="let app of applications ;trackBy: trackId">
-        <mat-card>
+        <mat-card *ngIf="account.login === app.hr?.employee?.user?.login || 
+                            account.login === app.fr?.employee?.user?.login ||
+                            account.login === app.employee?.user?.login">
             <div class="flex-container">
                 <div>
                     <mat-card-title>Name: {{app.employee?.user?.firstName}} {{app.employee?.user?.lastName}}</mat-card-title>
