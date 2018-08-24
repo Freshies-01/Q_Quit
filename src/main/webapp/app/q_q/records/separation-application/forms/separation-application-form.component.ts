@@ -30,11 +30,13 @@ export class SeparationApplicationFormComponent implements OnInit {
   functionRepOptions: IFunctionReps[];
 
   public appForm = new FormGroup({
-    firstName: new FormControl(""),
-    lastName: new FormControl(""),
+    id: new FormControl(""),
     dateOfLeave: new FormControl(""),
     dateApproved: new FormControl(""),
-    location: new FormControl("")
+    location: new FormControl(""),
+    employee: new FormGroup({
+      id: new FormControl("")
+    })
   });
 
   constructor(
@@ -47,8 +49,8 @@ export class SeparationApplicationFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((sa: SeparationApplication) => {
-      this.mapSeparationApplicationToAppForm(sa);
+    this.activatedRoute.data.subscribe(routeData => {
+      this.mapSeparationApplicationToAppForm(routeData.separationApplication);
     });
     this.populateEmployeeOptions();
     this.populateFrOptions();
@@ -58,11 +60,11 @@ export class SeparationApplicationFormComponent implements OnInit {
   mapSeparationApplicationToAppForm(sa: SeparationApplication) {
     // If the record we got here has id, then this record allready exists and we need to populate the form with it
     // If not, then then we just stick with defaults.
-    if (sa.id) {
-      const adjustedSa: any = sa;
-      adjustedSa.dateOfLeave = sa.dateOfLeave.toDate();
-      adjustedSa.dateApproved = sa.dateApproved.toDate();
-    }
+    const adjustedSa: any = sa;
+    console.log(sa);
+    adjustedSa.dateOfLeave = sa.dateOfLeave.toDate();
+    adjustedSa.dateApproved = sa.dateApproved.toDate();
+    this.appForm.patchValue(adjustedSa);
   }
 
   populateFrOptions() {
@@ -92,21 +94,22 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   save() {
-    // this.isSaving = true;
-    // if (this.separationApplication.id !== undefined) {
-    //   this.subscribeToSaveResponse(
-    //     this.separationApplicationService.update(this.separationApplication)
-    //   );
-    // } else {
-    //   this.subscribeToSaveResponse(
-    //     this.separationApplicationService.create(this.separationApplication)
-    //   );
-    // }
+    console.log("save was triggered");
+    this.isSaving = true;
+    const sa: SeparationApplication = this.appForm.getRawValue();
+    if (sa.id !== undefined) {
+      this.subscribeToSaveResponse(
+        this.separationApplicationService.update(sa)
+      );
+    } else {
+      this.subscribeToSaveResponse(
+        this.separationApplicationService.create(sa)
+      );
+    }
   }
 
   private onSaveSuccess() {
     this.isSaving = false;
-    // this.previousState();
   }
 
   private onSaveError() {
