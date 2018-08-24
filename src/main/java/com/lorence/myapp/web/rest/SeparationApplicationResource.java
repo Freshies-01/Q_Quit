@@ -96,6 +96,13 @@ public class SeparationApplicationResource {
         return separationApplicationRepository.findAllPendingApplications();
     }
 
+    @GetMapping("/user-applications/{login}")
+    @Timed
+    public List<SeparationApplication> getAllPendingApplicationsByCurrentUser(@PathVariable String login) {
+        log.debug("REST request to get all pending SeparationApplications");
+        return separationApplicationRepository.findAllPendingApplicationsByCurrentUser(login);
+    }
+
     @GetMapping("/closed-applications")
     @Timed
     public List<SeparationApplication> getAllClosedApplications() {
