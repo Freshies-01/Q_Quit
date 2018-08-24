@@ -3,21 +3,19 @@ import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
   ISeparationApplication,
-  SeparationApplication
+  SeparationApplication,
+  Status as SeparationApplicationStatus
 } from "app/shared/model/separation-application.model";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { JhiAlertService } from "ng-jhipster";
-
 import { IEmployee } from "app/shared/model/employee.model";
 import { EmployeeService } from "app/entities/employee";
 import { IHrReps } from "app/shared/model/hr-reps.model";
 import { HrRepsService } from "app/entities/hr-reps";
 import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
-
 import { FormGroup, FormControl } from "@angular/forms";
-
 import * as moment from "moment";
 
 @Component({
@@ -64,10 +62,10 @@ export class SeparationApplicationFormComponent implements OnInit {
     // If not, then then we just stick empty values that form is initialized with
     const adjustedSa: any = sa;
     if (sa.dateOfLeave) {
-      adjustedSa = sa.dateOfLeave.toDate();
+      adjustedSa.dateOfLeave = sa.dateOfLeave.toDate();
     }
     if (sa.dateApproved) {
-      adjustedSa = sa.dateApproved.toDate();
+      adjustedSa.dateApproved = sa.dateApproved.toDate();
     }
     this.appForm.patchValue(adjustedSa);
   }
@@ -108,7 +106,7 @@ export class SeparationApplicationFormComponent implements OnInit {
     // DEBUG: API demands that we submit these date fields - these values are not correct
     sa.dateSumbitted = moment(sa.dateOfLeave);
     sa.dateCompleted = moment(sa.dateOfLeave);
-    sa.status = "UNDER_REVIEW_FR";
+    sa.status = SeparationApplicationStatus.PENDING;
     if (sa.id !== undefined) {
       this.subscribeToSaveResponse(
         this.separationApplicationService.update(sa)
