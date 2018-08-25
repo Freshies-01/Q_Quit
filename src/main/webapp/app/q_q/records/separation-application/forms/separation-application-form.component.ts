@@ -29,6 +29,8 @@ export class SeparationApplicationFormComponent implements OnInit {
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
 
+  // app form group is mimicing the structure of JSON that API generates.
+  // conversion functions This way we can acoid writing lengthy.
   public appForm = new FormGroup({
     id: new FormControl(""),
     dateOfLeave: new FormControl(""),
@@ -36,7 +38,11 @@ export class SeparationApplicationFormComponent implements OnInit {
     location: new FormControl(""),
     employee: new FormGroup({
       id: new FormControl("")
-    })
+    }),
+    fr: new FormGroup({
+      id: new FormControl("")
+    }),
+    hr: new FormControl("")
   });
 
   constructor(
@@ -61,6 +67,7 @@ export class SeparationApplicationFormComponent implements OnInit {
     // If the record we got here has id, then this record allready exists and we need to populate the form with it
     // If not, then then we just stick empty values that form is initialized with
     const adjustedSa: any = sa;
+    // remapping of values because angular material expects default javascript date objects
     if (sa.dateOfLeave) {
       adjustedSa.dateOfLeave = sa.dateOfLeave.toDate();
     }
@@ -97,7 +104,6 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   save() {
-    console.log("save was triggered");
     this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();
     // we have to convert dates back to momment because that is what jhipster expects
@@ -137,17 +143,5 @@ export class SeparationApplicationFormComponent implements OnInit {
 
   private onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  trackEmployeeById(index: number, item: IEmployee) {
-    return item.id;
-  }
-
-  trackHrRepsById(index: number, item: IHrReps) {
-    return item.id;
-  }
-
-  trackFunctionRepsById(index: number, item: IFunctionReps) {
-    return item.id;
   }
 }
