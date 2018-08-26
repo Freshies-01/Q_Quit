@@ -99,7 +99,14 @@ export class SeparationApplicationFormComponent implements OnInit {
 
   populateEmployeeOptions() {
     this.employeeService
-      .query({ filter: "separationapplication-is-null" })
+      .query()
+      //  .query({ filter: "separationapplication-is-null" })
+      // OMG... this line caused me so much trouble.
+      // I am populating the default values from this array as well.
+      // this means that we do not have information for an employee that was set
+      // when the form loaded.  On the other hand, this makes bussness rule sense because
+      // one employee should not have two separation applications...
+      // On the other hand... such a thing would be better implemented with Async validator
       .subscribe((res: HttpResponse<IEmployee[]>) => {
         this.employeeOptions = res.body;
       });
@@ -107,7 +114,7 @@ export class SeparationApplicationFormComponent implements OnInit {
 
   save() {
     console.log(this.appForm.getRawValue());
-    console.log(this.hrRepOptions);
+    console.log(this.appForm.get("employee"));
 
     this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();

@@ -5,11 +5,15 @@
             <div class="formField">
                 <mat-form-field appearance="outline">
                     <mat-label>Employee</mat-label>
-                    <input matInput formControlName="id">
+                    <mat-select formControlName="id">
+                        <mat-option *ngFor="let i of employeeOptions" [value]="i.id">
+                            testing {{i.id}} {{i.user.firstName}} {{i.user.lastName}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
-                </p>
             </div>
         </ng-container>
+
         <div class="formField">
             <mat-form-field appearance="outline">
                 <mat-label>Date of Leave</mat-label>
