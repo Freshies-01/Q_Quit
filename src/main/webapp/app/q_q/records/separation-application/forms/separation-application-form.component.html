@@ -1,34 +1,47 @@
 <div>
     <mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
     <form (ngSubmit)="save()" [formGroup]="appForm">
-        <div formGroupName="employee">
-            <p>
+        <ng-container formGroupName="employee">
+            <div class="formField">
                 <mat-form-field appearance="outline">
                     <mat-label>Employee</mat-label>
                     <input matInput formControlName="id">
                 </mat-form-field>
-            </p>
-        </div>
-        <p>
+                </p>
+            </div>
+        </ng-container>
+        <div class="formField">
             <mat-form-field appearance="outline">
                 <mat-label>Date of Leave</mat-label>
                 <input matInput [matDatepicker]="picker2 " formControlName="dateOfLeave">
                 <mat-datepicker-toggle matSuffix [for]="picker2 "></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
-        </p>
-        <p>
+        </div>
+        <div class="formField">
             <mat-form-field appearance="outline">
                 <mat-label>Date Approved</mat-label>
                 <input matInput [matDatepicker]="picker3" formControlName="dateApproved">
                 <mat-datepicker-toggle matSuffix [for]="picker3 "></mat-datepicker-toggle>
                 <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
-        </p>
-        <p>
+        </div>
+        <ng-container formGroupName="fr">
+            <div class="formField">
+                <mat-form-field appearance="outline">
+                    <mat-label>Functional Representative</mat-label>
+                    <mat-select formControlName="id">
+                        <mat-option *ngFor="let i of functionRepOptions" [value]="i.id">
+                            {{i.employee.user.firstName}} {{i.employee.user.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </ng-container>
+        <div>
             <button mat-raised-button type="submit" [disabled]="isSaving">
                 Save
             </button>
-        </p>
+        </div>
     </form>
 </div>

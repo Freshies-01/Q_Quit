@@ -25,9 +25,9 @@ import * as moment from "moment";
 })
 export class SeparationApplicationFormComponent implements OnInit {
   isSaving = false;
-  employeeOptions: IEmployee[];
+  public employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
-  functionRepOptions: IFunctionReps[];
+  public functionRepOptions: IFunctionReps[];
 
   // app form group is mimicing the structure of JSON that API generates.
   // conversion functions This way we can acoid writing lengthy.
@@ -104,6 +104,9 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   save() {
+    console.log(this.appForm.getRawValue());
+    console.log(this.functionRepOptions);
+
     this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();
     // we have to convert dates back to momment because that is what jhipster expects
