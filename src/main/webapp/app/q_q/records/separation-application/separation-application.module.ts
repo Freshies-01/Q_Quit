@@ -6,9 +6,15 @@ import { SeparationApplicationListComponent } from "./separation-application-lis
 import { SeparationApplicationFormComponent } from "./forms/separation-application-form.component";
 
 import { AngularMaterialModule } from "app/shared/angular-material.module";
+import { QQuitSharedModule } from "app/shared/shared.module";
 
 @NgModule({
-  imports: [CommonModule, AngularMaterialModule, RouterModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    RouterModule,
+    QQuitSharedModule
+  ],
   declarations: [
     SeparationApplicationListComponent,
     SeparationApplicationFormComponent
