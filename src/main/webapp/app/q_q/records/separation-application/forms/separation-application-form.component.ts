@@ -25,9 +25,9 @@ import * as moment from "moment";
 })
 export class SeparationApplicationFormComponent implements OnInit {
   isSaving = false;
-  public employeeOptions: IEmployee[];
+  employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
-  public functionRepOptions: IFunctionReps[];
+  functionRepOptions: IFunctionReps[];
 
   // app form group is mimicing the structure of JSON that API generates.
   // conversion functions This way we can acoid writing lengthy.
@@ -42,7 +42,9 @@ export class SeparationApplicationFormComponent implements OnInit {
     fr: new FormGroup({
       id: new FormControl("")
     }),
-    hr: new FormControl("")
+    hr: new FormGroup({
+      id: new FormControl("")
+    })
   });
 
   constructor(
@@ -105,7 +107,7 @@ export class SeparationApplicationFormComponent implements OnInit {
 
   save() {
     console.log(this.appForm.getRawValue());
-    console.log(this.functionRepOptions);
+    console.log(this.hrRepOptions);
 
     this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();
