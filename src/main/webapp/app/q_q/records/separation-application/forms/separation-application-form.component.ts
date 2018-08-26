@@ -17,6 +17,7 @@ import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
 import { FormGroup, FormControl } from "@angular/forms";
 import * as moment from "moment";
+import { KeysPipe } from "app/shared/util/EnumKeyPipe/enum-key.pipe";
 
 @Component({
   selector: "jhi-separation-application-form",
@@ -28,11 +29,13 @@ export class SeparationApplicationFormComponent implements OnInit {
   employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
+  statusOptions = SeparationApplicationStatus;
 
   // app form group is mimicing the structure of JSON that API generates.
   // conversion functions This way we can acoid writing lengthy.
   public appForm = new FormGroup({
     id: new FormControl(""),
+    status: new FormControl(""),
     dateOfLeave: new FormControl(""),
     dateApproved: new FormControl(""),
     location: new FormControl(""),
@@ -58,7 +61,9 @@ export class SeparationApplicationFormComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(routeData => {
-      this.mapSeparationApplicationToAppForm(routeData.separationApplication);
+      if (routeData.separationApplication.id) {
+        this.mapSeparationApplicationToAppForm(routeData.separationApplication);
+      }
     });
     this.populateEmployeeOptions();
     this.populateFrOptions();
@@ -121,7 +126,6 @@ export class SeparationApplicationFormComponent implements OnInit {
     // DEBUG: API demands that we submit these date fields - these values are not correct
     sa.dateSumbitted = moment(sa.dateOfLeave);
     sa.dateCompleted = moment(sa.dateOfLeave);
-    sa.status = SeparationApplicationStatus.PENDING;
     if (sa.id !== undefined) {
       this.subscribeToSaveResponse(
         this.separationApplicationService.update(sa)

@@ -1,6 +1,16 @@
 <div>
     <mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
     <form (ngSubmit)="save()" [formGroup]="appForm">
+        <div class="formField">
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let item of statusOptions | keys" [value]="item.value">
+                        {{item.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <ng-container formGroupName="employee">
             <div class="formField">
                 <mat-form-field appearance="outline">
