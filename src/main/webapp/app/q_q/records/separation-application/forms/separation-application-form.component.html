@@ -7,7 +7,7 @@
                     <mat-label>Employee</mat-label>
                     <mat-select formControlName="id">
                         <mat-option *ngFor="let i of employeeOptions" [value]="i.id">
-                            testing {{i.id}} {{i.user.firstName}} {{i.user.lastName}}
+                            {{i.user.firstName}} {{i.user.lastName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

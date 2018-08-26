@@ -113,9 +113,6 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   save() {
-    console.log(this.appForm.getRawValue());
-    console.log(this.appForm.get("employee"));
-
     this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();
     // we have to convert dates back to momment because that is what jhipster expects
