@@ -24,7 +24,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    this.employeeService.query().subscribe(
+    this.employeeService.query("filter=is-hr").subscribe(
       (res: HttpResponse<IEmployee[]>) => {
         this.employees = res.body;
       },
