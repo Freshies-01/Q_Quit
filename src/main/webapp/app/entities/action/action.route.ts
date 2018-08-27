@@ -10,11 +10,11 @@ import { UserRouteAccessService } from "app/core";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
 import { Action } from "app/shared/model/action.model";
-import { ActionService } from "./action.service";
-import { ActionComponent } from "./action.component";
-import { ActionDetailComponent } from "./action-detail.component";
-import { ActionUpdateComponent } from "./action-update.component";
-import { ActionDeletePopupComponent } from "./action-delete-dialog.component";
+import { ActionService } from "app/entities/action/action.service";
+import { ActionComponent } from "app/entities/action/action.component";
+import { ActionDetailComponent } from "app/entities/action/action-detail.component";
+import { ActionUpdateComponent } from "app/entities/action/action-update.component";
+import { ActionDeletePopupComponent } from "app/entities/action/action-delete-dialog.component";
 import { IAction } from "app/shared/model/action.model";
 
 @Injectable({ providedIn: "root" })

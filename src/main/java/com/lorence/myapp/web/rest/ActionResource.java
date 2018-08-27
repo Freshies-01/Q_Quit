@@ -101,7 +101,19 @@ public class ActionResource {
         Optional<Action> action = actionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(action);
     }
-
+    
+    /**
+    * @param id the id of the separation application needed
+    * to find actions to retrieve 
+    * @return the ResponseEntity with status 200 (OK) and with body the action, or with status 404 (Not Found)
+    */
+    @GetMapping("/actions-sa/{id}")
+    @Timed
+    public List<Action> getActionsInSeparationApplication(@PathVariable Long id) {
+        log.debug("REST request to get Action : {}", id);
+        List<Action> actions = actionRepository.findAllBySeparationApplicationId(id);
+        return actions;
+    }
     /**
      * DELETE  /actions/:id : delete the "id" action.
      *

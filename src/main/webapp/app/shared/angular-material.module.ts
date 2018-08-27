@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
   MatCheckboxModule,
@@ -13,12 +14,13 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatStepperModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
 } from "@angular/material";
 
 @NgModule({
   imports: [
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
@@ -31,10 +33,13 @@ import {
     MatDatepickerModule,
     MatListModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
@@ -47,7 +52,10 @@ import {
     MatDatepickerModule,
     MatListModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AngularMaterialModule {}

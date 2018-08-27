@@ -10,11 +10,11 @@ import { UserRouteAccessService } from "app/core";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
 import { Employee } from "app/shared/model/employee.model";
-import { EmployeeService } from "./employee.service";
-import { EmployeeComponent } from "./employee.component";
-import { EmployeeDetailComponent } from "./employee-detail.component";
-import { EmployeeUpdateComponent } from "./employee-update.component";
-import { EmployeeDeletePopupComponent } from "./employee-delete-dialog.component";
+import { EmployeeService } from "app/entities/employee/employee.service";
+import { EmployeeComponent } from "app/entities/employee/employee.component";
+import { EmployeeDetailComponent } from "app/entities/employee/employee-detail.component";
+import { EmployeeUpdateComponent } from "app/entities/employee/employee-update.component";
+import { EmployeeDeletePopupComponent } from "app/entities/employee/employee-delete-dialog.component";
 import { IEmployee } from "app/shared/model/employee.model";
 
 @Injectable({ providedIn: "root" })

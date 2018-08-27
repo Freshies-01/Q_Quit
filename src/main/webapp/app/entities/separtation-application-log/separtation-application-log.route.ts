@@ -11,11 +11,11 @@ import { UserRouteAccessService } from "app/core";
 import { of } from "rxjs";
 import { map } from "rxjs/operators";
 import { SepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
-import { SepartationApplicationLogService } from "./separtation-application-log.service";
-import { SepartationApplicationLogComponent } from "./separtation-application-log.component";
-import { SepartationApplicationLogDetailComponent } from "./separtation-application-log-detail.component";
-import { SepartationApplicationLogUpdateComponent } from "./separtation-application-log-update.component";
-import { SepartationApplicationLogDeletePopupComponent } from "./separtation-application-log-delete-dialog.component";
+import { SepartationApplicationLogService } from "app/entities/separtation-application-log/separtation-application-log.service";
+import { SepartationApplicationLogComponent } from "app/entities/separtation-application-log/separtation-application-log.component";
+import { SepartationApplicationLogDetailComponent } from "app/entities/separtation-application-log/separtation-application-log-detail.component";
+import { SepartationApplicationLogUpdateComponent } from "app/entities/separtation-application-log/separtation-application-log-update.component";
+import { SepartationApplicationLogDeletePopupComponent } from "app/entities/separtation-application-log/separtation-application-log-delete-dialog.component";
 import { ISepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
 
 @Injectable({ providedIn: "root" })

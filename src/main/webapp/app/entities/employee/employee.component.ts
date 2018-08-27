@@ -5,7 +5,7 @@ import { JhiEventManager, JhiAlertService } from "ng-jhipster";
 
 import { IEmployee } from "app/shared/model/employee.model";
 import { Principal } from "app/core";
-import { EmployeeService } from "./employee.service";
+import { EmployeeService } from "app/entities/employee/employee.service";
 
 @Component({
   selector: "jhi-employee",
@@ -24,7 +24,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    this.employeeService.query().subscribe(
+    this.employeeService.query("filter=is-hr").subscribe(
       (res: HttpResponse<IEmployee[]>) => {
         this.employees = res.body;
       },

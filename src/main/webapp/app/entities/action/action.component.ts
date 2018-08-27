@@ -5,7 +5,7 @@ import { JhiEventManager, JhiAlertService } from "ng-jhipster";
 
 import { IAction } from "app/shared/model/action.model";
 import { Principal } from "app/core";
-import { ActionService } from "./action.service";
+import { ActionService } from "app/entities/action/action.service";
 
 @Component({
   selector: "jhi-action",
@@ -24,7 +24,7 @@ export class ActionComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    this.actionService.query().subscribe(
+    this.actionService.findActionsBySAID(2).subscribe(
       (res: HttpResponse<IAction[]>) => {
         this.actions = res.body;
       },

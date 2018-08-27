@@ -4,7 +4,7 @@ import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { IDepartment } from "app/shared/model/department.model";
-import { DepartmentService } from "./department.service";
+import { DepartmentService } from "app/entities/department/department.service";
 
 @Component({
   selector: "jhi-department-update",
