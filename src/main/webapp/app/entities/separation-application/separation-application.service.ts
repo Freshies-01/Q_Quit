@@ -23,6 +23,7 @@ export class SeparationApplicationService {
   create(
     separationApplication: ISeparationApplication
   ): Observable<EntityResponseType> {
+    separationApplication.dateSumbitted = moment(Date.now());
     const copy = this.convertDateFromClient(separationApplication);
     return this.http
       .post<ISeparationApplication>(this.resourceUrl, copy, {
