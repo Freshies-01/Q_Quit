@@ -97,14 +97,13 @@ public class SeparationApplicationResource {
     @Timed
     public List<SeparationApplication> getAllPendingApplications() {
         log.debug("REST request to get all pending SeparationApplications");
-        return separationApplicationRepository.findAllPendingApplications();
+        return separationApplicationRepository.findAllPendingApplicationsByLogin();
     }
 
     @GetMapping("/user-applications")
     @Timed
     public List<SeparationApplication> getAllApplicationsByCurrentUser() {
         log.debug("REST request to get all pending SeparationApplications");
-        System.console().writer().print(SecurityUtils.getCurrentUserLogin().get());
         return separationApplicationRepository.findAllApplicationsByLogin();
     }
 
@@ -112,7 +111,7 @@ public class SeparationApplicationResource {
     @Timed
     public List<SeparationApplication> getAllClosedApplications() {
         log.debug("REST request to get all closed SeparationApplications");
-        return separationApplicationRepository.findAllClosedApplications();
+        return separationApplicationRepository.findAllClosedApplicationsByLogin();
     }
 
     /**
