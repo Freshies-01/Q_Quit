@@ -5,7 +5,7 @@ import {
   AfterContentInit,
   OnDestroy
 } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { Employee } from "app/shared/model/employee.model";
 import { EmployeeService } from "app/entities/employee/employee.service";
 

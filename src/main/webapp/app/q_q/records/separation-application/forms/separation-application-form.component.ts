@@ -17,7 +17,7 @@ import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
 import { FormGroup, FormControl } from "@angular/forms";
 import * as moment from "moment";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatDialogRef } from "@angular/material";
 import {
   DialogPickEmployeeComponent,
   DialockPickEmployeeData
@@ -107,22 +107,19 @@ export class SeparationApplicationFormComponent implements OnInit {
   }
 
   populateEmployeeOptions() {
-    this.employeeService
-      .query()
-      //  .query({ filter: "separationapplication-is-null" })
-      // OMG... this line caused me so much trouble.
-      // I am populating the default values from this array as well.
-      // this means that we do not have information for an employee that was set
-      // when the form loaded.  On the other hand, this makes bussness rule sense because
-      // one employee should not have two separation applications...
-      // On the other hand... such a thing would be better implemented with Async validator
-      .subscribe((res: HttpResponse<IEmployee[]>) => {
-        this.employeeOptions = res.body;
-      });
+    this.employeeService.query().subscribe((res: HttpResponse<IEmployee[]>) => {
+      this.employeeOptions = res.body;
+    });
   }
 
   OpenEmployeeSelectDialog() {
-    this.dialog.open(DialogPickEmployeeComponent);
+    const dialogRef: MatDialogRef<
+      DialogPickEmployeeComponent
+    > = this.dialog.open(DialogPickEmployeeComponent);
+
+    dialogRef.afterClosed().subscribe(pickedEmployee => {
+      this.appForm.get("employee.id").setValue(pickedEmployee.id);
+    });
   }
 
   save() {

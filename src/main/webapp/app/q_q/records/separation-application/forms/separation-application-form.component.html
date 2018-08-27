@@ -15,16 +15,11 @@
             <div class="formField">
                 <mat-form-field appearance="outline">
                     <mat-label>Employee</mat-label>
-                    <mat-select formControlName="id">
-                        <mat-option *ngFor="let i of employeeOptions" [value]="i.id">
-                            {{i.user.firstName}} {{i.user.lastName}}
-                        </mat-option>
-                    </mat-select>
+                    <input matInput formControlName="id">
                 </mat-form-field>
                 <mat-icon type="button" (click)="OpenEmployeeSelectDialog()">edit</mat-icon>
             </div>
         </ng-container>
-
         <div class="formField">
             <mat-form-field appearance="outline">
                 <mat-label>Date of Leave</mat-label>
