@@ -6,6 +6,7 @@ import {
 } from "@angular/router";
 import { Injectable } from "@angular/core";
 
+// import { EmployeeDeletePopupComponent, EmployeeResolve } from 'app/entities/employee';
 import { EmployeeListComponent } from "./employee-list/employee-list.component";
 import { EmployeeChangeComponent } from "./employee-change/employee-change.component";
 import { UserService, User } from "app/core";
@@ -55,3 +56,19 @@ export const employeeRoutes: Routes = [
     ]
   }
 ];
+
+// export const employeePopupRoute: Routes = [
+//   {
+//     path: "employee/:id/delete",
+//     component: EmployeeDeletePopupComponent,
+//     resolve: {
+//       employee: UserRecordResolver
+//     },
+//     data: {
+//       authorities: [],
+//       pageTitle: "Employees"
+//     },
+//     canActivate: [UserRouteAccessService],
+//     outlet: "popup"
+//   }
+// ];
