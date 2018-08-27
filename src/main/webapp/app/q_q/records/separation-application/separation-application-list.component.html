@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 <h1>Here is a list of SA for {{account.login}}:</h1>
+||||||| merged common ancestors
+<h1>Here is a list of SA:</h1>
+=======
+<a [routerLink]="['./new']">Create Separation Application</a>
+<h1>Here is a list of SA:</h1>
+>>>>>>> SA/CreatePage
 <mat-form-field>
     <mat-select id="list-filter" placeholder="Filter">
         <mat-option value="all" (click)="filterAll()">All</mat-option>
@@ -19,18 +26,18 @@
                         <br/> FR: {{app.fr?.employee?.user?.firstName}}
                         <br/> Location: {{app.employee?.location?.city}}
                         <li *ngFor="let action of app.actions">
-                        <div>
-                            <p>action.task</p>
-                            <p>action.isCompleted</p>
-                            <p>action.dateCompleted</p>
-                        </div>
+                            <div>
+                                <p>action.task</p>
+                                <p>action.isCompleted</p>
+                                <p>action.dateCompleted</p>
+                            </div>
                         </li>
                     </mat-card-subtitle>
                 </div>
                 <div style="justify-content: center">
                     <mat-progress-spinner class="status-progress" [mode]="mode" [value]="value"></mat-progress-spinner><br/>
                     <mat-card-subtitle>Status: {{app.status}}</mat-card-subtitle>
-                    <a [routerLink]="['/Q_Q/record/separationApplicationForm', app.id, 'view' ]">
+                    <a [routerLink]="['/Q_Q/record/separationApplication', app.id, 'view' ]">
                         <button mat-raised-button>
                             View
                         </button>

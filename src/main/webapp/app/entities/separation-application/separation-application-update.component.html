@@ -35,71 +35,54 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateSumbitted">Date Sumbitted</label>
-                    <div class="input-group">
-                        <input id="field_dateSumbitted" type="text" class="form-control" name="dateSumbitted" ngbDatepicker #dateSumbittedDp="ngbDatepicker"
-                            [(ngModel)]="separationApplication.dateSumbitted" required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateSumbittedDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.dateSumbitted?.dirty && editForm.controls.dateSumbitted?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.dateSumbitted?.errors?.required">
-                            This field is required.
-                        </small>
-                    </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="field_dateCompleted">Date Completed</label>
+                <div class="input-group">
+                    <input id="field_dateCompleted" type="text" class="form-control" name="dateCompleted" ngbDatepicker #dateCompletedDp="ngbDatepicker"
+                        [(ngModel)]="separationApplication.dateCompleted" />
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dateCompletedDp.toggle()">
+                            <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                        </button>
+                    </span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateCompleted">Date Completed</label>
-                    <div class="input-group">
-                        <input id="field_dateCompleted" type="text" class="form-control" name="dateCompleted" ngbDatepicker #dateCompletedDp="ngbDatepicker"
-                            [(ngModel)]="separationApplication.dateCompleted" />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateCompletedDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
-                        </span>
-                    </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="field_dateApproved">Date Approved</label>
+                <div class="input-group">
+                    <input id="field_dateApproved" type="text" class="form-control" name="dateApproved" ngbDatepicker #dateApprovedDp="ngbDatepicker"
+                        [(ngModel)]="separationApplication.dateApproved" />
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="dateApprovedDp.toggle()">
+                            <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                        </button>
+                    </span>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateApproved">Date Approved</label>
-                    <div class="input-group">
-                        <input id="field_dateApproved" type="text" class="form-control" name="dateApproved" ngbDatepicker #dateApprovedDp="ngbDatepicker"
-                            [(ngModel)]="separationApplication.dateApproved" />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateApprovedDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
-                        </span>
-                    </div>
-                </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_employee">Employee</label>
-                    <select class="form-control" id="field_employee" name="employee" [(ngModel)]="separationApplication.employee">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="employeeOption.id === separationApplication.employee?.id ? separationApplication.employee : employeeOption"
-                            *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.user?.firstName}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_hr">Hr</label>
-                    <select class="form-control" id="field_hr" name="hr" [(ngModel)]="separationApplication.hr">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="hrRepsOption.id === separationApplication.hr?.id ? separationApplication.hr : hrRepsOption" *ngFor="let hrRepsOption of hrreps; trackBy: trackHrRepsById">{{hrRepsOption.employee.user?.firstName}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_fr">Fr</label>
-                    <select class="form-control" id="field_fr" name="fr" [(ngModel)]="separationApplication.fr">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="functionRepsOption.id === separationApplication.fr?.id ? separationApplication.fr : functionRepsOption"
-                            *ngFor="let functionRepsOption of functionreps; trackBy: trackFunctionRepsById">{{functionRepsOption.employee.user?.firstName}}</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label class="form-control-label" for="field_employee">Employee</label>
+                <select class="form-control" id="field_employee" name="employee" [(ngModel)]="separationApplication.employee">
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="employeeOption.id === separationApplication.employee?.id ? separationApplication.employee : employeeOption"
+                        *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.user?.firstName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="field_hr">Hr</label>
+                <select class="form-control" id="field_hr" name="hr" [(ngModel)]="separationApplication.hr">
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="hrRepsOption.id === separationApplication.hr?.id ? separationApplication.hr : hrRepsOption" *ngFor="let hrRepsOption of hrreps; trackBy: trackHrRepsById">{{hrRepsOption.employee.user?.firstName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="field_fr">Fr</label>
+                <select class="form-control" id="field_fr" name="fr" [(ngModel)]="separationApplication.fr">
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="functionRepsOption.id === separationApplication.fr?.id ? separationApplication.fr : functionRepsOption"
+                        *ngFor="let functionRepsOption of functionreps; trackBy: trackFunctionRepsById">{{functionRepsOption.employee.user?.firstName}}</option>
+                </select>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">

@@ -8,16 +8,18 @@ import {
   JhiLoginModalComponent,
   HasAnyAuthorityDirective
 } from "app/shared";
+import { KeysPipe } from "./util/EnumKeyPipe/enum-key.pipe";
 
 @NgModule({
   imports: [QQuitSharedLibsModule, QQuitSharedCommonModule],
-  declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
+  declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, KeysPipe],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
   entryComponents: [JhiLoginModalComponent],
   exports: [
     QQuitSharedCommonModule,
     JhiLoginModalComponent,
-    HasAnyAuthorityDirective
+    HasAnyAuthorityDirective,
+    KeysPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
