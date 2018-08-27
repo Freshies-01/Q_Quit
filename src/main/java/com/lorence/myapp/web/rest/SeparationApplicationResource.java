@@ -2,7 +2,9 @@ package com.lorence.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.SeparationApplication;
+import com.lorence.myapp.domain.User;
 import com.lorence.myapp.repository.SeparationApplicationRepository;
+import com.lorence.myapp.security.SecurityUtils;
 import com.lorence.myapp.web.rest.errors.BadRequestAlertException;
 import com.lorence.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,6 +32,8 @@ public class SeparationApplicationResource {
     private static final String ENTITY_NAME = "separationApplication";
 
     private final SeparationApplicationRepository separationApplicationRepository;
+
+    //private String login = SecurityUtils.getCurrentUserLogin().get();
 
     public SeparationApplicationResource(SeparationApplicationRepository separationApplicationRepository) {
         this.separationApplicationRepository = separationApplicationRepository;
@@ -96,11 +100,11 @@ public class SeparationApplicationResource {
         return separationApplicationRepository.findAllPendingApplications();
     }
 
-    @GetMapping("/user-applications/{login}")
+    @GetMapping("/user-applications")
     @Timed
-    public List<SeparationApplication> getAllPendingApplicationsByCurrentUser(@PathVariable String login) {
+    public List<SeparationApplication> getAllApplicationsByCurrentUser() {
         log.debug("REST request to get all pending SeparationApplications");
-        return separationApplicationRepository.findAllPendingApplicationsByCurrentUser(login);
+        return separationApplicationRepository.findAllApplicationsByLogin(SecurityUtils.getCurrentUserLogin().get());
     }
 
     @GetMapping("/closed-applications")

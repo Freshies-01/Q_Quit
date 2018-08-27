@@ -1,11 +1,11 @@
-<h1>Here is a list of SA for {{account.login}}:</h1>
-<mat-form-field>
+<h1>Here is a list of SA:</h1>
+<!-- <mat-form-field>
     <mat-select id="list-filter" placeholder="Filter">
         <mat-option value="all" (click)="filterAll()">All</mat-option>
         <mat-option value="pending" (click)="filterPending()">Pending</mat-option>
         <mat-option value="closed" (click)="filterClosed()">Closed</mat-option>
     </mat-select>
-</mat-form-field>
+</mat-form-field> -->
 <ul>
     <li style="list-style-type: none;" *ngFor="let app of applications ;trackBy: trackId">
         <mat-card >

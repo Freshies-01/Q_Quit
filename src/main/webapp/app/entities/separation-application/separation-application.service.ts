@@ -51,9 +51,9 @@ export class SeparationApplicationService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  findByLogin(login: string): Observable<EntityArrayResponseType> {
+  findByLogin(): Observable<EntityArrayResponseType> {
     return this.http
-      .get<ISeparationApplication[]>(`${this.userUrl}/${login}`, {
+      .get<ISeparationApplication[]>(this.userUrl, {
         observe: "response"
       })
       .pipe(

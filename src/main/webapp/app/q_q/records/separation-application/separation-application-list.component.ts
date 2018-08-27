@@ -28,17 +28,8 @@ export class SeparationApplicationListComponent implements OnInit {
     private eventManager: JhiEventManager
   ) {}
 
-  loadUserApplications() {
-    this.principal.identity().then(account => {
-      this.account = account;
-      this.queryApps(this.account);
-      console.log(this.account.login);
-    });
-    this.registerAuthenticationSuccess();
-  }
-
-  queryApps(account: Account) {
-    this.separationApplicationService.findByLogin(account.login).subscribe(
+  queryApps() {
+    this.separationApplicationService.findByLogin().subscribe(
       (res: HttpResponse<ISeparationApplication[]>) => {
         this.separationApplications = res.body;
         this.applications = this.separationApplications;
@@ -105,7 +96,8 @@ export class SeparationApplicationListComponent implements OnInit {
   ngOnInit() {
     // this.loadAll();
     // this.getCurrentLoginUser();
-    this.loadUserApplications();
+    // this.loadUserApplications();
+    this.queryApps();
   }
 
   trackId(index: number, item: ISeparationApplication) {
