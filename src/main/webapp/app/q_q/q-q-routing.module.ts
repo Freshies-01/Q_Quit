@@ -19,7 +19,7 @@ const routes: Routes = [
     component: AlternativeMainComponent,
 
     data: {
-      authorities: ["ROLE_ADMIN"],
+      authorities: [],
 
       pageTitle: "Separation Applications"
     },

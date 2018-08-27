@@ -17,6 +17,7 @@ export class SeparationApplicationService {
   private resourceUrl = SERVER_API_URL + "api/separation-applications";
   private pendingUrl = SERVER_API_URL + "api/pending-applications";
   private closedUrl = SERVER_API_URL + "api/closed-applications";
+  private userUrl = SERVER_API_URL + "api/user-applications";
 
   constructor(private http: HttpClient) {}
 
@@ -49,6 +50,18 @@ export class SeparationApplicationService {
         observe: "response"
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findByLogin(): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<ISeparationApplication[]>(this.userUrl, {
+        observe: "response"
+      })
+      .pipe(
+        map((res: EntityArrayResponseType) =>
+          this.convertDateArrayFromServer(res)
+        )
+      );
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

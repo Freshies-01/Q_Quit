@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
@@ -14,9 +15,9 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatStepperModule,
-  MatSelectModule,
-  MatDialogModule
+  MatSelectModule
 } from "@angular/material";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {
     MatSelectModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -55,7 +57,11 @@ import {
     MatSelectModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
+  ],
+  providers: [
+    /*{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} }*/
   ]
 })
 export class AngularMaterialModule {}

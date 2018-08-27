@@ -1,6 +1,7 @@
 package com.lorence.myapp.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.lorence.myapp.domain.SeparationApplication;
 import org.springframework.data.jpa.repository.*;
@@ -19,9 +20,7 @@ public interface SeparationApplicationRepository extends JpaRepository<Separatio
 
     @Query("SELECT app FROM SeparationApplication app WHERE app.status = 'CLOSED_BY_HR'")
     public List<SeparationApplication> findAllClosedApplications();
-
-    @Query("FROM Employee emp JOIN HrReps hr "
-           +"ON hr.employee.id = emp.id WHERE emp.id = ?1 AND hr.id = " 
-           +"(SELECT sa.hr.id FROM SeparationApplication sa)")
-    public List<SeparationApplication> findAllApplicationsByHr(long hrId);
+  
+    @Query("SELECT app FROM SeparationApplication app WHERE app.hr.employee.user.login = ?#{principal.username} OR app.employee.user.login = ?#{principal.username} OR app.fr.employee.user.login = ?#{principal.username}")
+    public List<SeparationApplication> findAllApplicationsByLogin();
 }
