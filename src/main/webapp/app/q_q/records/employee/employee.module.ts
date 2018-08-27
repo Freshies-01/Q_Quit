@@ -7,6 +7,7 @@ import { EmployeeListComponent } from "app/Q_Q/records/employee/employee-list/em
 import { EmployeeChangeComponent } from "./employee-change/employee-change.component";
 import { AngularMaterialModule } from "app/shared/angular-material.module";
 import { EmployeeRegisterComponent } from "./employee-register/employee-register.component";
+import { DialogPickEmployeeComponent } from "app/q_q/records/employee/dialog-pick-employee/dialog-pick-employee.component";
 
 @NgModule({
   imports: [
@@ -18,7 +19,9 @@ import { EmployeeRegisterComponent } from "./employee-register/employee-register
   declarations: [
     EmployeeListComponent,
     EmployeeChangeComponent,
-    EmployeeRegisterComponent
-  ]
+    EmployeeRegisterComponent,
+    DialogPickEmployeeComponent
+  ],
+  entryComponents: [DialogPickEmployeeComponent]
 })
 export class MyEmployeeModule {}
