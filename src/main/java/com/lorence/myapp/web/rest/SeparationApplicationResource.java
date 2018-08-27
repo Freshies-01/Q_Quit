@@ -104,7 +104,8 @@ public class SeparationApplicationResource {
     @Timed
     public List<SeparationApplication> getAllApplicationsByCurrentUser() {
         log.debug("REST request to get all pending SeparationApplications");
-        return separationApplicationRepository.findAllApplicationsByLogin(SecurityUtils.getCurrentUserLogin().get());
+        System.console().writer().print(SecurityUtils.getCurrentUserLogin().get());
+        return separationApplicationRepository.findAllApplicationsByLogin();
     }
 
     @GetMapping("/closed-applications")

@@ -21,6 +21,6 @@ public interface SeparationApplicationRepository extends JpaRepository<Separatio
     @Query("SELECT app FROM SeparationApplication app WHERE app.status = 'CLOSED_BY_HR'")
     public List<SeparationApplication> findAllClosedApplications();
 
-    @Query("SELECT app FROM SeparationApplication app WHERE app.employee.user.login = ?1 OR app.hr.employee.user.login = ?1 OR app.fr.employee.user.login = ?1")
-    public List<SeparationApplication> findAllApplicationsByLogin(String login);
+    @Query("SELECT app FROM SeparationApplication app WHERE app.hr.employee.user.login = ?#{principal.username} OR app.employee.user.login = ?#{principal.username} OR app.fr.employee.user.login = ?#{principal.username}")
+    public List<SeparationApplication> findAllApplicationsByLogin();
 }
