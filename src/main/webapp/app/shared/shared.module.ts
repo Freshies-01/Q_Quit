@@ -9,9 +9,14 @@ import {
   HasAnyAuthorityDirective
 } from "app/shared";
 import { KeysPipe } from "./util/EnumKeyPipe/enum-key.pipe";
+import { ControlValueAccessorsModule } from "./control-value-accessors/control-value-accessors.module";
 
 @NgModule({
-  imports: [QQuitSharedLibsModule, QQuitSharedCommonModule],
+  imports: [
+    QQuitSharedLibsModule,
+    QQuitSharedCommonModule,
+    ControlValueAccessorsModule
+  ],
   declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, KeysPipe],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
   entryComponents: [JhiLoginModalComponent],
