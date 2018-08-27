@@ -4,6 +4,7 @@ import { EmployeeFieldComponent } from "./employee-field/employee-field.componen
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [EmployeeFieldComponent]
+  declarations: [EmployeeFieldComponent],
+  exports: [EmployeeFieldComponent]
 })
 export class ControlValueAccessorsModule {}

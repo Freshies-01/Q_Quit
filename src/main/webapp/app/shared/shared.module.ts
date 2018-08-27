@@ -9,7 +9,7 @@ import {
   HasAnyAuthorityDirective
 } from "app/shared";
 import { KeysPipe } from "./util/EnumKeyPipe/enum-key.pipe";
-import { ControlValueAccessorsModule } from "./control-value-accessors/control-value-accessors.module";
+import { ControlValueAccessorsModule } from "app/shared/control-value-accessors/control-value-accessors.module";
 
 @NgModule({
   imports: [
@@ -24,7 +24,8 @@ import { ControlValueAccessorsModule } from "./control-value-accessors/control-v
     QQuitSharedCommonModule,
     JhiLoginModalComponent,
     HasAnyAuthorityDirective,
-    KeysPipe
+    KeysPipe,
+    ControlValueAccessorsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
