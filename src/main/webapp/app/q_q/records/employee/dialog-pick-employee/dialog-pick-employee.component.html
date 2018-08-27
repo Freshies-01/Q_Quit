@@ -1,0 +1,4 @@
+<input id="search-box" matInput placeholder="Search By Name">
+<div *ngFor="let item of filteredEmployees">
+    <button mat-stroked-button type="button">{{item.user.firstName}}</button>
+</div>

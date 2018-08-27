@@ -17,7 +17,11 @@ import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
 import { FormGroup, FormControl } from "@angular/forms";
 import * as moment from "moment";
-import { KeysPipe } from "app/shared/util/EnumKeyPipe/enum-key.pipe";
+import { MatDialog } from "@angular/material";
+import {
+  DialogPickEmployeeComponent,
+  DialockPickEmployeeData
+} from "app/q_q/records/employee/dialog-pick-employee/dialog-pick-employee.component";
 
 @Component({
   selector: "jhi-separation-application-form",
@@ -25,7 +29,6 @@ import { KeysPipe } from "app/shared/util/EnumKeyPipe/enum-key.pipe";
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  isSaving = false;
   employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
@@ -56,7 +59,8 @@ export class SeparationApplicationFormComponent implements OnInit {
     private employeeService: EmployeeService,
     private hrRepsService: HrRepsService,
     private functionRepsService: FunctionRepsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -117,8 +121,11 @@ export class SeparationApplicationFormComponent implements OnInit {
       });
   }
 
+  OpenEmployeeSelectDialog() {
+    this.dialog.open(DialogPickEmployeeComponent);
+  }
+
   save() {
-    this.isSaving = true;
     const sa: SeparationApplication = this.appForm.getRawValue();
     // we have to convert dates back to momment because that is what jhipster expects
     sa.dateOfLeave = moment(sa.dateOfLeave);
@@ -137,13 +144,9 @@ export class SeparationApplicationFormComponent implements OnInit {
     }
   }
 
-  private onSaveSuccess() {
-    this.isSaving = false;
-  }
+  private onSaveSuccess() {}
 
-  private onSaveError() {
-    this.isSaving = false;
-  }
+  private onSaveError() {}
 
   private subscribeToSaveResponse(
     result: Observable<HttpResponse<ISeparationApplication>>

@@ -15,9 +15,9 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatStepperModule,
-  MatSelectModule,
-  MatDialogModule
+  MatSelectModule
 } from "@angular/material";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   imports: [
@@ -59,6 +59,9 @@ import {
     ReactiveFormsModule,
     FormsModule,
     MatIconModule
+  ],
+  providers: [
+    /*{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {} }*/
   ]
 })
 export class AngularMaterialModule {}
