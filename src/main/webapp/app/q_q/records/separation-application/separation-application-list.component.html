@@ -1,15 +1,12 @@
 <!-- <mat-form-field>
 <a [routerLink]="['./new']">Create Separation Application</a>
 <h1>Here is a list of SA:</h1>
-<<<<<<< HEAD
-=======
 <mat-form-field>
     <mat-select id="list-filter" placeholder="Filter">
         <mat-option value="all" (click)="filterAll()">All</mat-option>
         <mat-option value="pending" (click)="filterPending()">Pending</mat-option>
         <mat-option value="closed" (click)="filterClosed()">Closed</mat-option>
     </mat-select>
->>>>>>> ad451eab2a7614cff8fe4bffa8562a3327927b82
 </mat-form-field> -->
 <ul>
     <li style="list-style-type: none;" *ngFor="let app of applications ;trackBy: trackId">
