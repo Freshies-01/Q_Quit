@@ -37,19 +37,19 @@ export class SeparationApplicationFormComponent implements OnInit {
   // app form group is mimicing the structure of JSON that API generates.
   // conversion functions This way we can acoid writing lengthy.
   public appForm = new FormGroup({
-    id: new FormControl(""),
-    status: new FormControl(""),
-    dateOfLeave: new FormControl(""),
-    dateApproved: new FormControl(""),
-    location: new FormControl(""),
+    id: new FormControl(null),
+    status: new FormControl(null),
+    dateOfLeave: new FormControl(null),
+    dateApproved: new FormControl(null),
+    location: new FormControl(null),
     employee: new FormGroup({
-      id: new FormControl("")
+      id: new FormControl(null)
     }),
     fr: new FormGroup({
-      id: new FormControl("")
+      id: new FormControl(null)
     }),
     hr: new FormGroup({
-      id: new FormControl("")
+      id: new FormControl(null)
     })
   });
 
@@ -130,7 +130,7 @@ export class SeparationApplicationFormComponent implements OnInit {
     // DEBUG: API demands that we submit these date fields - these values are not correct
     sa.dateSumbitted = moment(sa.dateOfLeave);
     sa.dateCompleted = moment(sa.dateOfLeave);
-    if (sa.id !== undefined) {
+    if (sa.id) {
       this.subscribeToSaveResponse(
         this.separationApplicationService.update(sa)
       );
