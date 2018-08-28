@@ -1,6 +1,5 @@
 package com.lorence.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -14,10 +13,13 @@ import java.util.Objects;
 
 import com.lorence.myapp.domain.enumeration.Status;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 /**
  * A SeparationApplication.
  */
 @Entity
+@DynamicUpdate(true)
 @Table(name = "separation_application")
 public class SeparationApplication implements Serializable {
 
@@ -36,7 +38,7 @@ public class SeparationApplication implements Serializable {
     private LocalDate dateOfLeave;
 
     @NotNull
-    @Column(name = "date_sumbitted", nullable = false)
+    @Column(name = "date_sumbitted", updatable = false, nullable = false)
     private LocalDate dateSumbitted;
 
     @Column(name = "date_completed")
