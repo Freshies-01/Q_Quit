@@ -8,6 +8,7 @@ import { map } from "rxjs/operators";
 import { SERVER_API_URL } from "app/app.constants";
 import { createRequestOption } from "app/shared";
 import { ISeparationApplication } from "app/shared/model/separation-application.model";
+import { IAction } from "app/shared/model/action.model";
 
 type EntityResponseType = HttpResponse<ISeparationApplication>;
 type EntityArrayResponseType = HttpResponse<ISeparationApplication[]>;
@@ -18,6 +19,7 @@ export class SeparationApplicationService {
   private pendingUrl = SERVER_API_URL + "api/pending-applications";
   private closedUrl = SERVER_API_URL + "api/closed-applications";
   private userUrl = SERVER_API_URL + "api/user-applications";
+  private actionUrl = SERVER_API_URL + "api/actions-sa";
 
   constructor(private http: HttpClient) {}
 
@@ -97,6 +99,18 @@ export class SeparationApplicationService {
     return this.http
       .get<ISeparationApplication[]>(this.closedUrl, {
         params: options,
+        observe: "response"
+      })
+      .pipe(
+        map((res: EntityArrayResponseType) =>
+          this.convertDateArrayFromServer(res)
+        )
+      );
+  }
+
+  queryActions(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAction[]>(`${this.actionUrl}/${id}`, {
         observe: "response"
       })
       .pipe(

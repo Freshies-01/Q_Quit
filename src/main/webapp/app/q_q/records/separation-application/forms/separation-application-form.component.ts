@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgModule } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
