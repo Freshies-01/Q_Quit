@@ -5,7 +5,9 @@ import { JhiEventManager, JhiAlertService } from "ng-jhipster";
 
 import { IAction } from "app/shared/model/action.model";
 import { Principal } from "app/core";
-import { ActionService } from "app/entities/action/action.service";
+import { ActionService } from "./action.service";
+import { Moment, isMoment } from "moment";
+import { DepartmentCodes } from "app/shared/model/department.model";
 
 @Component({
   selector: "jhi-action",
@@ -15,7 +17,8 @@ export class ActionComponent implements OnInit, OnDestroy {
   actions: IAction[];
   currentAccount: any;
   eventSubscriber: Subscription;
-
+  calculationList: [{ departmentName: DepartmentCodes; duration: number }];
+  calcListIndex: 1;
   constructor(
     private actionService: ActionService,
     private jhiAlertService: JhiAlertService,
@@ -23,8 +26,38 @@ export class ActionComponent implements OnInit, OnDestroy {
     private principal: Principal
   ) {}
 
+  functionWiseDuration() {
+    this.actionService.actionsByDepartment(this.calcListIndex).subscribe(
+      (res: HttpResponse<IAction[]>) => {
+        this.actions = res.body;
+        this.actions.forEach(action => {
+          this.calculationList[this.calcListIndex - 1] = {
+            departmentName: action.functionReps.employee.department.name,
+            duration: this.calcDuration(
+              this.calculationList[this.calcListIndex - 1].duration,
+              action.dateCompleted,
+              action.separationApplication.dateApproved
+            )
+          };
+        });
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+  }
+
+  calcDuration(
+    previousValue: number,
+    dateCompleted: Moment,
+    dateApproved: Moment
+  ) {
+    if (previousValue == null) {
+      return dateCompleted.diff(dateApproved);
+    }
+    return (dateCompleted.diff(dateApproved) + previousValue) / 2;
+  }
+
   loadAll() {
-    this.actionService.query().subscribe(
+    this.actionService.findActionsBySAID(2).subscribe(
       (res: HttpResponse<IAction[]>) => {
         this.actions = res.body;
       },

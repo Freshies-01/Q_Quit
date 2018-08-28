@@ -9,7 +9,7 @@ import {
 import { JhiEventManager } from "ng-jhipster";
 
 import { IAction } from "app/shared/model/action.model";
-import { ActionService } from "app/entities/action/action.service";
+import { ActionService } from "./action.service";
 
 @Component({
   selector: "jhi-action-delete-dialog",

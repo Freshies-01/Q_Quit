@@ -2,7 +2,9 @@ package com.lorence.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.SeparationApplication;
+import com.lorence.myapp.domain.User;
 import com.lorence.myapp.repository.SeparationApplicationRepository;
+import com.lorence.myapp.security.SecurityUtils;
 import com.lorence.myapp.web.rest.errors.BadRequestAlertException;
 import com.lorence.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,8 @@ public class SeparationApplicationResource {
     private static final String ENTITY_NAME = "separationApplication";
 
     private final SeparationApplicationRepository separationApplicationRepository;
+
+    //private String login = SecurityUtils.getCurrentUserLogin().get();
 
     public SeparationApplicationResource(SeparationApplicationRepository separationApplicationRepository) {
         this.separationApplicationRepository = separationApplicationRepository;
@@ -71,6 +75,7 @@ public class SeparationApplicationResource {
         if (separationApplication.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        
         SeparationApplication result = separationApplicationRepository.save(separationApplication);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, separationApplication.getId().toString()))
@@ -89,18 +94,35 @@ public class SeparationApplicationResource {
         return separationApplicationRepository.findAll();
     }
 
+    @GetMapping("/separation-applications-filtered")
+    @Timed
+    public List<SeparationApplication> getSeparationApplicationsFiltered(@RequestParam(required = false) Long locID)
+    {
+        List<SeparationApplication> res = separationApplicationRepository.findAll();
+        log.debug("REST request to get all SeparationApplications with filtered locID: " + locID);
+        if(locID != null) res = filterApplicationsByLocation(locID, res);
+        return res;
+    }
+
     @GetMapping("/pending-applications")
     @Timed
     public List<SeparationApplication> getAllPendingApplications() {
         log.debug("REST request to get all pending SeparationApplications");
-        return separationApplicationRepository.findAllPendingApplications();
+        return separationApplicationRepository.findAllPendingApplicationsByLogin();
+    }
+
+    @GetMapping("/user-applications")
+    @Timed
+    public List<SeparationApplication> getAllApplicationsByCurrentUser() {
+        log.debug("REST request to get all pending SeparationApplications");
+        return separationApplicationRepository.findAllApplicationsByLogin();
     }
 
     @GetMapping("/closed-applications")
     @Timed
     public List<SeparationApplication> getAllClosedApplications() {
         log.debug("REST request to get all closed SeparationApplications");
-        return separationApplicationRepository.findAllClosedApplications();
+        return separationApplicationRepository.findAllClosedApplicationsByLogin();
     }
 
     /**
@@ -131,4 +153,14 @@ public class SeparationApplicationResource {
         separationApplicationRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    public List<SeparationApplication> filterApplicationsByLocation(Long locID, List<SeparationApplication> saList){
+        
+        for(Iterator<SeparationApplication> it = saList.iterator(); it.hasNext();){
+            SeparationApplication sa = it.next();
+            if(sa.getEmployee().getLocation().getId() != locID) it.remove();
+        }
+        return saList;
+    }
+
 }

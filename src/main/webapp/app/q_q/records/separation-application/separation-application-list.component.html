@@ -6,12 +6,10 @@
         <mat-option value="pending" (click)="filterPending()">Pending</mat-option>
         <mat-option value="closed" (click)="filterClosed()">Closed</mat-option>
     </mat-select>
-</mat-form-field>
-<ul>
-    <li style="list-style-type: none;" *ngFor="let app of applications ;trackBy: trackId">
-        <mat-card *ngIf="account.login === app.hr?.employee?.user?.login || 
-                            account.login === app.fr?.employee?.user?.login ||
-                            account.login === app.employee?.user?.login">
+</mat-form-field> -->
+<div>
+    <div *ngFor="let app of applications ;trackBy: trackId">
+        <mat-card >
             <div class="flex-container">
                 <div>
                     <mat-card-title>Name: {{app.employee?.user?.firstName}} {{app.employee?.user?.lastName}}</mat-card-title>
@@ -40,5 +38,5 @@
             </div>
         </mat-card>
         <br/>
-    </li>
-</ul>
+    </div>
+</div>

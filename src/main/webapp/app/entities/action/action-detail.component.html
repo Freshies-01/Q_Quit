@@ -23,6 +23,12 @@
                         <a [routerLink]="['/separation-application', action.separationApplication?.id, 'view']">{{action.separationApplication?.id}}</a>
                     </div>
                 </dd>
+                <dt><span>Function Reps</span></dt>
+                <dd>
+                    <div *ngIf="action.functionReps">
+                        <a [routerLink]="['/function-reps', action.functionReps?.id, 'view']">{{action.functionReps?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

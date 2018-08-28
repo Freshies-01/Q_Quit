@@ -6,7 +6,7 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 @Component({
   selector: "jhi-employee-list",
   templateUrl: "./employee-list.component.html",
-  styles: []
+  styles: ["./employee-list.component.css"]
 })
 export class EmployeeListComponent implements OnInit {
   employees: IEmployee[];

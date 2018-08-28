@@ -97,7 +97,8 @@ public class AccountResource {
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {
             throw new EmailAlreadyUsedException();
         });
-        userService.q_qregisterUser(managedUserVM, managedUserVM.getPassword());
+        userService.q_qregisterUser(managedUserVM, managedUserVM.getPassword(), managedUserVM.getDepartment(),
+         managedUserVM.getLocation());
     }
 
     /**

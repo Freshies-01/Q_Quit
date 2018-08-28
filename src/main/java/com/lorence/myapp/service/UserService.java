@@ -1,14 +1,28 @@
 package com.lorence.myapp.service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.lorence.myapp.config.Constants;
 import com.lorence.myapp.domain.Authority;
+import com.lorence.myapp.domain.Department;
+import com.lorence.myapp.domain.Location;
+import com.lorence.myapp.domain.Employee;
 import com.lorence.myapp.domain.User;
 import com.lorence.myapp.repository.AuthorityRepository;
-import com.lorence.myapp.config.Constants;
+import com.lorence.myapp.repository.EmployeeRepository;
 import com.lorence.myapp.repository.UserRepository;
 import com.lorence.myapp.security.AuthoritiesConstants;
 import com.lorence.myapp.security.SecurityUtils;
-import com.lorence.myapp.service.util.RandomUtil;
 import com.lorence.myapp.service.dto.UserDTO;
+import com.lorence.myapp.service.util.RandomUtil;
+import com.lorence.myapp.web.rest.errors.InvalidPasswordException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +31,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.lorence.myapp.web.rest.errors.InvalidPasswordException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Service class for managing users.
@@ -37,6 +45,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final EmployeeRepository employeeRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -44,11 +54,12 @@ public class UserService {
     private final CacheManager cacheManager;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-            AuthorityRepository authorityRepository, CacheManager cacheManager) {
+            AuthorityRepository authorityRepository, CacheManager cacheManager, EmployeeRepository employeeRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.employeeRepository = employeeRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -110,9 +121,10 @@ public class UserService {
         return newUser;
     }
 
-    public User q_qregisterUser(UserDTO userDTO, String password) {
+    public User q_qregisterUser(UserDTO userDTO, String password, Department department, Location location) {
 
         User newUser = new User();
+        Employee newEmployee = new Employee();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin());
         // new user gets initially a generated password
@@ -136,7 +148,11 @@ public class UserService {
             newUser.setAuthorities(authorities);
         }
 
-        userRepository.save(newUser);
+        newUser = userRepository.save(newUser);
+        newEmployee.setDepartment(department);
+        newEmployee.setLocation(location);
+        newEmployee.setUser(newUser);
+        employeeRepository.save(newEmployee);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;

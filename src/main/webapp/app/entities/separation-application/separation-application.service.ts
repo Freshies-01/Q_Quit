@@ -17,12 +17,14 @@ export class SeparationApplicationService {
   private resourceUrl = SERVER_API_URL + "api/separation-applications";
   private pendingUrl = SERVER_API_URL + "api/pending-applications";
   private closedUrl = SERVER_API_URL + "api/closed-applications";
+  private userUrl = SERVER_API_URL + "api/user-applications";
 
   constructor(private http: HttpClient) {}
 
   create(
     separationApplication: ISeparationApplication
   ): Observable<EntityResponseType> {
+    separationApplication.dateSumbitted = moment(Date.now());
     const copy = this.convertDateFromClient(separationApplication);
     return this.http
       .post<ISeparationApplication>(this.resourceUrl, copy, {
@@ -48,6 +50,18 @@ export class SeparationApplicationService {
         observe: "response"
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findByLogin(): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<ISeparationApplication[]>(this.userUrl, {
+        observe: "response"
+      })
+      .pipe(
+        map((res: EntityArrayResponseType) =>
+          this.convertDateArrayFromServer(res)
+        )
+      );
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

@@ -19,6 +19,7 @@
             <th><span>Task</span></th>
             <th><span>Date Completed</span></th>
             <th><span>Separation Application</span></th>
+            <th><span>Function Reps</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +32,11 @@
                 <td>
                     <div *ngIf="action.separationApplication">
                         <a [routerLink]="['../separation-application', action.separationApplication?.id, 'view' ]" >{{action.separationApplication?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="action.functionReps">
+                        <a [routerLink]="['../function-reps', action.functionReps?.id, 'view' ]" >{{action.functionReps?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

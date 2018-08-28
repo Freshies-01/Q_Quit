@@ -3,6 +3,7 @@ package com.lorence.myapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -33,6 +34,11 @@ public class Action implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("")
     private SeparationApplication separationApplication;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties("")
+    private FunctionReps functionReps;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -93,6 +99,19 @@ public class Action implements Serializable {
 
     public void setSeparationApplication(SeparationApplication separationApplication) {
         this.separationApplication = separationApplication;
+    }
+
+    public FunctionReps getFunctionReps() {
+        return functionReps;
+    }
+
+    public Action functionReps(FunctionReps functionReps) {
+        this.functionReps = functionReps;
+        return this;
+    }
+
+    public void setFunctionReps(FunctionReps functionReps) {
+        this.functionReps = functionReps;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
