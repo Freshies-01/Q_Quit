@@ -1,5 +1,4 @@
 <div>
-    <mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
     <form (ngSubmit)="save()" [formGroup]="appForm">
         <div class="formField">
             <mat-form-field appearance="outline">
@@ -11,16 +10,10 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <ng-container formGroupName="employee">
-            <jhi-employee-field formControlName="id"></jhi-employee-field>
-            <div class="formField">
-                <mat-form-field appearance="outline">
-                    <mat-label>Employee</mat-label>
-                    <input matInput formControlName="id">
-                </mat-form-field>
-                <mat-icon type="button" (click)="OpenEmployeeSelectDialog()">edit</mat-icon>
-            </div>
-        </ng-container>
+        <mat-form-field appearance="outline">
+            <mat-label>Employee</mat-label>
+            <jhi-employee-field formControlName="employee"></jhi-employee-field>
+        </mat-form-field>
         <div class="formField">
             <mat-form-field appearance="outline">
                 <mat-label>Date of Leave</mat-label>

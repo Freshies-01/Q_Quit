@@ -29,7 +29,6 @@ import {
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
   statusOptions = SeparationApplicationStatus;
@@ -42,9 +41,7 @@ export class SeparationApplicationFormComponent implements OnInit {
     dateOfLeave: new FormControl(null),
     dateApproved: new FormControl(null),
     location: new FormControl(null),
-    employee: new FormGroup({
-      id: new FormControl(null)
-    }),
+    employee: new FormControl(null),
     fr: new FormGroup({
       id: new FormControl(null)
     }),
@@ -56,7 +53,6 @@ export class SeparationApplicationFormComponent implements OnInit {
   constructor(
     private separationApplicationService: SeparationApplicationService,
     private jhiAlertService: JhiAlertService,
-    private employeeService: EmployeeService,
     private hrRepsService: HrRepsService,
     private functionRepsService: FunctionRepsService,
     private activatedRoute: ActivatedRoute,
@@ -69,7 +65,6 @@ export class SeparationApplicationFormComponent implements OnInit {
         this.mapSeparationApplicationToAppForm(routeData.separationApplication);
       }
     });
-    this.populateEmployeeOptions();
     this.populateFrOptions();
     this.populateHrOptions();
   }
@@ -86,6 +81,7 @@ export class SeparationApplicationFormComponent implements OnInit {
       adjustedSa.dateApproved = sa.dateApproved.toDate();
     }
     this.appForm.patchValue(adjustedSa);
+    console.log(this.appForm.getRawValue());
   }
 
   populateFrOptions() {
@@ -104,12 +100,6 @@ export class SeparationApplicationFormComponent implements OnInit {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
-  }
-
-  populateEmployeeOptions() {
-    this.employeeService.query().subscribe((res: HttpResponse<IEmployee[]>) => {
-      this.employeeOptions = res.body;
-    });
   }
 
   OpenEmployeeSelectDialog() {
