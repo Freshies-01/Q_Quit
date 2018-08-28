@@ -11,6 +11,10 @@ import { EmployeeListComponent } from "./employee-list/employee-list.component";
 import { EmployeeChangeComponent } from "./employee-change/employee-change.component";
 import { UserService, User } from "app/core";
 import { EmployeeRegisterComponent } from "./employee-register/employee-register.component";
+import {
+  EmployeeUpdateComponent,
+  EmployeeDeletePopupComponent
+} from "app/entities/employee";
 
 @Injectable({ providedIn: "root" })
 export class UserRecordResolver implements Resolve<any> {
@@ -39,8 +43,8 @@ export const employeeRoutes: Routes = [
         }
       },
       {
-        path: "edit",
-        component: EmployeeChangeComponent,
+        path: "employee/:id/edit",
+        component: EmployeeUpdateComponent,
         resolve: {
           user: UserRecordResolver
         }
@@ -57,18 +61,16 @@ export const employeeRoutes: Routes = [
   }
 ];
 
-// export const employeePopupRoute: Routes = [
-//   {
-//     path: "employee/:id/delete",
-//     component: EmployeeDeletePopupComponent,
-//     resolve: {
-//       employee: UserRecordResolver
-//     },
-//     data: {
-//       authorities: [],
-//       pageTitle: "Employees"
-//     },
-//     canActivate: [UserRouteAccessService],
-//     outlet: "popup"
-//   }
-// ];
+export const employeePopupRoute: Routes = [
+  {
+    path: "employee/:id/delete",
+    component: EmployeeDeletePopupComponent,
+    resolve: {
+      employee: UserRecordResolver
+    },
+    data: {
+      authorities: [],
+      pageTitle: "Employees"
+    }
+  }
+];

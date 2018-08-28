@@ -16,8 +16,9 @@
                 </div>
                 <div>
                     <mat-card-actions>
-                        <a mat-raised-button>Edit</a>
-                        <a mat-raised-button>Delete</a>
+                        <a mat-raised-button [routerLink]="['/employee', emp.id, 'edit']">Edit</a>
+                        <a mat-raised-button [routerLink]="['/', { outlets: { popup: 'employee/'+ emp.id + '/delete'} }]" replaceUrl="true"
+                        queryParamsHandling="merge">Delete</a>
                     </mat-card-actions>
                 </div>
             </div> 
