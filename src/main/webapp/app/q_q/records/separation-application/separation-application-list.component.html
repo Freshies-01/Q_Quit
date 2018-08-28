@@ -6,10 +6,10 @@
         <mat-option value="pending" (click)="filterPending()">Pending</mat-option>
         <mat-option value="closed" (click)="filterClosed()">Closed</mat-option>
     </mat-select>
-</mat-form-field> -->
+</mat-form-field>
 <div>
     <div *ngFor="let app of applications ;trackBy: trackId">
-        <mat-card >
+        <mat-card>
             <div class="flex-container">
                 <div>
                     <mat-card-title>Name: {{app.employee?.user?.firstName}} {{app.employee?.user?.lastName}}</mat-card-title>
