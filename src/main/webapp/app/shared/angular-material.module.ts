@@ -15,7 +15,8 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatStepperModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDividerModule
 } from "@angular/material";
 import { MatDialogModule } from "@angular/material/dialog";
 

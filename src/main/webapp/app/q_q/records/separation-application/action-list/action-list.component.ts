@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
@@ -6,7 +6,10 @@ import {
   SeparationApplication
 } from "app/shared/model/separation-application.model";
 import { IAction } from "app/shared/model/action.model";
-import { AngularMaterialModule } from "../../../../shared/angular-material.module";
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { ActionService } from "app/entities/action/action.service";
+import { Observable } from "rxjs";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: "jhi-action-list",
@@ -16,8 +19,53 @@ import { AngularMaterialModule } from "../../../../shared/angular-material.modul
 })
 export class ActionListComponent implements OnInit {
   actions: IAction[];
+  private action: IAction;
+  @Input() saId: number;
+  isSaving: boolean;
 
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
+  // public actionForm = new FormGroup ({
+  //   id: new FormControl("")
+  // });
+
+  constructor(
+    private separationApplicationService: SeparationApplicationService,
+    private actionService: ActionService
+  ) {}
+
+  loadActions() {
+    this.separationApplicationService.queryActions(this.saId).subscribe(
+      (res: HttpResponse<IAction[]>) => {
+        this.actions = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
+  save() {
+    this.isSaving = true;
+    if (this.action.id !== undefined) {
+      this.subscribeToSaveResponse(this.actionService.update(this.action));
+    } else {
+      this.subscribeToSaveResponse(this.actionService.create(this.action));
+    }
+  }
+
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IAction>>) {
+    result.subscribe(
+      (res: HttpResponse<IAction>) => this.onSaveSuccess(),
+      (res: HttpErrorResponse) => this.onSaveError()
+    );
+  }
+
+  private onSaveSuccess() {
+    this.isSaving = false;
+  }
+
+  private onSaveError() {
+    this.isSaving = false;
+  }
+
+  ngOnInit() {
+    this.loadActions();
   }
 }
