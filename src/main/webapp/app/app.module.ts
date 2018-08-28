@@ -10,16 +10,16 @@ import {
 } from "ngx-webstorage";
 import { JhiEventManager } from "ng-jhipster";
 
-import { AuthInterceptor } from "./blocks/interceptor/auth.interceptor";
-import { AuthExpiredInterceptor } from "./blocks/interceptor/auth-expired.interceptor";
-import { ErrorHandlerInterceptor } from "./blocks/interceptor/errorhandler.interceptor";
-import { NotificationInterceptor } from "./blocks/interceptor/notification.interceptor";
+import { AuthInterceptor } from "app/blocks/interceptor/auth.interceptor";
+import { AuthExpiredInterceptor } from "app/blocks/interceptor/auth-expired.interceptor";
+import { ErrorHandlerInterceptor } from "app/blocks/interceptor/errorhandler.interceptor";
+import { NotificationInterceptor } from "app/blocks/interceptor/notification.interceptor";
 import { QQuitSharedModule } from "app/shared";
 import { QQuitCoreModule } from "app/core";
-import { QQuitAppRoutingModule } from "./app-routing.module";
-import { QQuitHomeModule } from "./home/home.module";
-import { QQuitAccountModule } from "./account/account.module";
-import { QQuitEntityModule } from "./entities/entity.module";
+import { QQuitAppRoutingModule } from "app/app-routing.module";
+import { QQuitHomeModule } from "app/home/home.module";
+import { QQuitAccountModule } from "app/account/account.module";
+import { QQuitEntityModule } from "app/entities/entity.module";
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
   JhiMainComponent,
@@ -27,8 +27,8 @@ import {
   FooterComponent,
   PageRibbonComponent,
   ErrorComponent
-} from "./layouts";
-import { QQModule } from "./Q_Q/q-q.module";
+} from "app/layouts";
+import { QQModule } from "app/Q_Q/q-q.module";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularMaterialModule } from "app/shared/angular-material.module";

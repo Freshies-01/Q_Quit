@@ -1,84 +1,69 @@
-<h1>Employee: Boop</h1>
-<h3>HR: Boop</h3>
-<br/>
-<mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
-<br/>
-<!-- <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step>
-        <ng-template matStepLabel>Pending</ng-template>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Under Function Review</ng-template>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Employee Task</ng-template>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Completed</ng-template>
-    </mat-step>
-</mat-horizontal-stepper> -->
-<div class="flex-container">
-    <div>
-        <mat-form-field class="form">
-            <textarea matInput placeholder="First Name"></textarea>
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="form">
-            <textarea matInput placeholder="Last Name"></textarea>
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="form">
-            <input matInput [matDatepicker]="picker" placeholder="Date of Leave">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class ="form">
-            <mat-select placeholder="Location">
-                <mat-option>
-                    Chicaboop
-                </mat-option>
-                <mat-option>
-                    Sesaboop
-                </mat-option>
-                <mat-option>
-                    Boop city
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <div>
-        <div style="padding: 5%">
-            <h6>Function Representatives</h6>
-            <mat-list>
-                <mat-list-item>
-                    fr 1
-                </mat-list-item>
-                <mat-list-item>
-                    fr 2
-                </mat-list-item>
-                <mat-list-item>
-                    fr 3
-                </mat-list-item>
-            </mat-list>
+<div>
+    <mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
+    <form (ngSubmit)="save()" [formGroup]="appForm">
+        <div class="formField">
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let item of statusOptions | keys" [value]="item.value">
+                        {{item.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
-        <br/>
+        <ng-container formGroupName="employee">
+            <div class="formField">
+                <mat-form-field appearance="outline">
+                    <mat-label>Employee</mat-label>
+                    <input matInput formControlName="id">
+                </mat-form-field>
+                <mat-icon type="button" (click)="OpenEmployeeSelectDialog()">edit</mat-icon>
+            </div>
+        </ng-container>
+        <div class="formField">
+            <mat-form-field appearance="outline">
+                <mat-label>Date of Leave</mat-label>
+                <input matInput [matDatepicker]="picker2 " formControlName="dateOfLeave">
+                <mat-datepicker-toggle matSuffix [for]="picker2 "></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="formField">
+            <mat-form-field appearance="outline">
+                <mat-label>Date Approved</mat-label>
+                <input matInput [matDatepicker]="picker3" formControlName="dateApproved">
+                <mat-datepicker-toggle matSuffix [for]="picker3 "></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <ng-container formGroupName="fr">
+            <div class="formField">
+                <mat-form-field appearance="outline">
+                    <mat-label>Functional Representative</mat-label>
+                    <mat-select formControlName="id">
+                        <mat-option *ngFor="let i of functionRepOptions" [value]="i.id">
+                            {{i.employee.user.firstName}} {{i.employee.user.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </ng-container>
+        <ng-container formGroupName="hr">
+            <div class="formField">
+                <mat-form-field appearance="outline">
+                    <mat-label>Human Resource Representative</mat-label>
+                    <mat-select formControlName="id">
+                        <mat-option *ngFor="let i of hrRepOptions" [value]="i.id">
+                            {{i.employee.user.firstName}} {{i.employee.user.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </ng-container>
         <div>
-            <h6>To be completed</h6>
-            <mat-selection-list #actions>
-                <mat-list-option>
-                    action 1
-                </mat-list-option>
-                <mat-list-option>
-                    action 2
-                </mat-list-option>
-                <mat-list-option>
-                    action 3
-                </mat-list-option>
-            </mat-selection-list>
-            <p>
-                Actions completed: {{actions.selectedOptions.selected.length}}
-            </p>
+            <button mat-raised-button type="submit" [disabled]="isSaving">
+                Save
+            </button>
         </div>
-    </div>
+    </form>
 </div>
-<br/>

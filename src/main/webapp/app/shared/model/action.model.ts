@@ -1,5 +1,5 @@
 import { Moment } from "moment";
-import { ISeparationApplication } from "app/shared/model//separation-application.model";
+import { ISeparationApplication } from "app/shared/model/separation-application.model";
 
 export interface IAction {
   id?: number;

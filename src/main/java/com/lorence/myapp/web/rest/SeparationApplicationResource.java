@@ -2,7 +2,9 @@ package com.lorence.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.SeparationApplication;
+import com.lorence.myapp.domain.User;
 import com.lorence.myapp.repository.SeparationApplicationRepository;
+import com.lorence.myapp.security.SecurityUtils;
 import com.lorence.myapp.web.rest.errors.BadRequestAlertException;
 import com.lorence.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,6 +32,8 @@ public class SeparationApplicationResource {
     private static final String ENTITY_NAME = "separationApplication";
 
     private final SeparationApplicationRepository separationApplicationRepository;
+
+    //private String login = SecurityUtils.getCurrentUserLogin().get();
 
     public SeparationApplicationResource(SeparationApplicationRepository separationApplicationRepository) {
         this.separationApplicationRepository = separationApplicationRepository;
@@ -87,6 +91,28 @@ public class SeparationApplicationResource {
     public List<SeparationApplication> getAllSeparationApplications() {
         log.debug("REST request to get all SeparationApplications");
         return separationApplicationRepository.findAll();
+    }
+
+    @GetMapping("/pending-applications")
+    @Timed
+    public List<SeparationApplication> getAllPendingApplications() {
+        log.debug("REST request to get all pending SeparationApplications");
+        return separationApplicationRepository.findAllPendingApplications();
+    }
+
+    @GetMapping("/user-applications")
+    @Timed
+    public List<SeparationApplication> getAllApplicationsByCurrentUser() {
+        log.debug("REST request to get all pending SeparationApplications");
+        System.console().writer().print(SecurityUtils.getCurrentUserLogin().get());
+        return separationApplicationRepository.findAllApplicationsByLogin();
+    }
+
+    @GetMapping("/closed-applications")
+    @Timed
+    public List<SeparationApplication> getAllClosedApplications() {
+        log.debug("REST request to get all closed SeparationApplications");
+        return separationApplicationRepository.findAllClosedApplications();
     }
 
     /**

@@ -5,7 +5,7 @@ import { JhiEventManager, JhiAlertService } from "ng-jhipster";
 
 import { IEmployee } from "app/shared/model/employee.model";
 import { Principal } from "app/core";
-import { EmployeeService } from "./employee.service";
+import { EmployeeService } from "app/entities/employee/employee.service";
 
 @Component({
   selector: "jhi-employee",

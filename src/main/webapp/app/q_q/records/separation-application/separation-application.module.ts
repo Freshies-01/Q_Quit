@@ -1,23 +1,20 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Routes } from "@angular/router";
+
+import { Routes, RouterModule } from "@angular/router";
 import { SeparationApplicationListComponent } from "./separation-application-list.component";
 import { SeparationApplicationFormComponent } from "./forms/separation-application-form.component";
-import { AngularMaterialModule } from "app/shared/angular-material.module";
 
-export const separationApplicationRoute: Routes = [
-  {
-    path: "separationApplication",
-    component: SeparationApplicationListComponent
-  },
-  {
-    path: "separationApplicationForm",
-    component: SeparationApplicationFormComponent
-  }
-];
+import { AngularMaterialModule } from "app/shared/angular-material.module";
+import { QQuitSharedModule } from "app/shared/shared.module";
 
 @NgModule({
-  imports: [CommonModule, AngularMaterialModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    RouterModule,
+    QQuitSharedModule
+  ],
   declarations: [
     SeparationApplicationListComponent,
     SeparationApplicationFormComponent
