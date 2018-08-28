@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,6 +75,7 @@ public class SeparationApplicationResource {
         if (separationApplication.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        
         SeparationApplication result = separationApplicationRepository.save(separationApplication);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, separationApplication.getId().toString()))
@@ -93,18 +94,27 @@ public class SeparationApplicationResource {
         return separationApplicationRepository.findAll();
     }
 
+    @GetMapping("/separation-applications-filtered")
+    @Timed
+    public List<SeparationApplication> getSeparationApplicationsFiltered(@RequestParam(required = false) Long locID)
+    {
+        List<SeparationApplication> res = separationApplicationRepository.findAll();
+        log.debug("REST request to get all SeparationApplications with filtered locID: " + locID);
+        if(locID != null) res = filterApplicationsByLocation(locID, res);
+        return res;
+    }
+
     @GetMapping("/pending-applications")
     @Timed
     public List<SeparationApplication> getAllPendingApplications() {
         log.debug("REST request to get all pending SeparationApplications");
-        return separationApplicationRepository.findAllPendingApplications();
+        return separationApplicationRepository.findAllPendingApplicationsByLogin();
     }
 
     @GetMapping("/user-applications")
     @Timed
     public List<SeparationApplication> getAllApplicationsByCurrentUser() {
         log.debug("REST request to get all pending SeparationApplications");
-        System.console().writer().print(SecurityUtils.getCurrentUserLogin().get());
         return separationApplicationRepository.findAllApplicationsByLogin();
     }
 
@@ -112,7 +122,7 @@ public class SeparationApplicationResource {
     @Timed
     public List<SeparationApplication> getAllClosedApplications() {
         log.debug("REST request to get all closed SeparationApplications");
-        return separationApplicationRepository.findAllClosedApplications();
+        return separationApplicationRepository.findAllClosedApplicationsByLogin();
     }
 
     /**
@@ -143,4 +153,14 @@ public class SeparationApplicationResource {
         separationApplicationRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    public List<SeparationApplication> filterApplicationsByLocation(Long locID, List<SeparationApplication> saList){
+        
+        for(Iterator<SeparationApplication> it = saList.iterator(); it.hasNext();){
+            SeparationApplication sa = it.next();
+            if(sa.getEmployee().getLocation().getId() != locID) it.remove();
+        }
+        return saList;
+    }
+
 }

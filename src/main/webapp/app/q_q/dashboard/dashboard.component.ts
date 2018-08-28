@@ -60,7 +60,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAll();
     this.loadPending();
     this.loadClosed();
   }

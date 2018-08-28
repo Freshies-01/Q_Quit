@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -86,7 +86,25 @@ public class EmployeeResource {
      */
     @GetMapping("/employees")
     @Timed
-    public List<Employee> getAllEmployees(@RequestParam(required = false) String filter) {
+    public List<Employee> getAllEmployees(@RequestParam(required = false) String filter, @RequestParam(required = false) Long locID) {
+        
+        List<Employee> emp = filterEmployees(filter);  
+        if(locID != null){
+           emp = filterEmployeesByLocation(locID, emp);
+        }  
+        return emp;
+    }
+
+    public List<Employee> filterEmployeesByLocation(Long locID, List<Employee> emp){
+        
+        for(Iterator<Employee> it = emp.iterator(); it.hasNext();){
+            Employee e = it.next();
+            if(e.getLocation().getId() != locID) it.remove();
+        }
+        return emp;
+    }
+
+    public List<Employee> filterEmployees(String filter){
         if ("separationapplication-is-null".equals(filter)) {
             log.debug("REST request to get all Employees where separationApplication is null");
             return StreamSupport
@@ -100,12 +118,26 @@ public class EmployeeResource {
                 .stream(employeeRepository.findAll().spliterator(), false)
                 .filter(employee -> employee.getHr() == null)
                 .collect(Collectors.toList());
+        }     
+        if ("is-hr".equals(filter)) {
+            log.debug("REST request to get all Employees where hr is null");
+            return StreamSupport
+                .stream(employeeRepository.findAll().spliterator(), false)
+                .filter(employee -> employee.getHr() != null)
+                .collect(Collectors.toList());
         }
         if ("fr-is-null".equals(filter)) {
             log.debug("REST request to get all Employees where fr is null");
             return StreamSupport
                 .stream(employeeRepository.findAll().spliterator(), false)
                 .filter(employee -> employee.getFr() == null)
+                .collect(Collectors.toList());
+        }
+        if ("is-fr".equals(filter)) {
+            log.debug("REST request to get all Employees where fr is null");
+            return StreamSupport
+                .stream(employeeRepository.findAll().spliterator(), false)
+                .filter(employee -> employee.getFr() != null)
                 .collect(Collectors.toList());
         }
         log.debug("REST request to get all Employees");
