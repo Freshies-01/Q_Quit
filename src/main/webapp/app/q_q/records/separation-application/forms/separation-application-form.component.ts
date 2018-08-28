@@ -29,7 +29,6 @@ import {
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  employeeOptions: IEmployee[];
   hrRepOptions: IHrReps[];
   functionRepOptions: IFunctionReps[];
   statusOptions = SeparationApplicationStatus;
@@ -37,26 +36,23 @@ export class SeparationApplicationFormComponent implements OnInit {
   // app form group is mimicing the structure of JSON that API generates.
   // conversion functions This way we can acoid writing lengthy.
   public appForm = new FormGroup({
-    id: new FormControl(""),
-    status: new FormControl(""),
-    dateOfLeave: new FormControl(""),
-    dateApproved: new FormControl(""),
-    location: new FormControl(""),
-    employee: new FormGroup({
-      id: new FormControl("")
-    }),
+    id: new FormControl(null),
+    status: new FormControl(null),
+    dateOfLeave: new FormControl(null),
+    dateApproved: new FormControl(null),
+    location: new FormControl(null),
+    employee: new FormControl(null),
     fr: new FormGroup({
-      id: new FormControl("")
+      id: new FormControl(null)
     }),
     hr: new FormGroup({
-      id: new FormControl("")
+      id: new FormControl(null)
     })
   });
 
   constructor(
     private separationApplicationService: SeparationApplicationService,
     private jhiAlertService: JhiAlertService,
-    private employeeService: EmployeeService,
     private hrRepsService: HrRepsService,
     private functionRepsService: FunctionRepsService,
     private activatedRoute: ActivatedRoute,
@@ -69,7 +65,6 @@ export class SeparationApplicationFormComponent implements OnInit {
         this.mapSeparationApplicationToAppForm(routeData.separationApplication);
       }
     });
-    this.populateEmployeeOptions();
     this.populateFrOptions();
     this.populateHrOptions();
   }
@@ -106,12 +101,6 @@ export class SeparationApplicationFormComponent implements OnInit {
     );
   }
 
-  populateEmployeeOptions() {
-    this.employeeService.query().subscribe((res: HttpResponse<IEmployee[]>) => {
-      this.employeeOptions = res.body;
-    });
-  }
-
   OpenEmployeeSelectDialog() {
     const dialogRef: MatDialogRef<
       DialogPickEmployeeComponent
@@ -130,7 +119,7 @@ export class SeparationApplicationFormComponent implements OnInit {
     // DEBUG: API demands that we submit these date fields - these values are not correct
     sa.dateSumbitted = moment(sa.dateOfLeave);
     sa.dateCompleted = moment(sa.dateOfLeave);
-    if (sa.id !== undefined) {
+    if (sa.id) {
       this.subscribeToSaveResponse(
         this.separationApplicationService.update(sa)
       );
