@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -43,7 +44,7 @@ public class ActionResource {
      */
     @PostMapping("/actions")
     @Timed
-    public ResponseEntity<Action> createAction(@RequestBody Action action) throws URISyntaxException {
+    public ResponseEntity<Action> createAction(@Valid @RequestBody Action action) throws URISyntaxException {
         log.debug("REST request to save Action : {}", action);
         if (action.getId() != null) {
             throw new BadRequestAlertException("A new action cannot already have an ID", ENTITY_NAME, "idexists");
@@ -65,7 +66,7 @@ public class ActionResource {
      */
     @PutMapping("/actions")
     @Timed
-    public ResponseEntity<Action> updateAction(@RequestBody Action action) throws URISyntaxException {
+    public ResponseEntity<Action> updateAction(@Valid @RequestBody Action action) throws URISyntaxException {
         log.debug("REST request to update Action : {}", action);
         if (action.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -127,5 +128,23 @@ public class ActionResource {
 
         actionRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/actions-dept/{deptID}")
+    @Timed
+    public ResponseEntity<Action> findAllActionsByDepartment(@PathVariable Long deptID){
+
+        log.debug("REST request to return all actions assoicated with department: " + deptID);
+        Optional<Action> actions = actionRepository.findAllActionsByDepartment(deptID);
+        return ResponseUtil.wrapOrNotFound(actions);
+    }
+
+    @GetMapping("/actions-sa/{saID}")
+    @Timed
+    public ResponseEntity<Action> findAllActionsBySeparationApplication(@PathVariable Long saID){
+
+        log.debug("REST request to return all actions assoicated with saID: " + saID);
+        Optional<Action> actions = actionRepository.findAllBySeparationApplication(saID);
+        return ResponseUtil.wrapOrNotFound(actions);
     }
 }

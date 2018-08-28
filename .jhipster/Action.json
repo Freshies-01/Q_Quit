@@ -7,6 +7,15 @@
             "relationshipName": "separationApplication",
             "otherEntityName": "separationApplication",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "functionReps",
+            "otherEntityName": "functionReps",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
         }
     ],
     "fields": [

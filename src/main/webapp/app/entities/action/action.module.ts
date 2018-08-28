@@ -10,7 +10,7 @@ import {
   ActionDeleteDialogComponent,
   actionRoute,
   actionPopupRoute
-} from "app/entities/action";
+} from "./";
 
 const ENTITY_STATES = [...actionRoute, ...actionPopupRoute];
 

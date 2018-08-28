@@ -87,19 +87,16 @@ public class EmployeeResource {
     @GetMapping("/employees")
     @Timed
     public List<Employee> getAllEmployees(@RequestParam(required = false) String filter, @RequestParam(required = false) Long locID) {
-        
-        List<Employee> emp = filterEmployees(filter);  
-        if(locID != null){
-           emp = filterEmployeesByLocation(locID, emp);
-        }  
+        List<Employee> emp = filterEmployees(filter);
+        if(locID != null){emp = filterEmployeesByLocation(emp, locID);}
         return emp;
     }
 
-    public List<Employee> filterEmployeesByLocation(Long locID, List<Employee> emp){
-        
-        for(Iterator<Employee> it = emp.iterator(); it.hasNext();){
+    public List<Employee> filterEmployeesByLocation(List<Employee> emp, Long locID) {
+
+        for (Iterator<Employee> it = emp.iterator(); it.hasNext();) {
             Employee e = it.next();
-            if(e.getLocation().getId() != locID) it.remove();
+            if(e.getLocation().getId() != locID){it.remove();}
         }
         return emp;
     }
@@ -143,7 +140,6 @@ public class EmployeeResource {
         log.debug("REST request to get all Employees");
         return employeeRepository.findAll();
     }
-
     /**
      * GET  /employees/:id : get the "id" employee.
      *

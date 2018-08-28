@@ -33,6 +33,8 @@ export class EmployeeRegisterComponent implements OnInit {
       email: this.userFormGroup.get("email").value,
       password: this.userFormGroup.get("password").value,
       password2: this.userFormGroup.get("password2").value,
+      location: this.userFormGroup.get("location").value,
+      department: this.userFormGroup.get("department").value,
       authorities: [
         this.userFormGroup.get("adminAuthorization").value
           ? "ROLE_ADMIN"
