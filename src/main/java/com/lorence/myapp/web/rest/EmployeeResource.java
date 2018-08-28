@@ -101,7 +101,7 @@ public class EmployeeResource {
         return emp;
     }
 
-    public List<Employee> filterEmployees(String filter) {
+    public List<Employee> filterEmployees(String filter){
         if ("separationapplication-is-null".equals(filter)) {
             log.debug("REST request to get all Employees where separationApplication is null");
             return StreamSupport
@@ -115,19 +115,19 @@ public class EmployeeResource {
                 .stream(employeeRepository.findAll().spliterator(), false)
                 .filter(employee -> employee.getHr() == null)
                 .collect(Collectors.toList());
+        }     
+        if ("is-hr".equals(filter)) {
+            log.debug("REST request to get all Employees where hr is null");
+            return StreamSupport
+                .stream(employeeRepository.findAll().spliterator(), false)
+                .filter(employee -> employee.getHr() != null)
+                .collect(Collectors.toList());
         }
         if ("fr-is-null".equals(filter)) {
             log.debug("REST request to get all Employees where fr is null");
             return StreamSupport
                 .stream(employeeRepository.findAll().spliterator(), false)
                 .filter(employee -> employee.getFr() == null)
-                .collect(Collectors.toList());
-        }
-        if ("is-hr".equals(filter)) {
-            log.debug("REST request to get all Employees where hr is null");
-            return StreamSupport
-                .stream(employeeRepository.findAll().spliterator(), false)
-                .filter(employee -> employee.getHr() != null)
                 .collect(Collectors.toList());
         }
         if ("is-fr".equals(filter)) {

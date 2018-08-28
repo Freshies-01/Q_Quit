@@ -8,8 +8,8 @@
         <mat-option value="closed" (click)="filterClosed()">Closed</mat-option>
     </mat-select>
 </mat-form-field> -->
-<ul>
-    <li style="list-style-type: none;" *ngFor="let app of applications ;trackBy: trackId">
+<div>
+    <div *ngFor="let app of applications ;trackBy: trackId">
         <mat-card >
             <div class="flex-container">
                 <div>
@@ -39,5 +39,5 @@
             </div>
         </mat-card>
         <br/>
-    </li>
-</ul>
+    </div>
+</div>

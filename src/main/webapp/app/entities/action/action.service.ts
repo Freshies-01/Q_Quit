@@ -15,7 +15,7 @@ type EntityArrayResponseType = HttpResponse<IAction[]>;
 @Injectable({ providedIn: "root" })
 export class ActionService {
   private resourceUrl = SERVER_API_URL + "api/actions";
-
+  private testUrl = SERVER_API_URL + "api/actions-sa";
   constructor(private http: HttpClient) {}
 
   create(action: IAction): Observable<EntityResponseType> {
@@ -36,6 +36,12 @@ export class ActionService {
     return this.http
       .get<IAction>(`${this.resourceUrl}/${id}`, { observe: "response" })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findActionsBySAID(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IAction[]>(`${this.testUrl}/${id}`, {
+      observe: "response"
+    });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

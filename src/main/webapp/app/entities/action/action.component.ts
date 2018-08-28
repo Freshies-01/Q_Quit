@@ -57,7 +57,7 @@ export class ActionComponent implements OnInit, OnDestroy {
   }
 
   loadAll() {
-    this.actionService.query().subscribe(
+    this.actionService.findActionsBySAID(2).subscribe(
       (res: HttpResponse<IAction[]>) => {
         this.actions = res.body;
       },
