@@ -22,7 +22,6 @@ import {
   DialogPickEmployeeComponent,
   DialockPickEmployeeData
 } from "app/q_q/records/employee/dialog-pick-employee/dialog-pick-employee.component";
-import { ActionListComponent } from "../action-list/action-list.component";
 
 @Component({
   selector: "jhi-separation-application-form",

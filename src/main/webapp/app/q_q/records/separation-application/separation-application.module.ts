@@ -8,13 +8,15 @@ import { ActionListComponent } from "./action-list/action-list.component";
 
 import { AngularMaterialModule } from "app/shared/angular-material.module";
 import { QQuitSharedModule } from "app/shared/shared.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     AngularMaterialModule,
     RouterModule,
-    QQuitSharedModule
+    QQuitSharedModule,
+    ReactiveFormsModule
   ],
   declarations: [
     SeparationApplicationListComponent,
