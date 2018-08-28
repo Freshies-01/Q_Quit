@@ -12,7 +12,10 @@
         </div>
         <mat-form-field appearance="outline">
             <mat-label>Employee</mat-label>
-            <jhi-employee-field formControlName="employee"></jhi-employee-field>
+            <jhi-employee-field #employeePicker1 formControlName="employee"></jhi-employee-field>
+            <button mat-icon-button matSuffix type="button" (click)="employeePicker1.openEmployeeSelectorDialog()">
+                <mat-icon style="color: #6c757d ">edit</mat-icon>
+            </button>
         </mat-form-field>
         <div class="formField">
             <mat-form-field appearance="outline">

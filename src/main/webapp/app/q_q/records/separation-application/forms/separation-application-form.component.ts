@@ -81,7 +81,6 @@ export class SeparationApplicationFormComponent implements OnInit {
       adjustedSa.dateApproved = sa.dateApproved.toDate();
     }
     this.appForm.patchValue(adjustedSa);
-    console.log(this.appForm.getRawValue());
   }
 
   populateFrOptions() {

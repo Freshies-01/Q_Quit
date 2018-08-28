@@ -28,27 +28,9 @@ import { Employee } from "app/shared/model/employee.model";
 
 @Component({
   selector: "jhi-employee-field",
-  template: `
-  <ng-container [ngSwitch]="!!employee">
-    <ng-container *ngSwitchCase="true">
-      <span #location>{{employee.user?.firstName}} {{employee.user?.firstName}}</span>
-    </ng-container>
-    <ng-container *ngSwitchCase="false">
-    </ng-container>
-    <button matSuffix type="button" (click)="openEmployeeSelectorDialog()">edit</button>
-  </ng-container>
-  `,
-  styles: [
-    ":host-context mat-form-field-type-employee-field-component {width: 100%}"
-  ],
+  templateUrl: "./employee-field.component.html",
+  styleUrls: ["./employee-field.component.css"],
   providers: [
-    /*
-    We are injecting the value of accessor in the constructor
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: EmployeeFieldComponent,
-      multi: true
-    },*/
     { provide: MatFormFieldControl, useExisting: EmployeeFieldComponent }
   ]
 })
@@ -120,7 +102,6 @@ export class EmployeeFieldComponent
   }
 
   writeValue(obj: any): void {
-    console.log(obj);
     this.employee = obj;
   }
 
