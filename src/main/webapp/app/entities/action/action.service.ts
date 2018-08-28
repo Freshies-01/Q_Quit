@@ -38,16 +38,6 @@ export class ActionService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  actionsBySA(saID: number): Observable<EntityArrayResponseType> {
-    return this.http
-      .get<IAction[]>(`${this.resourceUrl}-sa/${saID}`, { observe: "response" })
-      .pipe(
-        map((res: EntityArrayResponseType) =>
-          this.convertDateArrayFromServer(res)
-        )
-      );
-  }
-
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
@@ -78,6 +68,26 @@ export class ActionService {
     return copy;
   }
 
+  actionsBySA(saID: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAction[]>(`${this.resourceUrl}-sa/${saID}`, { observe: "response" })
+      .pipe(
+        map((res: EntityArrayResponseType) =>
+          this.convertDateArrayFromServer(res)
+        )
+      );
+  }
+  actionsByDepartment(deptID: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAction[]>(`${this.resourceUrl}-dept/${deptID}`, {
+        observe: "response"
+      })
+      .pipe(
+        map((res: EntityArrayResponseType) =>
+          this.convertDateArrayFromServer(res)
+        )
+      );
+  }
   private convertDateFromServer(res: EntityResponseType): EntityResponseType {
     res.body.dateCompleted =
       res.body.dateCompleted != null ? moment(res.body.dateCompleted) : null;

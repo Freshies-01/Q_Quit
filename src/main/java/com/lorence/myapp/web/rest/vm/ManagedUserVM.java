@@ -1,5 +1,7 @@
 package com.lorence.myapp.web.rest.vm;
 
+import com.lorence.myapp.domain.Department;
+import com.lorence.myapp.domain.Location;
 import com.lorence.myapp.service.dto.UserDTO;
 import javax.validation.constraints.Size;
 
@@ -14,6 +16,8 @@ public class ManagedUserVM extends UserDTO {
 
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
+    private Department department;
+    private Location location;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -32,4 +36,12 @@ public class ManagedUserVM extends UserDTO {
         return "ManagedUserVM{" +
             "} " + super.toString();
     }
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
 }

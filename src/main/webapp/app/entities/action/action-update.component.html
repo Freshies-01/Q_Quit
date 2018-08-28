@@ -37,6 +37,19 @@
                         <option [ngValue]="separationApplicationOption.id === action.separationApplication?.id ? action.separationApplication : separationApplicationOption" *ngFor="let separationApplicationOption of separationapplications; trackBy: trackSeparationApplicationById">{{separationApplicationOption.id}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_functionReps">Function Reps</label>
+                    <select class="form-control" id="field_functionReps" name="functionReps" [(ngModel)]="action.functionReps"  required>
+                        <option *ngIf="!editForm.value.functionReps" [ngValue]="null" selected></option>
+                        <option [ngValue]="functionRepsOption.id === action.functionReps?.id ? action.functionReps : functionRepsOption" *ngFor="let functionRepsOption of functionreps; trackBy: trackFunctionRepsById">{{functionRepsOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.functionReps?.dirty && editForm.controls.functionReps?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.functionReps?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

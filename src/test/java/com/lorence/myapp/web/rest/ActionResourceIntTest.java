@@ -3,6 +3,7 @@ package com.lorence.myapp.web.rest;
 import com.lorence.myapp.QQuitApp;
 
 import com.lorence.myapp.domain.Action;
+import com.lorence.myapp.domain.FunctionReps;
 import com.lorence.myapp.repository.ActionRepository;
 import com.lorence.myapp.web.rest.errors.ExceptionTranslator;
 
@@ -92,6 +93,11 @@ public class ActionResourceIntTest {
             .isCompleted(DEFAULT_IS_COMPLETED)
             .task(DEFAULT_TASK)
             .dateCompleted(DEFAULT_DATE_COMPLETED);
+        // Add required entity
+        FunctionReps functionReps = FunctionRepsResourceIntTest.createEntity(em);
+        em.persist(functionReps);
+        em.flush();
+        action.setFunctionReps(functionReps);
         return action;
     }
 

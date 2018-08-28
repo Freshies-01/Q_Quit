@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="separation_application"/>
 
+        <addForeignKeyConstraint baseColumnNames="function_reps_id"
+                                 baseTableName="action"
+                                 constraintName="fk_action_function_reps_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="function_reps"/>
+
     </changeSet>
 </databaseChangeLog>

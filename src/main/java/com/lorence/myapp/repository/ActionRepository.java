@@ -16,4 +16,7 @@ public interface ActionRepository extends JpaRepository<Action, Long> {
 
     @Query("SELECT action FROM Action action WHERE action.separationApplication.id = ?1")
     public Optional<Action> findAllBySeparationApplication(@PathVariable Long saID);
+    
+    @Query("SELECT action FROM Action action WHERE action.functionReps.employee.department.id = ?1")
+    public Optional<Action> findAllActionsByDepartment(@PathVariable Long deptID);
 }

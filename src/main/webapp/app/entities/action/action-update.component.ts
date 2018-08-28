@@ -5,9 +5,11 @@ import { Observable } from "rxjs";
 import { JhiAlertService } from "ng-jhipster";
 
 import { IAction } from "app/shared/model/action.model";
-import { ActionService } from "app/entities/action/action.service";
+import { ActionService } from "./action.service";
 import { ISeparationApplication } from "app/shared/model/separation-application.model";
 import { SeparationApplicationService } from "app/entities/separation-application";
+import { IFunctionReps } from "app/shared/model/function-reps.model";
+import { FunctionRepsService } from "app/entities/function-reps";
 
 @Component({
   selector: "jhi-action-update",
@@ -18,12 +20,15 @@ export class ActionUpdateComponent implements OnInit {
   isSaving: boolean;
 
   separationapplications: ISeparationApplication[];
+
+  functionreps: IFunctionReps[];
   dateCompletedDp: any;
 
   constructor(
     private jhiAlertService: JhiAlertService,
     private actionService: ActionService,
     private separationApplicationService: SeparationApplicationService,
+    private functionRepsService: FunctionRepsService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -35,6 +40,12 @@ export class ActionUpdateComponent implements OnInit {
     this.separationApplicationService.query().subscribe(
       (res: HttpResponse<ISeparationApplication[]>) => {
         this.separationapplications = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+    this.functionRepsService.query().subscribe(
+      (res: HttpResponse<IFunctionReps[]>) => {
+        this.functionreps = res.body;
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
@@ -74,6 +85,10 @@ export class ActionUpdateComponent implements OnInit {
   }
 
   trackSeparationApplicationById(index: number, item: ISeparationApplication) {
+    return item.id;
+  }
+
+  trackFunctionRepsById(index: number, item: IFunctionReps) {
     return item.id;
   }
   get action() {

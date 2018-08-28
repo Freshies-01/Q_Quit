@@ -1,5 +1,6 @@
 import { Moment } from "moment";
-import { ISeparationApplication } from "app/shared/model/separation-application.model";
+import { ISeparationApplication } from "app/shared/model//separation-application.model";
+import { IFunctionReps } from "app/shared/model//function-reps.model";
 
 export interface IAction {
   id?: number;
@@ -7,6 +8,7 @@ export interface IAction {
   task?: string;
   dateCompleted?: Moment;
   separationApplication?: ISeparationApplication;
+  functionReps?: IFunctionReps;
 }
 
 export class Action implements IAction {
@@ -15,7 +17,8 @@ export class Action implements IAction {
     public isCompleted?: boolean,
     public task?: string,
     public dateCompleted?: Moment,
-    public separationApplication?: ISeparationApplication
+    public separationApplication?: ISeparationApplication,
+    public functionReps?: IFunctionReps
   ) {
     this.isCompleted = false;
   }
