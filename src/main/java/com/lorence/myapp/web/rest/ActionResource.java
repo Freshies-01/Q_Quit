@@ -54,6 +54,14 @@ public class ActionResource {
             .body(result);
     }
 
+    @GetMapping("/actions-sa/{saID}")
+    @Timed
+    public ResponseEntity<Action> findAllActionsBySeparationApplication(@PathVariable Long saID){
+
+        log.debug("REST request to return all actions assoicated with saID: " + saID);
+        Optional<Action> actions = actionRepository.findAllBySeparationApplication(saID);
+        return ResponseUtil.wrapOrNotFound(actions);
+    }
     /**
      * PUT  /actions : Updates an existing action.
      *

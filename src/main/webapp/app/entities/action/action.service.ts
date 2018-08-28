@@ -38,6 +38,16 @@ export class ActionService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  actionsBySA(saID: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAction[]>(`${this.resourceUrl}-sa/${saID}`, { observe: "response" })
+      .pipe(
+        map((res: EntityArrayResponseType) =>
+          this.convertDateArrayFromServer(res)
+        )
+      );
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
