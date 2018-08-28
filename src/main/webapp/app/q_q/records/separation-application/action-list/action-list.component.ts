@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
@@ -6,7 +6,6 @@ import {
   SeparationApplication
 } from "app/shared/model/separation-application.model";
 import { IAction } from "app/shared/model/action.model";
-import { AngularMaterialModule } from "../../../../shared/angular-material.module";
 
 @Component({
   selector: "jhi-action-list",
@@ -16,8 +15,13 @@ import { AngularMaterialModule } from "../../../../shared/angular-material.modul
 })
 export class ActionListComponent implements OnInit {
   actions: IAction[];
+  @Input() saId: number;
 
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
+  constructor(
+    private separationApplicationService: SeparationApplicationService
+  ) {}
+
+  ngOnInit() {
+    this.separationApplicationService.queryActions(this.saId);
   }
 }
