@@ -13,11 +13,7 @@ import { fromEvent, Subscription } from "rxjs";
 import { map, debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 export interface DialockPickEmployeeData {
-  preselectedEmployee?: Employee;
-  requestParametersForEmployeePool?: {
-    filter?: String;
-    locID?: String;
-  };
+  employee: Employee;
 }
 
 @Component({
@@ -31,25 +27,16 @@ export class DialogPickEmployeeComponent
   filteredEmployees: Employee[];
   typeAheadSubscription: Subscription;
 
-  urlFilterParams: String[];
-
   constructor(
     private dialogRef: MatDialogRef<DialogPickEmployeeComponent>,
-    private employeeService: EmployeeService,
-    @Inject(MAT_DIALOG_DATA) public passedInData: DialockPickEmployeeData
+    private employeeService: EmployeeService
   ) {}
 
   ngOnInit() {
-    this.setEmployeePoolAndInitializeFilteredEmployees();
-  }
-
-  setEmployeePoolAndInitializeFilteredEmployees() {
-    this.employeeService
-      .query(this.passedInData.requestParametersForEmployeePool)
-      .subscribe(result => {
-        this.allEmployees = result.body;
-        this.filteredEmployees = this.allEmployees;
-      });
+    this.employeeService.query().subscribe(result => {
+      this.allEmployees = result.body;
+      this.filteredEmployees = this.allEmployees;
+    });
   }
 
   ngAfterContentInit() {

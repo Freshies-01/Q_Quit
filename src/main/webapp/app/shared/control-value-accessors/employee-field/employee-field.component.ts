@@ -23,16 +23,13 @@ import {
 
 import { Subject } from "rxjs";
 
-import {
-  DialogPickEmployeeComponent,
-  DialockPickEmployeeData
-} from "app/q_q/records/employee/dialog-pick-employee/dialog-pick-employee.component";
+import { DialogPickEmployeeComponent } from "app/q_q/records/employee/dialog-pick-employee/dialog-pick-employee.component";
 import { Employee } from "app/shared/model/employee.model";
 
 @Component({
   selector: "jhi-employee-field",
   templateUrl: "./employee-field.component.html",
-  styleUrls: [],
+  styleUrls: ["./employee-field.component.css"],
   providers: [
     { provide: MatFormFieldControl, useExisting: EmployeeFieldComponent }
   ]
@@ -58,10 +55,6 @@ export class EmployeeFieldComponent
   get value(): Employee | null {
     return this.employee;
   }
-  set value(value: Employee | null) {
-    this.employee = value;
-    this.stateChanges.next();
-  }
   readonly shouldLabelFloat = true;
   readonly required = false;
   private _disabled = false;
@@ -75,10 +68,11 @@ export class EmployeeFieldComponent
     this._disabled = !!dis;
     this.stateChanges.next();
   }
-  @Input() employeeFilterParameters: { filter?; locID? };
-
+  set value(value: Employee | null) {
+    this.employee = value;
+    this.stateChanges.next();
+  }
   @HostBinding("attr.aria-describedby") describedBy = "";
-
   setDescribedByIds(ids: string[]) {
     this.describedBy = ids.join(" ");
   }
@@ -120,27 +114,12 @@ export class EmployeeFieldComponent
   setDisabledState?(isDisabled: boolean): void;
 
   openEmployeeSelectorDialog() {
-    console.log(this.employeeFilterParameters);
-    const dialogData: DialockPickEmployeeData = {
-      preselectedEmployee: this.employee,
-      requestParametersForEmployeePool: {
-        filter: this.employeeFilterParameters.filter,
-        locID: this.employeeFilterParameters.locID
+    this.dialogReference = this.dialog.open(DialogPickEmployeeComponent);
+    this.dialogReference.beforeClose().subscribe(pickedEmployee => {
+      if (pickedEmployee) {
+        this.employee = pickedEmployee;
+        this.onChange(this.employee);
       }
-    };
-
-    if (!this.disabled) {
-      this.dialogReference = this.dialog.open(DialogPickEmployeeComponent, {
-        data: dialogData
-      });
-      this.dialogReference.beforeClose().subscribe(pickedEmployee => {
-        if (pickedEmployee) {
-          this.employee = pickedEmployee;
-          this.onChange(this.employee);
-        }
-      });
-    } else {
-      return;
-    }
+    });
   }
 }

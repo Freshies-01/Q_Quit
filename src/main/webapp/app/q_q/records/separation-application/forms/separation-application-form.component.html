@@ -12,16 +12,16 @@
         </div>
         <mat-form-field appearance="outline">
             <mat-label>Employee</mat-label>
-            <jhi-employee-field [employeeFilterParameters]="{filter: 'is-hr'}" #employeePicker1 formControlName="employee"></jhi-employee-field>
+            <jhi-employee-field #employeePicker1 formControlName="employee"></jhi-employee-field>
             <button mat-icon-button matSuffix type="button" (click)="employeePicker1.openEmployeeSelectorDialog()">
-                <mat-icon style="color: #6c757d">edit</mat-icon>
+                <mat-icon style="color: #6c757d ">edit</mat-icon>
             </button>
         </mat-form-field>
-        <div>
+        <div class="formField">
             <mat-form-field appearance="outline">
                 <mat-label>Date of Leave</mat-label>
-                <input placeholder="Completely disabled" matInput [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <input matInput [matDatepicker]="picker2 " formControlName="dateOfLeave">
+                <mat-datepicker-toggle matSuffix [for]="picker2 "></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
         </div>
