@@ -6,7 +6,16 @@ import {
 } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { ActionListComponent } from "./action-list.component";
-import { ActionDeleteDialogComponent } from "../../../../entities/action/action-delete-dialog.component";
+import {
+  ActionDeleteDialogComponent,
+  ActionDeletePopupComponent
+} from "../../../../entities/action/action-delete-dialog.component";
+import { IAction, Action } from "app/shared/model/action.model";
+import { ActionService } from "app/entities/action/action.service";
+import { HttpResponse } from "../../../../../../../../node_modules/@angular/common/http";
+import { of } from "../../../../../../../../node_modules/rxjs";
+import { map } from "../../../../../../../../node_modules/rxjs/operators";
+import { UserRouteAccessService } from "app/core";
 
 @Injectable({ providedIn: "root" })
 export class ActionResolve implements Resolve<IAction> {
