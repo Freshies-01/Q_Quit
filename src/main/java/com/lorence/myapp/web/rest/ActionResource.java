@@ -112,7 +112,7 @@ public class ActionResource {
     @Timed
     public List<Action> getActionsInSeparationApplication(@PathVariable Long id) {
         log.debug("REST request to get Action : {}", id);
-        List<Action> actions = actionRepository.findAllBySeparationApplicationId(id);
+        List<Action> actions = actionRepository.findAllBySeparationApplication(id);
         return actions;
     }
     /**
