@@ -18,7 +18,8 @@ import {
 import {
   MatDialog,
   MatDialogRef,
-  MatFormFieldControl
+  MatFormFieldControl,
+  MatDialogConfig
 } from "@angular/material";
 
 import { Subject } from "rxjs";
@@ -114,7 +115,10 @@ export class EmployeeFieldComponent
   setDisabledState?(isDisabled: boolean): void;
 
   openEmployeeSelectorDialog() {
-    this.dialogReference = this.dialog.open(DialogPickEmployeeComponent);
+    this.dialogReference = this.dialog.open(DialogPickEmployeeComponent, {
+      width: "370px",
+      minHeight: "530px"
+    } as MatDialogConfig);
     this.dialogReference.beforeClose().subscribe(pickedEmployee => {
       if (pickedEmployee) {
         this.employee = pickedEmployee;
