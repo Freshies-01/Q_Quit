@@ -18,6 +18,8 @@ export class EmployeeRegisterComponent implements OnInit {
     email: new FormControl(""),
     password: new FormControl(""),
     password2: new FormControl(""),
+    department: new FormControl(""),
+    location: new FormControl(""),
     adminAuthorization: new FormControl(false),
     humanResourcesAuthorization: new FormControl(false),
     functionalRepAuthorization: new FormControl(false)

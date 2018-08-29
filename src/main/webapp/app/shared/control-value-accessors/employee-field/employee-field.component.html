@@ -1,1 +1,4 @@
-<span class="centeredText" #location>{{employee.user?.firstName}} {{employee.user?.firstName}}</span>
+<span class="nameSpan" #location>{{employee?.user?.firstName}} {{employee?.user?.firstName}}</span>
+<button mat-icon-button class="employeePickerDialog" type="button" (click)="openEmployeeSelectorDialog()">
+    <mat-icon style="color: #6c757d ">edit</mat-icon>
+</button>

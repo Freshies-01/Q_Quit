@@ -22,7 +22,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
@@ -42,7 +41,6 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatIconModule
   ],
   exports: [
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
