@@ -20,7 +20,6 @@ const routes: Routes = [
 
     data: {
       authorities: ["ROLE_ADMIN"],
-
       pageTitle: "Separation Applications"
     },
     canActivate: [UserRouteAccessService],
