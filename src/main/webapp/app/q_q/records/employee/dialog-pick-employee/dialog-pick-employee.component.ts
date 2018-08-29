@@ -19,7 +19,7 @@ export interface DialockPickEmployeeData {
 @Component({
   selector: "jhi-dialog-pick-employee",
   templateUrl: "./dialog-pick-employee.component.html",
-  styles: []
+  styleUrls: ["./dialog-pick-employee.component.css"]
 })
 export class DialogPickEmployeeComponent
   implements OnInit, AfterContentInit, OnDestroy {
