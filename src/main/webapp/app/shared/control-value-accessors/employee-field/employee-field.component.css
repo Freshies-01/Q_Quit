@@ -1,7 +1,11 @@
-.fieldEditButton {
+/* Setting margin to counteract angular forms padidng which assumes only text in the component */
+.employeePickerDialog {
+  margin: -16px 0;
   float: right;
+  white-space: nowrap;
 }
 
-.centeredText {
-  text-align: center;
+.nameSpan {
+  overflow-x: hidden;
+  white-space: nowrap;
 }
