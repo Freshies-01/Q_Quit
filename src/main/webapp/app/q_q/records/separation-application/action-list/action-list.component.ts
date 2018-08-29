@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 })
 export class ActionListComponent implements OnInit {
   actions: IAction[];
-  private action: IAction;
+  private _action: IAction;
   @Input() saId: number;
   isSaving: boolean;
 
@@ -43,10 +43,10 @@ export class ActionListComponent implements OnInit {
 
   save() {
     this.isSaving = true;
-    if (this.action.id !== undefined) {
-      this.subscribeToSaveResponse(this.actionService.update(this.action));
+    if (this._action.id !== undefined) {
+      this.subscribeToSaveResponse(this.actionService.update(this._action));
     } else {
-      this.subscribeToSaveResponse(this.actionService.create(this.action));
+      this.subscribeToSaveResponse(this.actionService.create(this._action));
     }
   }
 

@@ -54,6 +54,7 @@
                 </mat-form-field>
             </div>
         </ng-container>
+        <jhi-action-list [saId]="appForm.get('id').value"></jhi-action-list>
         <div>
             <button mat-raised-button type="submit" [disabled]="isSaving">
                 Save

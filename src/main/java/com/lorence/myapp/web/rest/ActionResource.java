@@ -120,19 +120,17 @@ public class ActionResource {
 
     @GetMapping("/actions-dept/{deptID}")
     @Timed
-    public ResponseEntity<Action> findAllActionsByDepartment(@PathVariable Long deptID){
+    public List<Action> findAllActionsByDepartment(@PathVariable Long deptID){
 
         log.debug("REST request to return all actions assoicated with department: " + deptID);
-        Optional<Action> actions = actionRepository.findAllActionsByDepartment(deptID);
-        return ResponseUtil.wrapOrNotFound(actions);
+        return actionRepository.findAllActionsByDepartment(deptID);
     }
 
     @GetMapping("/actions-sa/{saID}")
     @Timed
-    public ResponseEntity<Action> findAllActionsBySeparationApplication(@PathVariable Long saID){
+    public List<Action> findAllActionsBySeparationApplication(@PathVariable Long saID){
 
         log.debug("REST request to return all actions assoicated with saID: " + saID);
-        Optional<Action> actions = actionRepository.findAllBySeparationApplication(saID);
-        return ResponseUtil.wrapOrNotFound(actions);
+        return actionRepository.findAllBySeparationApplication(saID);
     }
 }
