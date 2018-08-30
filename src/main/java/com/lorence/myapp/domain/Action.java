@@ -31,8 +31,11 @@ public class Action implements Serializable {
     @Column(name = "date_completed")
     private LocalDate dateCompleted;
 
+    @Column(name = "num_disputes")
+    private Integer numDisputes;
+
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("actions")
     private SeparationApplication separationApplication;
 
     @ManyToOne(optional = false)
@@ -86,6 +89,19 @@ public class Action implements Serializable {
 
     public void setDateCompleted(LocalDate dateCompleted) {
         this.dateCompleted = dateCompleted;
+    }
+
+    public Integer getNumDisputes() {
+        return numDisputes;
+    }
+
+    public Action numDisputes(Integer numDisputes) {
+        this.numDisputes = numDisputes;
+        return this;
+    }
+
+    public void setNumDisputes(Integer numDisputes) {
+        this.numDisputes = numDisputes;
     }
 
     public SeparationApplication getSeparationApplication() {
@@ -142,6 +158,7 @@ public class Action implements Serializable {
             ", isCompleted='" + isIsCompleted() + "'" +
             ", task='" + getTask() + "'" +
             ", dateCompleted='" + getDateCompleted() + "'" +
+            ", numDisputes=" + getNumDisputes() +
             "}";
     }
 }

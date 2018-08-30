@@ -30,6 +30,10 @@
         {
             "fieldName": "dateCompleted",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "numDisputes",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20180808183050",

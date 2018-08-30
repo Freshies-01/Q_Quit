@@ -122,6 +122,25 @@ export class ActionListComponent implements OnInit {
     });
   }
 
+  dispute(action: IAction) {
+    // increment numDisputes
+    // if numDisputes > 2, reveal 'accept', 'delete', and 'edit' button to HR
+    // change text of action.task to red
+    // disable dispute button
+    action.numDisputes++;
+  }
+
+  edit(action: IAction) {
+    // set action.task to form value
+    // change action.task text color to normal
+    // reenable dispute button
+  }
+
+  accept(action: IAction) {
+    // set action.task text style to BOLD
+    // remove ability to edit this action
+  }
+
   ngOnInit() {
     this.loadActions();
     this.loadFr();

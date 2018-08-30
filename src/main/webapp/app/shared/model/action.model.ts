@@ -7,6 +7,7 @@ export interface IAction {
   isCompleted?: boolean;
   task?: string;
   dateCompleted?: Moment;
+  numDisputes?: number;
   separationApplication?: ISeparationApplication;
   functionReps?: IFunctionReps;
 }
@@ -17,6 +18,7 @@ export class Action implements IAction {
     public isCompleted?: boolean,
     public task?: string,
     public dateCompleted?: Moment,
+    public numDisputes?: number,
     public separationApplication?: ISeparationApplication,
     public functionReps?: IFunctionReps
   ) {
