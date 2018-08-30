@@ -9,7 +9,10 @@ import { IAction } from "app/shared/model/action.model";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { ActionService } from "app/entities/action/action.service";
 import { Observable } from "rxjs";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
+import { IFunctionReps } from "app/shared/model/function-reps.model";
+import { FunctionRepsService } from "app/entities/function-reps";
+import { JhiEventManager } from "ng-jhipster";
 
 @Component({
   selector: "jhi-action-list",
@@ -19,17 +22,22 @@ import { ReactiveFormsModule } from "@angular/forms";
 })
 export class ActionListComponent implements OnInit {
   actions: IAction[];
-  private action: IAction;
+  private _action: IAction;
+  functionRep: IFunctionReps;
   @Input() saId: number;
   isSaving: boolean;
+  separationApplication: ISeparationApplication;
 
-  // public actionForm = new FormGroup ({
-  //   id: new FormControl("")
-  // });
+  public actionForm = new FormGroup({
+    id: new FormControl(""),
+    task: new FormControl("")
+  });
 
   constructor(
     private separationApplicationService: SeparationApplicationService,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private functionRepsService: FunctionRepsService,
+    private eventManager: JhiEventManager
   ) {}
 
   loadActions() {
@@ -41,12 +49,49 @@ export class ActionListComponent implements OnInit {
     );
   }
 
+  loadFr() {
+    this.functionRepsService.findCurrentFunctionRep().subscribe(
+      (res: HttpResponse<IFunctionReps>) => {
+        this.functionRep = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
+  getApp() {
+    this.separationApplicationService.find(this.saId).subscribe(
+      (res: HttpResponse<ISeparationApplication>) => {
+        this.separationApplication = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
   save() {
+    if (this.actionForm.get("task").value === "" || null) {
+      return;
+    }
+    const action: IAction = this.actionForm.getRawValue();
+    this.actionForm.reset();
+    action.id = undefined;
+    action.isCompleted = false;
+    action.separationApplication = this.separationApplication;
+    action.separationApplication.id = this.saId;
+    action.functionReps = this.functionRep;
     this.isSaving = true;
-    if (this.action.id !== undefined) {
-      this.subscribeToSaveResponse(this.actionService.update(this.action));
+    if (action.id !== undefined) {
+      this.subscribeToSaveResponse(this.actionService.update(action));
     } else {
-      this.subscribeToSaveResponse(this.actionService.create(this.action));
+      this.subscribeToSaveResponse(this.actionService.create(action));
+    }
+  }
+
+  update(action: IAction) {
+    action.isCompleted = !action.isCompleted;
+    if (action.id !== undefined) {
+      this.subscribeToSaveResponse(this.actionService.update(action));
+    } else {
+      this.subscribeToSaveResponse(this.actionService.create(action));
     }
   }
 
@@ -59,13 +104,27 @@ export class ActionListComponent implements OnInit {
 
   private onSaveSuccess() {
     this.isSaving = false;
+    this.loadActions();
   }
 
   private onSaveError() {
     this.isSaving = false;
+    this.loadActions();
+  }
+
+  confirmDelete(id: number) {
+    this.actionService.delete(id).subscribe(response => {
+      this.eventManager.broadcast({
+        name: "actionListModification",
+        content: "Deleted an action"
+      });
+      this.loadActions();
+    });
   }
 
   ngOnInit() {
     this.loadActions();
+    this.loadFr();
+    this.getApp();
   }
 }

@@ -102,6 +102,14 @@ public class FunctionRepsResource {
         return ResponseUtil.wrapOrNotFound(functionReps);
     }
 
+    @GetMapping("/current-function-reps")
+    @Timed
+    public ResponseEntity<FunctionReps> getCurrentFunctionRep() {
+        log.debug("REST request to get the current Function Rep");
+        Optional<FunctionReps> functionReps = functionRepsRepository.findByCurrentUser();
+        return ResponseUtil.wrapOrNotFound(functionReps);
+    }
+
     /**
      * DELETE  /function-reps/:id : delete the "id" functionReps.
      *

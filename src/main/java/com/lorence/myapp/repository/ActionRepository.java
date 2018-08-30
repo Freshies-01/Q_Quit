@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ActionRepository extends JpaRepository<Action, Long> {
 
     @Query("SELECT action FROM Action action WHERE action.separationApplication.id = ?1")
-    public Optional<Action> findAllBySeparationApplication(@PathVariable Long saID);
+    public List<Action> findAllBySeparationApplication(@PathVariable Long saID);
     
     @Query("SELECT action FROM Action action WHERE action.functionReps.employee.department.id = ?1")
-    public Optional<Action> findAllActionsByDepartment(@PathVariable Long deptID);
+    public List<Action> findAllActionsByDepartment(@PathVariable Long deptID);
 }
