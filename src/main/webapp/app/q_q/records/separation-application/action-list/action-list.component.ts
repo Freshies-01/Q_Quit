@@ -22,6 +22,7 @@ import { JhiEventManager } from "ng-jhipster";
 })
 export class ActionListComponent implements OnInit {
   actions: IAction[];
+  private _action: IAction;
   functionRep: IFunctionReps;
   @Input() saId: number;
   isSaving: boolean;
@@ -79,7 +80,15 @@ export class ActionListComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.actionService.create(action));
     }
-    this.loadActions();
+  }
+
+  update(action: IAction) {
+    action.isCompleted = !action.isCompleted;
+    if (action.id !== undefined) {
+      this.subscribeToSaveResponse(this.actionService.update(action));
+    } else {
+      this.subscribeToSaveResponse(this.actionService.create(action));
+    }
   }
 
   private subscribeToSaveResponse(result: Observable<HttpResponse<IAction>>) {
@@ -91,10 +100,12 @@ export class ActionListComponent implements OnInit {
 
   private onSaveSuccess() {
     this.isSaving = false;
+    this.loadActions();
   }
 
   private onSaveError() {
     this.isSaving = false;
+    this.loadActions();
   }
 
   confirmDelete(id: number) {
@@ -103,8 +114,8 @@ export class ActionListComponent implements OnInit {
         name: "actionListModification",
         content: "Deleted an action"
       });
+      this.loadActions();
     });
-    this.loadActions();
   }
 
   ngOnInit() {

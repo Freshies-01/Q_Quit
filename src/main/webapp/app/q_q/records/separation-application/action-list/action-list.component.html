@@ -2,7 +2,7 @@
 <mat-list>
     <h3 mat-subheader>Your TODO List</h3>
     <mat-list-item *ngFor="let action of actions">
-        <mat-checkbox value="action.isCompleted"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="action.isCompleted" (click)="update(action)"></mat-checkbox>
         Task: {{action.task}}<br/>
         Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
         <a mat-mini-fab (click)="confirmDelete(action.id)">-</a>
