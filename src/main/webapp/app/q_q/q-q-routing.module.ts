@@ -19,7 +19,7 @@ const routes: Routes = [
     component: AlternativeMainComponent,
 
     data: {
-      authorities: ["ROLE_HR", "ROLE_USER", "ROLE_ADMIN", "ROLE_FR"],
+      authorities: ["ROLE_HR", "ROLE_USER", "ROLE_ADMIN", "ROLE_FUNCTION"],
       pageTitle: "Change Page"
     },
     canActivate: [UserRouteAccessService],
@@ -30,7 +30,7 @@ const routes: Routes = [
     component: AlternativeMainComponent,
 
     data: {
-      authorities: ["ROLE_HR", "ROLE_USER"],
+      authorities: ["ROLE_HR", "ROLE_USER", "ROLE_FUNCTION"],
       pageTitle: "Separation Applications"
     },
     canActivate: [UserRouteAccessService],
