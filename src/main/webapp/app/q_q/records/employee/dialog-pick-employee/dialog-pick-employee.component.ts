@@ -3,11 +3,13 @@ import {
   OnInit,
   Inject,
   AfterContentInit,
-  OnDestroy
+  OnDestroy,
+  Input
 } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { Employee } from "app/shared/model/employee.model";
 import { EmployeeService } from "app/entities/employee/employee.service";
+import { createRequestOption } from "app/shared/util/request-util";
 
 import { fromEvent, Subscription } from "rxjs";
 import { map, debounceTime, distinctUntilChanged } from "rxjs/operators";
@@ -29,14 +31,21 @@ export class DialogPickEmployeeComponent
 
   constructor(
     private dialogRef: MatDialogRef<DialogPickEmployeeComponent>,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    @Inject(MAT_DIALOG_DATA) private passedInData
   ) {}
 
   ngOnInit() {
-    this.employeeService.query().subscribe(result => {
-      this.allEmployees = result.body;
-      this.filteredEmployees = this.allEmployees;
-    });
+    this.populateEmployeePool();
+  }
+
+  populateEmployeePool() {
+    this.employeeService
+      .query(this.passedInData.requestParameters)
+      .subscribe(result => {
+        this.allEmployees = result.body;
+        this.filteredEmployees = this.allEmployees;
+      });
   }
 
   ngAfterContentInit() {

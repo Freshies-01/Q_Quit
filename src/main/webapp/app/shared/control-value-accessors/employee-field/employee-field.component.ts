@@ -43,20 +43,24 @@ export class EmployeeFieldComponent
     OnDestroy {
   @ViewChild("location") location: ElementRef;
   dialogReference: MatDialogRef<DialogPickEmployeeComponent>;
-  employee: Employee = new Employee();
+  employee: Employee = null;
   private onChange;
   stateChanges = new Subject<void>();
   static nextId = 0;
   readonly placeholder: string;
-  @HostBinding() id = `my-tel-input-${EmployeeFieldComponent.nextId++}`;
+  @HostBinding() id = `employee-field-input-${EmployeeFieldComponent.nextId++}`;
   focused = false;
+  @Input() requestParameters: { filter?: String; locID?: String };
   get empty(): boolean {
-    return !!this.employee;
+    return !this.employee;
   }
   get value(): Employee | null {
-    return this.employee;
+    return this.employee || null;
   }
-  readonly shouldLabelFloat = true;
+
+  get shouldLabelFloat(): boolean {
+    return !this.empty;
+  }
   readonly required = false;
   private _disabled = false;
   readonly errorState = false;
@@ -116,6 +120,7 @@ export class EmployeeFieldComponent
 
   openEmployeeSelectorDialog() {
     this.dialogReference = this.dialog.open(DialogPickEmployeeComponent, {
+      data: { requestParameters: this.requestParameters },
       width: "370px",
       minHeight: "530px"
     } as MatDialogConfig);

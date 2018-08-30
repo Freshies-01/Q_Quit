@@ -1,5 +1,7 @@
-<span class="nameSpan" #location> {{employee?.user?.firstName}} {{employee?.user?.lastName}}
-    <button mat-icon-button class="employeePickerDialog" type="button" (click)="openEmployeeSelectorDialog()">
-        <mat-icon>edit</mat-icon>
-    </button>
-</span>
+<div class="emptyContentFix">
+    <ng-container *ngIf="!empty">
+        <div class="nameSpan" #location>
+            {{employee?.user?.firstName}} {{employee?.user?.lastName}}
+        </div>
+    </ng-container>
+</div>
