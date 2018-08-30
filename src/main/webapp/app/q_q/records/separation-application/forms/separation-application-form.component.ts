@@ -29,8 +29,6 @@ import {
   styleUrls: ["./separation-application-form.component.css"]
 })
 export class SeparationApplicationFormComponent implements OnInit {
-  hrRepOptions: IHrReps[];
-  functionRepOptions: IFunctionReps[];
   statusOptions = SeparationApplicationStatus;
 
   // app form group is mimicing the structure of JSON that API generates.
@@ -63,8 +61,6 @@ export class SeparationApplicationFormComponent implements OnInit {
         this.mapSeparationApplicationToAppForm(routeData.separationApplication);
       }
     });
-    this.populateFrOptions();
-    this.populateHrOptions();
   }
 
   mapSeparationApplicationToAppForm(sa: SeparationApplication) {
@@ -85,24 +81,6 @@ export class SeparationApplicationFormComponent implements OnInit {
       adjustedSa.dateSumbitted = sa.dateSumbitted.toDate();
     }
     this.appForm.patchValue(adjustedSa);
-  }
-
-  populateFrOptions() {
-    this.functionRepsService.query().subscribe(
-      (res: HttpResponse<IFunctionReps[]>) => {
-        this.functionRepOptions = res.body;
-      },
-      (res: HttpErrorResponse) => this.onError(res.message)
-    );
-  }
-
-  populateHrOptions() {
-    this.hrRepsService.query().subscribe(
-      (res: HttpResponse<IHrReps[]>) => {
-        this.hrRepOptions = res.body;
-      },
-      (res: HttpErrorResponse) => this.onError(res.message)
-    );
   }
 
   save() {
