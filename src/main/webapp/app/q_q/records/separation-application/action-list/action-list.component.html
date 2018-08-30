@@ -1,20 +1,18 @@
 <mat-divider></mat-divider>
 <mat-list>
     <h3 mat-subheader>Your TODO List</h3>
-    <mat-list-item class="flex-container" *ngFor="let action of actions">
-        <div>{{action.task}}</div>
-        <div>
-            <a mat-mini-fab [routerLink]="['/', { outlets: { popup: 'action/'+ action.id + '/delete'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge">-</a>
-        </div>
+    <mat-list-item *ngFor="let action of actions">
+        <mat-checkbox value="action.isCompleted"></mat-checkbox>
+        Task: {{action.task}}<br/>
+        Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+        <a mat-mini-fab (click)="confirmDelete(action.id)">-</a>
     </mat-list-item>
-    <!-- <form (ngSubmit)="save()" [formGroup]="actionForm">
+    <form (ngSubmit)="save()" [formGroup]="actionForm">
         <mat-form-field>
             <input matInput formControlName="task" placeholder="Add new item" name="task">
         </mat-form-field>
-        <a mat-mini-fab type="submit">+</a>
-    </form> -->
+        <button mat-mini-fab type="submit">+</button>
+    </form>
 </mat-list>
 <mat-divider></mat-divider>
 <br/>
