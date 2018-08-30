@@ -68,7 +68,11 @@ export class ActionListComponent implements OnInit {
   }
 
   save() {
+    if (this.actionForm.get("task").value === "" || null) {
+      return;
+    }
     const action: IAction = this.actionForm.getRawValue();
+    this.actionForm.reset();
     action.id = undefined;
     action.isCompleted = false;
     action.separationApplication = this.separationApplication;
