@@ -49,14 +49,12 @@ export class EmployeeRegisterComponent implements OnInit {
           : undefined
       ]
     };
-    console.log(user);
     return user;
   }
 
   ngOnInit() {}
 
   SaveUserForm() {
-    console.log("submited");
     this.registerService
       .q_qsave(this.CreateUserFromUserFormGroup())
       .subscribe();

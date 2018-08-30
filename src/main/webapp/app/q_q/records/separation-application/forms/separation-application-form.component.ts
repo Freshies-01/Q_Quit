@@ -44,12 +44,8 @@ export class SeparationApplicationFormComponent implements OnInit {
     dateCompleted: new FormControl(null),
     location: new FormControl(null),
     employee: new FormControl(null),
-    fr: new FormGroup({
-      id: new FormControl(null)
-    }),
-    hr: new FormGroup({
-      id: new FormControl(null)
-    })
+    fr: new FormControl(null),
+    hr: new FormControl(null)
   });
 
   constructor(
@@ -67,7 +63,6 @@ export class SeparationApplicationFormComponent implements OnInit {
         this.mapSeparationApplicationToAppForm(routeData.separationApplication);
       }
     });
-    console.log(this.appForm.getRawValue());
     this.populateFrOptions();
     this.populateHrOptions();
   }
@@ -116,8 +111,8 @@ export class SeparationApplicationFormComponent implements OnInit {
     sa.dateOfLeave = moment(sa.dateOfLeave);
     sa.dateApproved = moment(sa.dateApproved);
     // DEBUG: API demands that we submit these date fields - these values are not correct
-    sa.dateSumbitted = moment(sa.dateOfLeave);
-    sa.dateCompleted = moment(sa.dateOfLeave);
+    sa.dateSumbitted = moment(sa.dateSumbitted);
+    sa.dateCompleted = moment(sa.dateCompleted);
     if (sa.id) {
       this.subscribeToSaveResponse(
         this.separationApplicationService.update(sa)

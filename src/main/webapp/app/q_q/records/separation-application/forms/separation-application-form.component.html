@@ -12,9 +12,9 @@
         </div>
         <mat-form-field appearance="outline">
             <mat-label>Employee</mat-label>
-            <jhi-employee-field #employeePicker1 [requestParameters]="{filter: 'is-hr'}" formControlName="employee"></jhi-employee-field>
+            <jhi-employee-field #employeePicker1 formControlName="employee"></jhi-employee-field>
             <button matSuffix mat-icon-button type="button" (click)="employeePicker1.openEmployeeSelectorDialog()">
-                <mat-icon>edit</mat-icon>
+                <mat-icon style="color: #6c757d;">edit</mat-icon>
             </button>
         </mat-form-field>
         <div class="formField">
@@ -49,7 +49,11 @@
                 <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
         </div>
-        <ng-container formGroupName="fr">
+
+
+
+
+        <!-- <ng-container formGroupName="fr">
             <div class="formField">
                 <mat-form-field appearance="outline">
                     <mat-label>Functional Representative</mat-label>
@@ -60,19 +64,29 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-        </ng-container>
-        <ng-container formGroupName="hr">
-            <div class="formField">
-                <mat-form-field appearance="outline">
-                    <mat-label>Human Resource Representative</mat-label>
-                    <mat-select formControlName="id">
-                        <mat-option *ngFor="let i of hrRepOptions" [value]="i.id">
-                            {{i.employee.user.firstName}} {{i.employee.user.lastName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </ng-container>
+        </ng-container> -->
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Functional Representative</mat-label>
+            <jhi-fr-field #frPicker1 formControlName="fr"></jhi-fr-field>
+            <button matSuffix mat-icon-button type="button" (click)="frPicker1.openFrSelectorDialog()">
+                <mat-icon style="color: #6c757d;">edit</mat-icon>
+            </button>
+        </mat-form-field>
+
+
+
+
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Human Resource Representative</mat-label>
+            <jhi-hr-field #hrPicker1 formControlName="hr"></jhi-hr-field>
+            <button matSuffix mat-icon-button type="button" (click)="hrPicker1.openHrSelectorDialog()">
+                <mat-icon style="color: #6c757d;">edit</mat-icon>
+            </button>
+        </mat-form-field>
         <div>
             <button mat-raised-button type="submit" [disabled]="isSaving">
                 Save
