@@ -4,7 +4,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Status</mat-label>
                 <mat-select formControlName="status">
-                    <mat-option *ngFor="let item of statusOptions | keys" [value]="item.value">
+                    <mat-option *ngFor="let item of statusOptions | keys" [value]="item.key">
                         {{item.value}}
                     </mat-option>
                 </mat-select>
@@ -23,6 +23,22 @@
                 <input matInput [matDatepicker]="picker2 " formControlName="dateOfLeave">
                 <mat-datepicker-toggle matSuffix [for]="picker2 "></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="formField">
+            <mat-form-field appearance="outline">
+                <mat-label>Date completed</mat-label>
+                <input matInput [matDatepicker]="dateCompleted_picker4" formControlName="dateCompleted">
+                <mat-datepicker-toggle matSuffix [for]="dateCompleted_picker4 "></mat-datepicker-toggle>
+                <mat-datepicker #dateCompleted_picker4></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="formField">
+            <mat-form-field appearance="outline">
+                <mat-label>Date Submited</mat-label>
+                <input matInput [matDatepicker]="datesubmited_picker5" formControlName="dateSumbitted">
+                <mat-datepicker-toggle matSuffix [for]="datesubmited_picker5"></mat-datepicker-toggle>
+                <mat-datepicker #datesubmited_picker5></mat-datepicker>
             </mat-form-field>
         </div>
         <div class="formField">

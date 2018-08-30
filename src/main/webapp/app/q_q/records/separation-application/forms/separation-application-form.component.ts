@@ -40,6 +40,8 @@ export class SeparationApplicationFormComponent implements OnInit {
     status: new FormControl(null),
     dateOfLeave: new FormControl(null),
     dateApproved: new FormControl(null),
+    dateSumbitted: new FormControl(null),
+    dateCompleted: new FormControl(null),
     location: new FormControl(null),
     employee: new FormControl(null),
     fr: new FormGroup({
@@ -65,6 +67,7 @@ export class SeparationApplicationFormComponent implements OnInit {
         this.mapSeparationApplicationToAppForm(routeData.separationApplication);
       }
     });
+    console.log(this.appForm.getRawValue());
     this.populateFrOptions();
     this.populateHrOptions();
   }
@@ -79,6 +82,12 @@ export class SeparationApplicationFormComponent implements OnInit {
     }
     if (sa.dateApproved) {
       adjustedSa.dateApproved = sa.dateApproved.toDate();
+    }
+    if (sa.dateCompleted) {
+      adjustedSa.dateCompleted = sa.dateCompleted.toDate();
+    }
+    if (sa.dateSumbitted) {
+      adjustedSa.dateSumbitted = sa.dateSumbitted.toDate();
     }
     this.appForm.patchValue(adjustedSa);
   }
@@ -99,16 +108,6 @@ export class SeparationApplicationFormComponent implements OnInit {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
-  }
-
-  OpenEmployeeSelectDialog() {
-    const dialogRef: MatDialogRef<
-      DialogPickEmployeeComponent
-    > = this.dialog.open(DialogPickEmployeeComponent);
-
-    dialogRef.afterClosed().subscribe(pickedEmployee => {
-      this.appForm.get("employee.id").setValue(pickedEmployee.id);
-    });
   }
 
   save() {
