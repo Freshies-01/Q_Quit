@@ -19,8 +19,30 @@ const routes: Routes = [
     component: AlternativeMainComponent,
 
     data: {
-      authorities: ["ROLE_ADMIN"],
+      authorities: ["ROLE_HR", "ROLE_USER", "ROLE_ADMIN", "ROLE_FR"],
+      pageTitle: "Change Page"
+    },
+    canActivate: [UserRouteAccessService],
+    children: [...RecordsRouting, ...reportsRoutes, ...dashboardRoutes]
+  },
+  {
+    path: "Q_Q/record/separationApplication",
+    component: AlternativeMainComponent,
+
+    data: {
+      authorities: ["ROLE_HR", "ROLE_USER"],
       pageTitle: "Separation Applications"
+    },
+    canActivate: [UserRouteAccessService],
+    children: [...RecordsRouting, ...reportsRoutes, ...dashboardRoutes]
+  },
+  {
+    path: "Q_Q/record/employee",
+    component: AlternativeMainComponent,
+
+    data: {
+      authorities: ["ROLE_ADMIN"],
+      pageTitle: "Employees"
     },
     canActivate: [UserRouteAccessService],
     children: [...RecordsRouting, ...reportsRoutes, ...dashboardRoutes]
