@@ -21,12 +21,12 @@
                 <i class="material-icons">expand_more</i>
             </a>
             <ul class="secondary-nav-links">
-                <li>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <a class="secondary" routerLinkActive="active" routerLink="record/employee">
                         Employees
                     </a>
                 </li>
-                <li>
+                <li *jhiHasAnyAuthority="['ROLE_USER', 'ROLE_HR']">
                     <a class="secondary" routerLinkActive="active" routerLink="record/separationApplication">
                         Separation Applications
                     </a>

@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 import { QQRoutingModule } from "app/Q_Q/q-q-routing.module";
-
 import { NavTopComponent } from "app/Q_Q/nav-top/nav-top.component";
 import { NavSideComponent } from "app/Q_Q/nav-side/nav-side.component";
 import { AlternativeMainComponent } from "app/Q_Q/alternative-main/alternative-main.component";
@@ -11,6 +10,7 @@ import { RecordsModule } from "app/Q_Q/records/records.module";
 import { ReportsModule } from "app/Q_Q/reports/reports.module";
 import { DashboardModule } from "app/Q_Q/dashboard/dashboard.module";
 import { LoginPageComponent } from "app/Q_Q/login-page/login-page.component";
+import { QQuitSharedModule } from "app/shared/shared.module";
 
 @NgModule({
   imports: [
@@ -19,7 +19,8 @@ import { LoginPageComponent } from "app/Q_Q/login-page/login-page.component";
     QQRoutingModule,
     ReportsModule,
     DashboardModule,
-    FormsModule
+    FormsModule,
+    QQuitSharedModule
   ],
   declarations: [
     NavTopComponent,

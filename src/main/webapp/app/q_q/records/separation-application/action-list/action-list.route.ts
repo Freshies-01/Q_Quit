@@ -12,10 +12,10 @@ import {
 } from "../../../../entities/action/action-delete-dialog.component";
 import { IAction, Action } from "app/shared/model/action.model";
 import { ActionService } from "app/entities/action";
+import { map } from "rxjs/operators";
 import { HttpResponse } from "@angular/common/http";
+import { of } from "rxjs";
 import { UserRouteAccessService } from "app/core";
-import { map } from "../../../../../../../../node_modules/rxjs/operators";
-import { of } from "../../../../../../../../node_modules/rxjs";
 
 @Injectable({ providedIn: "root" })
 export class ActionResolve implements Resolve<IAction> {
@@ -26,7 +26,7 @@ export class ActionResolve implements Resolve<IAction> {
     if (id) {
       return this.service
         .find(id)
-        .pipe(map((action: HttpResponse<Action>) => action.body));
+        .pipe(map((action: HttpResponse<IAction>) => action.body));
     }
     return of(new Action());
   }
