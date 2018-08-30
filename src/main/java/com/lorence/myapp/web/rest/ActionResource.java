@@ -102,7 +102,6 @@ public class ActionResource {
         Optional<Action> action = actionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(action);
     }
-    
     /**
      * DELETE  /actions/:id : delete the "id" action.
      *

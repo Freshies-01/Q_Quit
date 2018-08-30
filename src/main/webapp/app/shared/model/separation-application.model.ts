@@ -5,11 +5,11 @@ import { IHrReps } from "app/shared/model/hr-reps.model";
 import { IFunctionReps } from "app/shared/model/function-reps.model";
 
 export enum Status {
-  PENDING = 0,
-  UNDER_REVIEW_FR = 25,
-  EMPLOYEE_TASKS_IN_PROGRESS = 50,
-  EMPLOYEE_TASKS_COMPLETED = 75,
-  CLOSED_BY_HR = 100
+  PENDING = "Pending",
+  UNDER_REVIEW_FR = "Under Review By FR",
+  EMPLOYEE_TASKS_IN_PROGRESS = "Employee Tasks In Progress",
+  EMPLOYEE_TASKS_COMPLETED = "Employee Tasks Completed",
+  CLOSED_BY_HR = "Closed By HR"
 }
 
 export interface ISeparationApplication {
