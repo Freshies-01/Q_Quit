@@ -28,10 +28,11 @@ import {
   PageRibbonComponent,
   ErrorComponent
 } from "app/layouts";
-import { QQModule } from "app/Q_Q/q-q.module";
+import { QQModule } from "app/q_q/q-q.module";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularMaterialModule } from "app/shared/angular-material.module";
+import { DashboardCardsService } from "app/Q_Q/dashboard/dashboardCardsService";
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { AngularMaterialModule } from "app/shared/angular-material.module";
       multi: true,
       deps: [LocalStorageService, SessionStorageService]
     },
+    DashboardCardsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthExpiredInterceptor,
