@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.lorence.myapp.domain.enumeration.ActionStatus;
+
 /**
  * A Action.
  */
@@ -33,6 +35,10 @@ public class Action implements Serializable {
 
     @Column(name = "num_disputes")
     private Integer numDisputes;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "action_status")
+    private ActionStatus actionStatus;
 
     @ManyToOne
     @JsonIgnoreProperties("actions")
@@ -104,6 +110,19 @@ public class Action implements Serializable {
         this.numDisputes = numDisputes;
     }
 
+    public ActionStatus getActionStatus() {
+        return actionStatus;
+    }
+
+    public Action actionStatus(ActionStatus actionStatus) {
+        this.actionStatus = actionStatus;
+        return this;
+    }
+
+    public void setActionStatus(ActionStatus actionStatus) {
+        this.actionStatus = actionStatus;
+    }
+
     public SeparationApplication getSeparationApplication() {
         return separationApplication;
     }
@@ -159,6 +178,7 @@ public class Action implements Serializable {
             ", task='" + getTask() + "'" +
             ", dateCompleted='" + getDateCompleted() + "'" +
             ", numDisputes=" + getNumDisputes() +
+            ", actionStatus='" + getActionStatus() + "'" +
             "}";
     }
 }

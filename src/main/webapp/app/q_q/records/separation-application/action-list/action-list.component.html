@@ -8,14 +8,24 @@
             <div class="list-item">
                 <mat-checkbox [(ngModel)]="action.isCompleted" (click)="toggleCompleted(action)"></mat-checkbox> <!--Applicant Employee ONLY-->
             </div>
-            <div *ngIf="action.numDisputes > 0; else elseBlock" style="color: red;">
-                Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
-                Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+            <div [ngSwitch]="action.actionStatus">
+                <div *ngSwitchCase="'DISPUTED'" style="color: red;">
+                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                </div>
+                <div *ngSwitchCase="'EDITED'">
+                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                </div>
+                <div *ngSwitchCase="'ACCEPTED'" style="font-weight: bold;">
+                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                </div>
+                <div *ngSwitchDefault>
+                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                </div>
             </div>
-            <ng-template #elseBlock class="list-item">
-                Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
-                Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
-            </ng-template>
             <div class="list-item">
                 <button class="icon" mat-mini-fab (click)="confirmDelete(action.id)">X</button> <!--FR ONLY-->
             </div>

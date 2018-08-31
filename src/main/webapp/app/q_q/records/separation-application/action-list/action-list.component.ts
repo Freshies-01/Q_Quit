@@ -5,7 +5,7 @@ import {
   ISeparationApplication,
   SeparationApplication
 } from "app/shared/model/separation-application.model";
-import { IAction } from "app/shared/model/action.model";
+import { IAction, ActionStatus } from "app/shared/model/action.model";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { ActionService } from "app/entities/action/action.service";
 import { Observable } from "rxjs";
@@ -128,6 +128,7 @@ export class ActionListComponent implements OnInit {
     // change text of action.task to red
     // disable dispute button
     action.numDisputes++;
+    action.actionStatus = ActionStatus.DISPUTED;
     this.updateAction(action);
     document
       .getElementById("disputeButton" + i)
@@ -138,6 +139,7 @@ export class ActionListComponent implements OnInit {
     // set action.task to form value
     // change action.task text color to normal
     // reenable dispute button
+    action.actionStatus = ActionStatus.EDITED;
     this.updateAction(action);
   }
 
@@ -145,6 +147,7 @@ export class ActionListComponent implements OnInit {
     // set action.task text style to BOLD
     // remove ability to edit this action
     action.numDisputes = 0;
+    action.actionStatus = ActionStatus.ACCEPTED;
     this.updateAction(action);
   }
 

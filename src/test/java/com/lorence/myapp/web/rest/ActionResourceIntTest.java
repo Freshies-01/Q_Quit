@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.lorence.myapp.domain.enumeration.ActionStatus;
 /**
  * Test class for the ActionResource REST controller.
  *
@@ -53,6 +54,9 @@ public class ActionResourceIntTest {
 
     private static final Integer DEFAULT_NUM_DISPUTES = 1;
     private static final Integer UPDATED_NUM_DISPUTES = 2;
+
+    private static final ActionStatus DEFAULT_ACTION_STATUS = ActionStatus.DISPUTED;
+    private static final ActionStatus UPDATED_ACTION_STATUS = ActionStatus.EDITED;
 
     @Autowired
     private ActionRepository actionRepository;
@@ -96,7 +100,8 @@ public class ActionResourceIntTest {
             .isCompleted(DEFAULT_IS_COMPLETED)
             .task(DEFAULT_TASK)
             .dateCompleted(DEFAULT_DATE_COMPLETED)
-            .numDisputes(DEFAULT_NUM_DISPUTES);
+            .numDisputes(DEFAULT_NUM_DISPUTES)
+            .actionStatus(DEFAULT_ACTION_STATUS);
         // Add required entity
         FunctionReps functionReps = FunctionRepsResourceIntTest.createEntity(em);
         em.persist(functionReps);
@@ -129,6 +134,7 @@ public class ActionResourceIntTest {
         assertThat(testAction.getTask()).isEqualTo(DEFAULT_TASK);
         assertThat(testAction.getDateCompleted()).isEqualTo(DEFAULT_DATE_COMPLETED);
         assertThat(testAction.getNumDisputes()).isEqualTo(DEFAULT_NUM_DISPUTES);
+        assertThat(testAction.getActionStatus()).isEqualTo(DEFAULT_ACTION_STATUS);
     }
 
     @Test
@@ -164,7 +170,8 @@ public class ActionResourceIntTest {
             .andExpect(jsonPath("$.[*].isCompleted").value(hasItem(DEFAULT_IS_COMPLETED.booleanValue())))
             .andExpect(jsonPath("$.[*].task").value(hasItem(DEFAULT_TASK.toString())))
             .andExpect(jsonPath("$.[*].dateCompleted").value(hasItem(DEFAULT_DATE_COMPLETED.toString())))
-            .andExpect(jsonPath("$.[*].numDisputes").value(hasItem(DEFAULT_NUM_DISPUTES)));
+            .andExpect(jsonPath("$.[*].numDisputes").value(hasItem(DEFAULT_NUM_DISPUTES)))
+            .andExpect(jsonPath("$.[*].actionStatus").value(hasItem(DEFAULT_ACTION_STATUS.toString())));
     }
     
 
@@ -182,7 +189,8 @@ public class ActionResourceIntTest {
             .andExpect(jsonPath("$.isCompleted").value(DEFAULT_IS_COMPLETED.booleanValue()))
             .andExpect(jsonPath("$.task").value(DEFAULT_TASK.toString()))
             .andExpect(jsonPath("$.dateCompleted").value(DEFAULT_DATE_COMPLETED.toString()))
-            .andExpect(jsonPath("$.numDisputes").value(DEFAULT_NUM_DISPUTES));
+            .andExpect(jsonPath("$.numDisputes").value(DEFAULT_NUM_DISPUTES))
+            .andExpect(jsonPath("$.actionStatus").value(DEFAULT_ACTION_STATUS.toString()));
     }
     @Test
     @Transactional
@@ -208,7 +216,8 @@ public class ActionResourceIntTest {
             .isCompleted(UPDATED_IS_COMPLETED)
             .task(UPDATED_TASK)
             .dateCompleted(UPDATED_DATE_COMPLETED)
-            .numDisputes(UPDATED_NUM_DISPUTES);
+            .numDisputes(UPDATED_NUM_DISPUTES)
+            .actionStatus(UPDATED_ACTION_STATUS);
 
         restActionMockMvc.perform(put("/api/actions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -223,6 +232,7 @@ public class ActionResourceIntTest {
         assertThat(testAction.getTask()).isEqualTo(UPDATED_TASK);
         assertThat(testAction.getDateCompleted()).isEqualTo(UPDATED_DATE_COMPLETED);
         assertThat(testAction.getNumDisputes()).isEqualTo(UPDATED_NUM_DISPUTES);
+        assertThat(testAction.getActionStatus()).isEqualTo(UPDATED_ACTION_STATUS);
     }
 
     @Test
