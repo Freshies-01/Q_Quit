@@ -15,6 +15,10 @@ import { FunctionRepsService } from "app/entities/function-reps";
 import { JhiEventManager } from "ng-jhipster";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 
+export interface ActionData {
+  action: IAction;
+}
+
 @Component({
   selector: "jhi-action-list",
   templateUrl: "./action-list.component.html",
@@ -42,7 +46,8 @@ export class ActionListComponent implements OnInit {
     private separationApplicationService: SeparationApplicationService,
     private actionService: ActionService,
     private functionRepsService: FunctionRepsService,
-    private eventManager: JhiEventManager
+    private eventManager: JhiEventManager,
+    public dialog: MatDialog
   ) {}
 
   loadActions() {
@@ -136,6 +141,13 @@ export class ActionListComponent implements OnInit {
     action.actionStatus = ActionStatus.DISPUTED;
   }
 
+  openDialog(action: IAction): void {
+    const dialogRef = this.dialog.open(ActionEditPopupComponent, {
+      width: "250px",
+      data: { editedAction: action }
+    });
+  }
+
   edit(action: IAction) {
     // set action.task to form value
     // change action.task text color to normal
@@ -169,4 +181,13 @@ export class ActionListComponent implements OnInit {
   selector: "jhi-action-edit-popup",
   templateUrl: "action-edit-popup.html"
 })
-export class ActionEditPopupComponent {}
+export class ActionEditPopupComponent {
+  constructor(
+    public dialogRef: MatDialogRef<ActionEditPopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ActionData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
