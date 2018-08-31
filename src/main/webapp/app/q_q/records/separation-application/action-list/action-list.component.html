@@ -4,36 +4,48 @@
     <br/>
     <mat-list-item *ngFor="let action of actions; let i = index">
         <div class="flex-container">
-            <br/>
+     
             <div class="list-item">
                 <mat-checkbox [(ngModel)]="action.isCompleted" (click)="toggleCompleted(action)"></mat-checkbox> <!--Applicant Employee ONLY-->
             </div>
-            <div [ngSwitch]="action.actionStatus">
+            <div class="list-item" [ngSwitch]="action.actionStatus">
                 <div *ngSwitchCase="'DISPUTED'" style="color: red;">
-                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
                     Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
                 </div>
                 <div *ngSwitchCase="'EDITED'">
-                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
                     Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
                 </div>
                 <div *ngSwitchCase="'ACCEPTED'" style="font-weight: bold;">
-                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
-                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}           
                 </div>
                 <div *ngSwitchDefault>
-                    Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
-                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}
                 </div>
             </div>
             <div class="list-item">
                 <button class="icon" mat-mini-fab (click)="confirmDelete(action.id)">X</button> <!--FR ONLY-->
             </div>
+
             <div class="list-item"> <!--Employee ONLY-->
-                <button id="disputeButton{{i}}" (click)="dispute(action, i)" class="icon" mat-mini-fab>!</button>
+                <button (click)="dispute(action)" class="icon" mat-mini-fab>!</button>
             </div>
             <div class="list-item"> <!--FR ONLY-->
                 <button class="icon" mat-mini-fab><fa-icon [icon]="'pencil-alt'"></fa-icon></button>
+            </div>
+            <div class="list-item"> <!--Employee ONLY, + HR if numDisputes > 2-->
+                <button class="icon" (click)="accept(action)" mat-mini-fab>OK</button>
             </div>
             <br/>
         </div>

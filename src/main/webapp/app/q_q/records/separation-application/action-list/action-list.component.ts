@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
@@ -13,6 +13,7 @@ import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
 import { JhiEventManager } from "ng-jhipster";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 
 @Component({
   selector: "jhi-action-list",
@@ -30,6 +31,10 @@ export class ActionListComponent implements OnInit {
 
   public actionForm = new FormGroup({
     id: new FormControl(""),
+    task: new FormControl("")
+  });
+
+  public actionEditForm = new FormGroup({
     task: new FormControl("")
   });
 
@@ -122,23 +127,25 @@ export class ActionListComponent implements OnInit {
     });
   }
 
-  dispute(action: IAction, i: number) {
+  dispute(action: IAction) {
     // increment numDisputes
     // if numDisputes > 2, reveal 'accept', 'delete', and 'edit' button to HR
     // change text of action.task to red
     // disable dispute button
     action.numDisputes++;
     action.actionStatus = ActionStatus.DISPUTED;
-    this.updateAction(action);
-    document
-      .getElementById("disputeButton" + i)
-      .setAttribute("disabled", "true");
   }
 
   edit(action: IAction) {
     // set action.task to form value
     // change action.task text color to normal
     // reenable dispute button
+    const editAction: IAction = this.actionEditForm.getRawValue();
+    if (editAction.task === "" || null || action.task) {
+      return;
+    }
+    // console.log(action.id);
+    action.task = editAction.task;
     action.actionStatus = ActionStatus.EDITED;
     this.updateAction(action);
   }
@@ -157,3 +164,9 @@ export class ActionListComponent implements OnInit {
     this.getApp();
   }
 }
+
+@Component({
+  selector: "jhi-action-edit-popup",
+  templateUrl: "action-edit-popup.html"
+})
+export class ActionEditPopupComponent {}
