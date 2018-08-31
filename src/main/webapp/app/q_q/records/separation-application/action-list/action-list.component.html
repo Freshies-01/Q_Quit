@@ -2,28 +2,28 @@
 <mat-list>
     <h3 mat-subheader>Your TODO List</h3>
     <br/>
-    <mat-list-item *ngFor="let action of actions">
+    <mat-list-item *ngFor="let action of actions; let i = index">
         <div class="flex-container">
             <br/>
             <div class="list-item">
-                <mat-checkbox [(ngModel)]="action.isCompleted" (click)="update(action)"></mat-checkbox> <!--Applicant Employee ONLY-->
+                <mat-checkbox [(ngModel)]="action.isCompleted" (click)="toggleCompleted(action)"></mat-checkbox> <!--Applicant Employee ONLY-->
             </div>
             <div *ngIf="action.numDisputes > 0; else elseBlock" style="color: red;">
-                Task: {{action.task}}<br/>
+                Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
                 Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
             </div>
             <ng-template #elseBlock class="list-item">
-                Task: {{action.task}}<br/>
+                Task: {{action.task}} Debug:{{action.numDisputes}} index{{i}}<br/>
                 Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
             </ng-template>
             <div class="list-item">
-                <a class="icon" mat-mini-fab (click)="confirmDelete(action.id)">X</a> <!--FR ONLY-->
+                <button class="icon" mat-mini-fab (click)="confirmDelete(action.id)">X</button> <!--FR ONLY-->
             </div>
             <div class="list-item"> <!--Employee ONLY-->
-                <a (click)="dispute(action)" class="icon" mat-mini-fab>!</a>
+                <button id="disputeButton{{i}}" (click)="dispute(action, i)" class="icon" mat-mini-fab>!</button>
             </div>
             <div class="list-item"> <!--FR ONLY-->
-                <a class="icon" mat-mini-fab><fa-icon [icon]="'pencil-alt'"></fa-icon></a>
+                <button class="icon" mat-mini-fab><fa-icon [icon]="'pencil-alt'"></fa-icon></button>
             </div>
             <br/>
         </div>

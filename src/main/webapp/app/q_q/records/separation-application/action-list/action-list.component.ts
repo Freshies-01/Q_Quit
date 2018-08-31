@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
@@ -68,10 +68,10 @@ export class ActionListComponent implements OnInit {
   }
 
   save() {
-    if (this.actionForm.get("task").value === "" || null) {
+    const action: IAction = this.actionForm.getRawValue();
+    if (action.task === "" || null) {
       return;
     }
-    const action: IAction = this.actionForm.getRawValue();
     this.actionForm.reset();
     action.id = undefined;
     action.isCompleted = false;
@@ -79,15 +79,15 @@ export class ActionListComponent implements OnInit {
     action.separationApplication.id = this.saId;
     action.functionReps = this.functionRep;
     this.isSaving = true;
-    if (action.id !== undefined) {
-      this.subscribeToSaveResponse(this.actionService.update(action));
-    } else {
-      this.subscribeToSaveResponse(this.actionService.create(action));
-    }
+    this.updateAction(action);
   }
 
-  update(action: IAction) {
+  toggleCompleted(action: IAction) {
     action.isCompleted = !action.isCompleted;
+    this.updateAction(action);
+  }
+
+  updateAction(action: IAction) {
     if (action.id !== undefined) {
       this.subscribeToSaveResponse(this.actionService.update(action));
     } else {
@@ -122,23 +122,30 @@ export class ActionListComponent implements OnInit {
     });
   }
 
-  dispute(action: IAction) {
+  dispute(action: IAction, i: number) {
     // increment numDisputes
     // if numDisputes > 2, reveal 'accept', 'delete', and 'edit' button to HR
     // change text of action.task to red
     // disable dispute button
     action.numDisputes++;
+    this.updateAction(action);
+    document
+      .getElementById("disputeButton" + i)
+      .setAttribute("disabled", "true");
   }
 
   edit(action: IAction) {
     // set action.task to form value
     // change action.task text color to normal
     // reenable dispute button
+    this.updateAction(action);
   }
 
   accept(action: IAction) {
     // set action.task text style to BOLD
     // remove ability to edit this action
+    action.numDisputes = 0;
+    this.updateAction(action);
   }
 
   ngOnInit() {
