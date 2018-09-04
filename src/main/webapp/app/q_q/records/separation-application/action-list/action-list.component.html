@@ -41,7 +41,7 @@
             <div class="list-item"> <!--Employee ONLY-->
                 <button (click)="dispute(action)" class="icon" mat-mini-fab>!</button>
             </div>
-            <div class="list-item"> <!--FR ONLY-->
+            <div class="list-item" (click)="openDialog(action)"> <!--FR ONLY-->
                 <button class="icon" mat-mini-fab><fa-icon [icon]="'pencil-alt'"></fa-icon></button>
             </div>
             <div class="list-item"> <!--Employee ONLY, + HR if numDisputes > 2-->
