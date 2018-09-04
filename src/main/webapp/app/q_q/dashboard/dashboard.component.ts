@@ -1,55 +1,70 @@
 import { Component, OnInit } from "@angular/core";
-import { DashboardCardsService } from "./dashboardCardsService";
-import { DashboardCard } from "./dashboardCards/dashboardCard";
-import { PendingApplicationCardComponent } from "./dashboardCards/pending-application-card/pending-application-card.component";
-import { ClosedApplicationCardComponent } from "./dashboardCards/closed-application-card/closed-application-card.component";
+import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
+import { ISeparationApplication } from "app/shared/model/separation-application.model";
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { PENDING } from "../../../../../../node_modules/@angular/forms/src/model";
+import { Status } from "app/shared/model/separtation-application-log.model";
+
 @Component({
   selector: "jhi-dashboard",
   templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.css"],
-  entryComponents: [
-    PendingApplicationCardComponent,
-    ClosedApplicationCardComponent
-  ]
+  styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  cards: DashboardCard[] = [];
-  cols: number;
-  rows: number;
+  separationApplications: ISeparationApplication[];
+  pendingApplications: ISeparationApplication[];
+  closedApplications: ISeparationApplication[];
+  separationApplication: ISeparationApplication;
 
-  constructor(private cardsService: DashboardCardsService) {
-    this.cardsService.cards.subscribe(cards => {
-      this.cards = cards;
-    });
+  numPending = 0;
+  numClosed = 0;
+
+  cards = [
+    { title: "Pending", cols: 2, rows: 1 },
+    { title: "Closed", cols: 1, rows: 1 }
+    // { title: "Card 3", content: "card content here", cols: 1, rows: 2 },
+    // { title: "Card 4", content: "card content here", cols: 1, rows: 1 }
+  ];
+
+  constructor(
+    private separationApplicationService: SeparationApplicationService
+  ) {}
+
+  loadAll() {
+    this.separationApplicationService.query().subscribe(
+      (res: HttpResponse<ISeparationApplication[]>) => {
+        this.separationApplications = res.body;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
   }
+
+  loadPending() {
+    this.separationApplicationService.queryPending().subscribe(
+      (res: HttpResponse<ISeparationApplication[]>) => {
+        this.pendingApplications = res.body;
+        this.numPending = this.pendingApplications.length;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
+  loadClosed() {
+    this.separationApplicationService.queryClosed().subscribe(
+      (res: HttpResponse<ISeparationApplication[]>) => {
+        this.closedApplications = res.body;
+        this.numClosed = this.closedApplications.length;
+      },
+      (res: HttpErrorResponse) => console.log(res.message)
+    );
+  }
+
   ngOnInit() {
-    this.generateCard(
-      "Pending Applications",
-      "./dashboardCards/pending-application-card",
-      PendingApplicationCardComponent
-    );
-    this.generateCard(
-      "Closed Applications",
-      "./dashboardCards/closed-application-card",
-      PendingApplicationCardComponent
-    );
+    this.loadPending();
+    this.loadClosed();
   }
 
-  generateCard(_name: string, _routerLink: string, cardType: any) {
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: { key: DashboardCard.metadata.NAME, value: _name },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: _routerLink
-          },
-          color: { key: DashboardCard.metadata.COLOR, value: "blue" },
-          cols: { key: DashboardCard.metadata.COLS, value: 1 },
-          rows: { key: DashboardCard.metadata.ROWS, value: 1 }
-        },
-        cardType
-      )
-    );
+  trackId(index: number, item: ISeparationApplication) {
+    return item.id;
   }
 }

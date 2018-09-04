@@ -34,6 +34,7 @@ public class Employee implements Serializable {
     private User user;
 
     @OneToOne(mappedBy = "employee")
+    @JsonIgnore
     private HrReps hr;
 
     @OneToOne(mappedBy = "employee")
