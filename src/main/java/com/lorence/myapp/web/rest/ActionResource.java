@@ -125,6 +125,18 @@ public class ActionResource {
         return actionRepository.findAllActionsByDepartment(deptID);
     }
 
+    @GetMapping("/actions-functionWise/{deptID}")
+    @Timed
+    public Duration functionWise(@PathVariable Long deptID) {
+        List<Action> actions = findAllActionsByDepartment(deptID);
+        Duration res;
+        for(int index = 0; index < actions.length; ++index) {
+            res.addTo(Duration.between(actions[index].dateCompleted, actions[index].separationApplication.dateApproved));
+        }
+        res.divideBy(actions.length);
+        return res;
+    }
+
     @GetMapping("/actions-sa/{saID}")
     @Timed
     public List<Action> findAllActionsBySeparationApplication(@PathVariable Long saID){
