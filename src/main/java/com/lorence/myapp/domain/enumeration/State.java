@@ -3,8 +3,7 @@ package com.lorence.myapp.domain.enumeration;
 /**
  * The State enumeration.
  */
-public enum State {
-    
+public enum State {    
 AL, AK, 
 AZ, AR, CA, CO, CT, DE,
 FL, GA, HI, ID, IL, IN,
@@ -13,6 +12,5 @@ MA, MI, MN, MS, MO, MT,
 NE, NV, NH, NJ, NM, NY,
 NC, ND, OH, OK, OR, PA,
 RI, SC, SD, TN, TX, UT,
-VT, VA, WA, WV, WI, WY,
-GODLY_DOMAIN
+VT, VA, WA, WV, WI, WY
 }

@@ -3182,6 +3182,10 @@ expect@^22.4.0:
     jest-message-util "^22.4.3"
     jest-regex-util "^22.4.3"
 
+export-to-csv@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/export-to-csv/-/export-to-csv-0.1.2.tgz#6579c18e7cd8e0ed2412496093123d0335bc9833"
+
 exports-loader@0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/exports-loader/-/exports-loader-0.7.0.tgz#84881c784dea6036b8e1cd1dac3da9b6409e21a5"

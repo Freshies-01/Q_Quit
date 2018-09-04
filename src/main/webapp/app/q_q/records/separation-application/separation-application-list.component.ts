@@ -4,6 +4,7 @@ import { ISeparationApplication } from "app/shared/model/separation-application.
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { LoginModalService, Principal, Account } from "app/core";
 import { JhiEventManager } from "ng-jhipster";
+import { ExportToCsv } from "export-to-csv";
 
 @Component({
   selector: "jhi-separation-application-list",
@@ -98,6 +99,20 @@ export class SeparationApplicationListComponent implements OnInit {
     // this.getCurrentLoginUser();
     // this.loadUserApplications();
     this.queryApps();
+    const options = {
+      fieldSeparator: ",",
+      quoteStrings: '"',
+      decimalseparator: ".",
+      showLabels: true,
+      showTitle: true,
+      title: "My Awesome CSV",
+      useBom: true,
+      useKeysAsHeaders: true
+      // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+    };
+    const csvExporter = new ExportToCsv(options);
+
+    csvExporter.generateCsv(this.separationApplications);
   }
 
   trackId(index: number, item: ISeparationApplication) {
