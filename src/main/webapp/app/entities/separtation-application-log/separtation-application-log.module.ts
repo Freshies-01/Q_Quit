@@ -10,7 +10,7 @@ import {
   SepartationApplicationLogDeleteDialogComponent,
   separtationApplicationLogRoute,
   separtationApplicationLogPopupRoute
-} from "app/entities/separtation-application-log";
+} from "./";
 
 const ENTITY_STATES = [
   ...separtationApplicationLogRoute,

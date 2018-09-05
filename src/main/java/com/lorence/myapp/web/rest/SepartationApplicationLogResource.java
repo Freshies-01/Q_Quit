@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -49,7 +48,7 @@ public class SepartationApplicationLogResource {
      */
     @PostMapping("/separtation-application-logs")
     @Timed
-    public ResponseEntity<SepartationApplicationLog> createSepartationApplicationLog(@Valid @RequestBody SepartationApplicationLog separtationApplicationLog) throws URISyntaxException {
+    public ResponseEntity<SepartationApplicationLog> createSepartationApplicationLog(@RequestBody SepartationApplicationLog separtationApplicationLog) throws URISyntaxException {
         log.debug("REST request to save SepartationApplicationLog : {}", separtationApplicationLog);
         if (separtationApplicationLog.getId() != null) {
             throw new BadRequestAlertException("A new separtationApplicationLog cannot already have an ID", ENTITY_NAME, "idexists");
@@ -71,7 +70,7 @@ public class SepartationApplicationLogResource {
      */
     @PutMapping("/separtation-application-logs")
     @Timed
-    public ResponseEntity<SepartationApplicationLog> updateSepartationApplicationLog(@Valid @RequestBody SepartationApplicationLog separtationApplicationLog) throws URISyntaxException {
+    public ResponseEntity<SepartationApplicationLog> updateSepartationApplicationLog(@RequestBody SepartationApplicationLog separtationApplicationLog) throws URISyntaxException {
         log.debug("REST request to update SepartationApplicationLog : {}", separtationApplicationLog);
         if (separtationApplicationLog.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
