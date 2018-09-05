@@ -12,4 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+    @Query("SELECT emp FROM Employee emp WHERE emp.user.id = ?1")
+	Employee findByUserId(long userId);
+
 }

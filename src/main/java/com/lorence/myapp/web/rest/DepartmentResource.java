@@ -3,7 +3,6 @@ package com.lorence.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.Department;
 import com.lorence.myapp.service.DepartmentService;
-import com.lorence.myapp.repository.DepartmentRepository;
 import com.lorence.myapp.web.rest.errors.BadRequestAlertException;
 import com.lorence.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Optional;
 

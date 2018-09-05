@@ -14,9 +14,13 @@ import com.lorence.myapp.domain.Authority;
 import com.lorence.myapp.domain.Department;
 import com.lorence.myapp.domain.Location;
 import com.lorence.myapp.domain.Employee;
+import com.lorence.myapp.domain.FunctionReps;
+import com.lorence.myapp.domain.HrReps;
 import com.lorence.myapp.domain.User;
 import com.lorence.myapp.repository.AuthorityRepository;
 import com.lorence.myapp.repository.EmployeeRepository;
+import com.lorence.myapp.repository.FunctionRepsRepository;
+import com.lorence.myapp.repository.HrRepsRepository;
 import com.lorence.myapp.repository.UserRepository;
 import com.lorence.myapp.security.AuthoritiesConstants;
 import com.lorence.myapp.security.SecurityUtils;
@@ -30,6 +34,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +52,10 @@ public class UserService {
 
     private final EmployeeRepository employeeRepository;
 
+    private final HrRepsRepository hrRepsRepository;
+
+    private final FunctionRepsRepository functionRepsRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -54,12 +63,15 @@ public class UserService {
     private final CacheManager cacheManager;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-            AuthorityRepository authorityRepository, CacheManager cacheManager, EmployeeRepository employeeRepository) {
+            AuthorityRepository authorityRepository, CacheManager cacheManager,
+            EmployeeRepository employeeRepository, HrRepsRepository hrRepsRepository, FunctionRepsRepository functionRepsRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
         this.employeeRepository = employeeRepository;
+        this.functionRepsRepository = functionRepsRepository;
+        this.hrRepsRepository = hrRepsRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -152,7 +164,17 @@ public class UserService {
         newEmployee.setDepartment(department);
         newEmployee.setLocation(location);
         newEmployee.setUser(newUser);
-        employeeRepository.save(newEmployee);
+        newEmployee = employeeRepository.save(newEmployee);
+        if(newUser.getAuthorities().toString().contains(AuthoritiesConstants.HR)){
+            HrReps newHr = new HrReps();
+            newHr.setEmployee(newEmployee);
+            newHr = hrRepsRepository.save(newHr);
+        }
+        if(newUser.getAuthorities().toString().contains(AuthoritiesConstants.FUNCTION)){
+            FunctionReps newFr = new FunctionReps();
+            newFr.setEmployee(newEmployee);
+            newFr = functionRepsRepository.save(newFr);
+        }
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
@@ -226,6 +248,7 @@ public class UserService {
                     user.setActivated(userDTO.isActivated());
                     user.setLangKey(userDTO.getLangKey());
                     Set<Authority> managedAuthorities = user.getAuthorities();
+                    updateHrAndFrTables(managedAuthorities, userDTO.getAuthorities(), user.getId());
                     managedAuthorities.clear();
                     userDTO.getAuthorities().stream().map(authorityRepository::findById).filter(Optional::isPresent)
                             .map(Optional::get).forEach(managedAuthorities::add);
@@ -235,9 +258,32 @@ public class UserService {
                 }).map(UserDTO::new);
     }
 
+    private void updateHrAndFrTables(Set<Authority> managedAuthorities, Set<String> authorities, long userId) {
+        String authorityString = managedAuthorities.toString();
+        String newAuthoritiesString = authorities.toString();
+        if(authorityString.contains(AuthoritiesConstants.FUNCTION) && !newAuthoritiesString.contains(AuthoritiesConstants.FUNCTION)) {
+            functionRepsRepository.delete(functionRepsRepository.findByUserId(userId));
+        }
+        if(!authorityString.contains(AuthoritiesConstants.FUNCTION) && newAuthoritiesString.contains(AuthoritiesConstants.FUNCTION)) {
+            FunctionReps fr = new FunctionReps();
+            fr.setEmployee(employeeRepository.findByUserId(userId));
+            functionRepsRepository.save(fr);
+        }
+        if(authorityString.contains(AuthoritiesConstants.HR) && !newAuthoritiesString.contains(AuthoritiesConstants.HR)) {
+            hrRepsRepository.delete(hrRepsRepository.findByUserId(userId));
+        }
+        if(!authorityString.contains(AuthoritiesConstants.HR) && newAuthoritiesString.contains(AuthoritiesConstants.HR)) {
+            HrReps hr = new HrReps();
+            hr.setEmployee(employeeRepository.findByUserId(userId));
+            hrRepsRepository.save(hr);
+        }
+    }
+
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
+            hrRepsRepository.delete(hrRepsRepository.findByUserId(user.getId()));
+            functionRepsRepository.delete(functionRepsRepository.findByUserId(user.getId()));
             this.clearUserCaches(user);
             log.debug("Deleted User: {}", user);
         });

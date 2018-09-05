@@ -2,9 +2,7 @@ package com.lorence.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.SeparationApplication;
-import com.lorence.myapp.domain.User;
 import com.lorence.myapp.repository.SeparationApplicationRepository;
-import com.lorence.myapp.security.SecurityUtils;
 import com.lorence.myapp.web.rest.errors.BadRequestAlertException;
 import com.lorence.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;

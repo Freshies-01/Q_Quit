@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the HrReps entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface HrRepsRepository extends JpaRepository<HrReps, Long> {
+
+    @Query("SELECT hr FROM HrReps hr WHERE hr.employee.user.id = ?1")
+    HrReps findByUserId(long userId);
 
 }
