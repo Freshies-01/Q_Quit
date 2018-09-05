@@ -15,13 +15,29 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity SepartationApplicationLog.
+        Added the entity SeparationApplicationLog.
     -->
-    <changeSet id="20180815192301-1" author="jhipster">
-        <createTable tableName="separtation_application_log">
+    <changeSet id="20180905134610-1" author="jhipster">
+        <createTable tableName="separation_application_log">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="edit_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="date_edited" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="employee_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="separation_application_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
