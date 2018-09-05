@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.lorence.myapp.domain.enumeration.ActionStatus;
+
 /**
  * A Action.
  */
@@ -31,8 +33,15 @@ public class Action implements Serializable {
     @Column(name = "date_completed")
     private LocalDate dateCompleted;
 
+    @Column(name = "num_disputes")
+    private Integer numDisputes;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "action_status")
+    private ActionStatus actionStatus;
+
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("actions")
     private SeparationApplication separationApplication;
 
     @ManyToOne(optional = false)
@@ -86,6 +95,32 @@ public class Action implements Serializable {
 
     public void setDateCompleted(LocalDate dateCompleted) {
         this.dateCompleted = dateCompleted;
+    }
+
+    public Integer getNumDisputes() {
+        return numDisputes;
+    }
+
+    public Action numDisputes(Integer numDisputes) {
+        this.numDisputes = numDisputes;
+        return this;
+    }
+
+    public void setNumDisputes(Integer numDisputes) {
+        this.numDisputes = numDisputes;
+    }
+
+    public ActionStatus getActionStatus() {
+        return actionStatus;
+    }
+
+    public Action actionStatus(ActionStatus actionStatus) {
+        this.actionStatus = actionStatus;
+        return this;
+    }
+
+    public void setActionStatus(ActionStatus actionStatus) {
+        this.actionStatus = actionStatus;
     }
 
     public SeparationApplication getSeparationApplication() {
@@ -142,6 +177,8 @@ public class Action implements Serializable {
             ", isCompleted='" + isIsCompleted() + "'" +
             ", task='" + getTask() + "'" +
             ", dateCompleted='" + getDateCompleted() + "'" +
+            ", numDisputes=" + getNumDisputes() +
+            ", actionStatus='" + getActionStatus() + "'" +
             "}";
     }
 }

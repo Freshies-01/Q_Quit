@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { SeparationApplicationService } from "app/entities/separation-application/separation-application.service";
 import {
   ISeparationApplication,
   SeparationApplication
 } from "app/shared/model/separation-application.model";
-import { IAction } from "app/shared/model/action.model";
+import { IAction, ActionStatus } from "app/shared/model/action.model";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { ActionService } from "app/entities/action/action.service";
 import { Observable } from "rxjs";
@@ -13,6 +13,11 @@ import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 import { IFunctionReps } from "app/shared/model/function-reps.model";
 import { FunctionRepsService } from "app/entities/function-reps";
 import { JhiEventManager } from "ng-jhipster";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+
+export interface ActionData {
+  action: IAction;
+}
 
 @Component({
   selector: "jhi-action-list",
@@ -33,11 +38,16 @@ export class ActionListComponent implements OnInit {
     task: new FormControl("")
   });
 
+  public actionEditForm = new FormGroup({
+    task: new FormControl("")
+  });
+
   constructor(
     private separationApplicationService: SeparationApplicationService,
     private actionService: ActionService,
     private functionRepsService: FunctionRepsService,
-    private eventManager: JhiEventManager
+    private eventManager: JhiEventManager,
+    public dialog: MatDialog
   ) {}
 
   loadActions() {
@@ -68,10 +78,10 @@ export class ActionListComponent implements OnInit {
   }
 
   save() {
-    if (this.actionForm.get("task").value === "" || null) {
+    const action: IAction = this.actionForm.getRawValue();
+    if (action.task === "" || null) {
       return;
     }
-    const action: IAction = this.actionForm.getRawValue();
     this.actionForm.reset();
     action.id = undefined;
     action.isCompleted = false;
@@ -79,15 +89,15 @@ export class ActionListComponent implements OnInit {
     action.separationApplication.id = this.saId;
     action.functionReps = this.functionRep;
     this.isSaving = true;
-    if (action.id !== undefined) {
-      this.subscribeToSaveResponse(this.actionService.update(action));
-    } else {
-      this.subscribeToSaveResponse(this.actionService.create(action));
-    }
+    this.updateAction(action);
   }
 
-  update(action: IAction) {
+  toggleCompleted(action: IAction) {
     action.isCompleted = !action.isCompleted;
+    this.updateAction(action);
+  }
+
+  updateAction(action: IAction) {
     if (action.id !== undefined) {
       this.subscribeToSaveResponse(this.actionService.update(action));
     } else {
@@ -122,9 +132,63 @@ export class ActionListComponent implements OnInit {
     });
   }
 
+  dispute(action: IAction) {
+    // increment numDisputes
+    // if numDisputes > 2, reveal 'accept', 'delete', and 'edit' button to HR
+    // change text of action.task to red
+    // disable dispute button
+    action.numDisputes++;
+    action.actionStatus = ActionStatus.DISPUTED;
+  }
+
+  openDialog(action: IAction): void {
+    const dialogRef = this.dialog.open(ActionEditPopupComponent, {
+      width: "250px",
+      height: "600px",
+      data: { editedAction: action }
+    });
+  }
+
+  edit(action: IAction) {
+    // set action.task to form value
+    // change action.task text color to normal
+    // reenable dispute button
+    const editAction: IAction = this.actionEditForm.getRawValue();
+    if (editAction.task === "" || null || action.task) {
+      return;
+    }
+    // console.log(action.id);
+    action.task = editAction.task;
+    action.actionStatus = ActionStatus.EDITED;
+    this.updateAction(action);
+  }
+
+  accept(action: IAction) {
+    // set action.task text style to BOLD
+    // remove ability to edit this action
+    action.numDisputes = 0;
+    action.actionStatus = ActionStatus.ACCEPTED;
+    this.updateAction(action);
+  }
+
   ngOnInit() {
     this.loadActions();
     this.loadFr();
     this.getApp();
+  }
+}
+
+@Component({
+  selector: "jhi-action-edit-popup",
+  templateUrl: "action-edit-popup.html"
+})
+export class ActionEditPopupComponent {
+  constructor(
+    public dialogRef: MatDialogRef<ActionEditPopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ActionData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
