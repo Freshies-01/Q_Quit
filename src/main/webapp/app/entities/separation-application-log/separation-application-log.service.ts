@@ -15,6 +15,7 @@ type EntityArrayResponseType = HttpResponse<ISeparationApplicationLog[]>;
 @Injectable({ providedIn: "root" })
 export class SeparationApplicationLogService {
   private resourceUrl = SERVER_API_URL + "api/separation-application-logs";
+  private logsUrl = SERVER_API_URL + "api/logs";
 
   constructor(private http: HttpClient) {}
 
@@ -46,6 +47,15 @@ export class SeparationApplicationLogService {
         observe: "response"
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  findBySaId(saId: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISeparationApplicationLog[]>(
+      `${this.logsUrl}/${saId}`,
+      {
+        observe: "response"
+      }
+    );
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

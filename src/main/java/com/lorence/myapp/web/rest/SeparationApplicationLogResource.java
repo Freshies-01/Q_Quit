@@ -89,6 +89,12 @@ public class SeparationApplicationLogResource {
         return separationApplicationLogRepository.findAll();
     }
 
+    @GetMapping("/logs/{saId}")
+    @Timed
+    public List<SeparationApplicationLog> getAllSeparationApplicationLogsById(@PathVariable Long saId) {
+        return separationApplicationLogRepository.findAllLogsBySeparationApplicationId(saId);
+    }
+
     /**
      * GET  /separation-application-logs/:id : get the "id" separationApplicationLog.
      *

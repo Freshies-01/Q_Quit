@@ -37,50 +37,18 @@ export class SeparationApplicationLogUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ separationApplicationLog }) => {
       this.separationApplicationLog = separationApplicationLog;
     });
-    this.employeeService
-      .query({ filter: "separationapplicationlog-is-null" })
-      .subscribe(
-        (res: HttpResponse<IEmployee[]>) => {
-          if (
-            !this.separationApplicationLog.employee ||
-            !this.separationApplicationLog.employee.id
-          ) {
-            this.employees = res.body;
-          } else {
-            this.employeeService
-              .find(this.separationApplicationLog.employee.id)
-              .subscribe(
-                (subRes: HttpResponse<IEmployee>) => {
-                  this.employees = [subRes.body].concat(res.body);
-                },
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    this.separationApplicationService
-      .query({ filter: "separationapplicationlog-is-null" })
-      .subscribe(
-        (res: HttpResponse<ISeparationApplication[]>) => {
-          if (
-            !this.separationApplicationLog.separationApplication ||
-            !this.separationApplicationLog.separationApplication.id
-          ) {
-            this.separationapplications = res.body;
-          } else {
-            this.separationApplicationService
-              .find(this.separationApplicationLog.separationApplication.id)
-              .subscribe(
-                (subRes: HttpResponse<ISeparationApplication>) => {
-                  this.separationapplications = [subRes.body].concat(res.body);
-                },
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.employeeService.query().subscribe(
+      (res: HttpResponse<IEmployee[]>) => {
+        this.employees = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
+    this.separationApplicationService.query().subscribe(
+      (res: HttpResponse<ISeparationApplication[]>) => {
+        this.separationapplications = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   previousState() {

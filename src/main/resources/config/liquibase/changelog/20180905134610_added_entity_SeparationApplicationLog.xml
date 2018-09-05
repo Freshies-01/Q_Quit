@@ -29,11 +29,15 @@
             <column name="date_edited" type="date">
                 <constraints nullable="false" />
             </column>
+
             <column name="employee_id" type="bigint">
-                <constraints unique="true" nullable="false" />
-            </column>            <column name="separation_application_id" type="bigint">
-                <constraints unique="true" nullable="false" />
+                <constraints nullable="false" />
             </column>
+
+            <column name="separation_application_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

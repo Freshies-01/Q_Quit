@@ -5,24 +5,20 @@
         {
             "relationshipName": "employee",
             "otherEntityName": "employee",
-            "relationshipType": "one-to-one",
+            "relationshipType": "many-to-one",
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "separationApplicationLog"
+            "otherEntityField": "id"
         },
         {
             "relationshipName": "separationApplication",
             "otherEntityName": "separationApplication",
-            "relationshipType": "one-to-one",
+            "relationshipType": "many-to-one",
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "separationApplicationLog"
+            "otherEntityField": "id"
         }
     ],
     "fields": [

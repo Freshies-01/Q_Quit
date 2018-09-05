@@ -1,5 +1,6 @@
 package com.lorence.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -32,14 +33,14 @@ public class SeparationApplicationLog implements Serializable {
     @Column(name = "date_edited", nullable = false)
     private LocalDate dateEdited;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @NotNull
-    @JoinColumn(unique = true)
+    @JsonIgnoreProperties("")
     private Employee employee;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @NotNull
-    @JoinColumn(unique = true)
+    @JsonIgnoreProperties("")
     private SeparationApplication separationApplication;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
