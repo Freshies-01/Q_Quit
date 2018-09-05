@@ -9,7 +9,7 @@ import {
 import { JhiEventManager } from "ng-jhipster";
 
 import { ISepartationApplicationLog } from "app/shared/model/separtation-application-log.model";
-import { SepartationApplicationLogService } from "app/entities/separtation-application-log/separtation-application-log.service";
+import { SepartationApplicationLogService } from "./separtation-application-log.service";
 
 @Component({
   selector: "jhi-separtation-application-log-delete-dialog",

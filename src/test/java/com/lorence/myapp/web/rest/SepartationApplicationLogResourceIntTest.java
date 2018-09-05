@@ -3,11 +3,6 @@ package com.lorence.myapp.web.rest;
 import com.lorence.myapp.QQuitApp;
 
 import com.lorence.myapp.domain.SepartationApplicationLog;
-import com.lorence.myapp.domain.Employee;
-import com.lorence.myapp.domain.HrReps;
-import com.lorence.myapp.domain.FunctionReps;
-import com.lorence.myapp.domain.Employee;
-import com.lorence.myapp.domain.SeparationApplication;
 import com.lorence.myapp.repository.SepartationApplicationLogRepository;
 import com.lorence.myapp.service.SepartationApplicationLogService;
 import com.lorence.myapp.web.rest.errors.ExceptionTranslator;
@@ -38,7 +33,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.lorence.myapp.domain.enumeration.Status;
 import com.lorence.myapp.domain.enumeration.EditType;
 /**
  * Test class for the SepartationApplicationLogResource REST controller.
@@ -49,29 +43,14 @@ import com.lorence.myapp.domain.enumeration.EditType;
 @SpringBootTest(classes = QQuitApp.class)
 public class SepartationApplicationLogResourceIntTest {
 
-    private static final Status DEFAULT_STATUS = Status.UNDER_REVIEW_FR;
-    private static final Status UPDATED_STATUS = Status.PENDING;
-
-    private static final LocalDate DEFAULT_DATE_APPROVED = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_APPROVED = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_SUBMITTED = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_SUBMITTED = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_COMPLETED = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_COMPLETED = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_OF_LEAVE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_OF_LEAVE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final Boolean DEFAULT_ACTION_ADDED = false;
-    private static final Boolean UPDATED_ACTION_ADDED = true;
-
     private static final LocalDate DEFAULT_DATE_EDITED = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_EDITED = LocalDate.now(ZoneId.systemDefault());
 
     private static final EditType DEFAULT_EDIT_TYPE = EditType.CREATE;
     private static final EditType UPDATED_EDIT_TYPE = EditType.UPDATE;
+
+    private static final Integer DEFAULT_EDIT_ID = 1;
+    private static final Integer UPDATED_EDIT_ID = 2;
 
     @Autowired
     private SepartationApplicationLogRepository separtationApplicationLogRepository;
@@ -116,36 +95,9 @@ public class SepartationApplicationLogResourceIntTest {
      */
     public static SepartationApplicationLog createEntity(EntityManager em) {
         SepartationApplicationLog separtationApplicationLog = new SepartationApplicationLog()
-            .status(DEFAULT_STATUS)
-            .dateApproved(DEFAULT_DATE_APPROVED)
-            .dateSubmitted(DEFAULT_DATE_SUBMITTED)
-            .dateCompleted(DEFAULT_DATE_COMPLETED)
-            .dateOfLeave(DEFAULT_DATE_OF_LEAVE)
-            .actionAdded(DEFAULT_ACTION_ADDED)
             .dateEdited(DEFAULT_DATE_EDITED)
-            .editType(DEFAULT_EDIT_TYPE);
-        // Add required entity
-        Employee employee = EmployeeResourceIntTest.createEntity(em);
-        em.persist(employee);
-        em.flush();
-        separtationApplicationLog.setEditor(employee);
-        // Add required entity
-        HrReps hrReps = HrRepsResourceIntTest.createEntity(em);
-        em.persist(hrReps);
-        em.flush();
-        separtationApplicationLog.setHrReps(hrReps);
-        // Add required entity
-        FunctionReps functionReps = FunctionRepsResourceIntTest.createEntity(em);
-        em.persist(functionReps);
-        em.flush();
-        separtationApplicationLog.setFunctionReps(functionReps);
-        // Add required entity
-        separtationApplicationLog.setEmployee(employee);
-        // Add required entity
-        SeparationApplication separationApplication = SeparationApplicationResourceIntTest.createEntity(em);
-        em.persist(separationApplication);
-        em.flush();
-        separtationApplicationLog.setSeparationApplication(separationApplication);
+            .editType(DEFAULT_EDIT_TYPE)
+            .editId(DEFAULT_EDIT_ID);
         return separtationApplicationLog;
     }
 
@@ -169,14 +121,9 @@ public class SepartationApplicationLogResourceIntTest {
         List<SepartationApplicationLog> separtationApplicationLogList = separtationApplicationLogRepository.findAll();
         assertThat(separtationApplicationLogList).hasSize(databaseSizeBeforeCreate + 1);
         SepartationApplicationLog testSepartationApplicationLog = separtationApplicationLogList.get(separtationApplicationLogList.size() - 1);
-        assertThat(testSepartationApplicationLog.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testSepartationApplicationLog.getDateApproved()).isEqualTo(DEFAULT_DATE_APPROVED);
-        assertThat(testSepartationApplicationLog.getDateSubmitted()).isEqualTo(DEFAULT_DATE_SUBMITTED);
-        assertThat(testSepartationApplicationLog.getDateCompleted()).isEqualTo(DEFAULT_DATE_COMPLETED);
-        assertThat(testSepartationApplicationLog.getDateOfLeave()).isEqualTo(DEFAULT_DATE_OF_LEAVE);
-        assertThat(testSepartationApplicationLog.isActionAdded()).isEqualTo(DEFAULT_ACTION_ADDED);
         assertThat(testSepartationApplicationLog.getDateEdited()).isEqualTo(DEFAULT_DATE_EDITED);
         assertThat(testSepartationApplicationLog.getEditType()).isEqualTo(DEFAULT_EDIT_TYPE);
+        assertThat(testSepartationApplicationLog.getEditId()).isEqualTo(DEFAULT_EDIT_ID);
     }
 
     @Test
@@ -196,60 +143,6 @@ public class SepartationApplicationLogResourceIntTest {
         // Validate the SepartationApplicationLog in the database
         List<SepartationApplicationLog> separtationApplicationLogList = separtationApplicationLogRepository.findAll();
         assertThat(separtationApplicationLogList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    public void checkStatusIsRequired() throws Exception {
-        int databaseSizeBeforeTest = separtationApplicationLogRepository.findAll().size();
-        // set the field null
-        separtationApplicationLog.setStatus(null);
-
-        // Create the SepartationApplicationLog, which fails.
-
-        restSepartationApplicationLogMockMvc.perform(post("/api/separtation-application-logs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(separtationApplicationLog)))
-            .andExpect(status().isBadRequest());
-
-        List<SepartationApplicationLog> separtationApplicationLogList = separtationApplicationLogRepository.findAll();
-        assertThat(separtationApplicationLogList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkDateSubmittedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = separtationApplicationLogRepository.findAll().size();
-        // set the field null
-        separtationApplicationLog.setDateSubmitted(null);
-
-        // Create the SepartationApplicationLog, which fails.
-
-        restSepartationApplicationLogMockMvc.perform(post("/api/separtation-application-logs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(separtationApplicationLog)))
-            .andExpect(status().isBadRequest());
-
-        List<SepartationApplicationLog> separtationApplicationLogList = separtationApplicationLogRepository.findAll();
-        assertThat(separtationApplicationLogList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkActionAddedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = separtationApplicationLogRepository.findAll().size();
-        // set the field null
-        separtationApplicationLog.setActionAdded(null);
-
-        // Create the SepartationApplicationLog, which fails.
-
-        restSepartationApplicationLogMockMvc.perform(post("/api/separtation-application-logs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(separtationApplicationLog)))
-            .andExpect(status().isBadRequest());
-
-        List<SepartationApplicationLog> separtationApplicationLogList = separtationApplicationLogRepository.findAll();
-        assertThat(separtationApplicationLogList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -299,14 +192,9 @@ public class SepartationApplicationLogResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(separtationApplicationLog.getId().intValue())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].dateApproved").value(hasItem(DEFAULT_DATE_APPROVED.toString())))
-            .andExpect(jsonPath("$.[*].dateSubmitted").value(hasItem(DEFAULT_DATE_SUBMITTED.toString())))
-            .andExpect(jsonPath("$.[*].dateCompleted").value(hasItem(DEFAULT_DATE_COMPLETED.toString())))
-            .andExpect(jsonPath("$.[*].dateOfLeave").value(hasItem(DEFAULT_DATE_OF_LEAVE.toString())))
-            .andExpect(jsonPath("$.[*].actionAdded").value(hasItem(DEFAULT_ACTION_ADDED.booleanValue())))
             .andExpect(jsonPath("$.[*].dateEdited").value(hasItem(DEFAULT_DATE_EDITED.toString())))
-            .andExpect(jsonPath("$.[*].editType").value(hasItem(DEFAULT_EDIT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].editType").value(hasItem(DEFAULT_EDIT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].editId").value(hasItem(DEFAULT_EDIT_ID)));
     }
     
 
@@ -321,14 +209,9 @@ public class SepartationApplicationLogResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(separtationApplicationLog.getId().intValue()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.dateApproved").value(DEFAULT_DATE_APPROVED.toString()))
-            .andExpect(jsonPath("$.dateSubmitted").value(DEFAULT_DATE_SUBMITTED.toString()))
-            .andExpect(jsonPath("$.dateCompleted").value(DEFAULT_DATE_COMPLETED.toString()))
-            .andExpect(jsonPath("$.dateOfLeave").value(DEFAULT_DATE_OF_LEAVE.toString()))
-            .andExpect(jsonPath("$.actionAdded").value(DEFAULT_ACTION_ADDED.booleanValue()))
             .andExpect(jsonPath("$.dateEdited").value(DEFAULT_DATE_EDITED.toString()))
-            .andExpect(jsonPath("$.editType").value(DEFAULT_EDIT_TYPE.toString()));
+            .andExpect(jsonPath("$.editType").value(DEFAULT_EDIT_TYPE.toString()))
+            .andExpect(jsonPath("$.editId").value(DEFAULT_EDIT_ID));
     }
     @Test
     @Transactional
@@ -351,14 +234,9 @@ public class SepartationApplicationLogResourceIntTest {
         // Disconnect from session so that the updates on updatedSepartationApplicationLog are not directly saved in db
         em.detach(updatedSepartationApplicationLog);
         updatedSepartationApplicationLog
-            .status(UPDATED_STATUS)
-            .dateApproved(UPDATED_DATE_APPROVED)
-            .dateSubmitted(UPDATED_DATE_SUBMITTED)
-            .dateCompleted(UPDATED_DATE_COMPLETED)
-            .dateOfLeave(UPDATED_DATE_OF_LEAVE)
-            .actionAdded(UPDATED_ACTION_ADDED)
             .dateEdited(UPDATED_DATE_EDITED)
-            .editType(UPDATED_EDIT_TYPE);
+            .editType(UPDATED_EDIT_TYPE)
+            .editId(UPDATED_EDIT_ID);
 
         restSepartationApplicationLogMockMvc.perform(put("/api/separtation-application-logs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -369,14 +247,9 @@ public class SepartationApplicationLogResourceIntTest {
         List<SepartationApplicationLog> separtationApplicationLogList = separtationApplicationLogRepository.findAll();
         assertThat(separtationApplicationLogList).hasSize(databaseSizeBeforeUpdate);
         SepartationApplicationLog testSepartationApplicationLog = separtationApplicationLogList.get(separtationApplicationLogList.size() - 1);
-        assertThat(testSepartationApplicationLog.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testSepartationApplicationLog.getDateApproved()).isEqualTo(UPDATED_DATE_APPROVED);
-        assertThat(testSepartationApplicationLog.getDateSubmitted()).isEqualTo(UPDATED_DATE_SUBMITTED);
-        assertThat(testSepartationApplicationLog.getDateCompleted()).isEqualTo(UPDATED_DATE_COMPLETED);
-        assertThat(testSepartationApplicationLog.getDateOfLeave()).isEqualTo(UPDATED_DATE_OF_LEAVE);
-        assertThat(testSepartationApplicationLog.isActionAdded()).isEqualTo(UPDATED_ACTION_ADDED);
         assertThat(testSepartationApplicationLog.getDateEdited()).isEqualTo(UPDATED_DATE_EDITED);
         assertThat(testSepartationApplicationLog.getEditType()).isEqualTo(UPDATED_EDIT_TYPE);
+        assertThat(testSepartationApplicationLog.getEditId()).isEqualTo(UPDATED_EDIT_ID);
     }
 
     @Test

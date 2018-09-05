@@ -12,7 +12,7 @@ import { ISepartationApplicationLog } from "app/shared/model/separtation-applica
 import { Principal } from "app/core";
 
 import { ITEMS_PER_PAGE } from "app/shared";
-import { SepartationApplicationLogService } from "app/entities/separtation-application-log/separtation-application-log.service";
+import { SepartationApplicationLogService } from "./separtation-application-log.service";
 
 @Component({
   selector: "jhi-separtation-application-log",

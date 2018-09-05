@@ -3,104 +3,23 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "editor",
-            "otherEntityName": "employee",
-            "relationshipType": "one-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "log"
-        },
-        {
-            "relationshipName": "action",
-            "otherEntityName": "action",
+            "relationshipName": "separationApplication",
+            "otherEntityName": "separationApplication",
             "relationshipType": "one-to-one",
             "otherEntityField": "id",
             "ownerSide": true,
-            "otherEntityRelationshipName": "log"
-        },
-        {
-            "relationshipName": "hrReps",
-            "otherEntityName": "hrReps",
-            "relationshipType": "one-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "log"
-        },
-        {
-            "relationshipName": "functionReps",
-            "otherEntityName": "functionReps",
-            "relationshipType": "one-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "log"
+            "otherEntityRelationshipName": "separtationApplicationLog"
         },
         {
             "relationshipName": "employee",
             "otherEntityName": "employee",
             "relationshipType": "one-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
             "otherEntityField": "id",
             "ownerSide": true,
-            "otherEntityRelationshipName": "log"
-        },
-        {
-            "relationshipName": "separationApplication",
-            "otherEntityName": "separationApplication",
-            "relationshipType": "one-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "log"
+            "otherEntityRelationshipName": "separtationApplicationLog"
         }
     ],
     "fields": [
-        {
-            "fieldName": "status",
-            "fieldType": "Status",
-            "fieldValues": "COMPLETED,PENDING,CLOSED,IN_PROGRESS",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "dateApproved",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateSubmitted",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "dateCompleted",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateOfLeave",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "actionAdded",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
         {
             "fieldName": "dateEdited",
             "fieldType": "LocalDate",
@@ -115,6 +34,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "editId",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20180815192301",

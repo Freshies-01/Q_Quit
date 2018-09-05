@@ -75,26 +75,6 @@ export class SepartationApplicationLogService {
       {},
       separtationApplicationLog,
       {
-        dateApproved:
-          separtationApplicationLog.dateApproved != null &&
-          separtationApplicationLog.dateApproved.isValid()
-            ? separtationApplicationLog.dateApproved.format(DATE_FORMAT)
-            : null,
-        dateSubmitted:
-          separtationApplicationLog.dateSubmitted != null &&
-          separtationApplicationLog.dateSubmitted.isValid()
-            ? separtationApplicationLog.dateSubmitted.format(DATE_FORMAT)
-            : null,
-        dateCompleted:
-          separtationApplicationLog.dateCompleted != null &&
-          separtationApplicationLog.dateCompleted.isValid()
-            ? separtationApplicationLog.dateCompleted.format(DATE_FORMAT)
-            : null,
-        dateOfLeave:
-          separtationApplicationLog.dateOfLeave != null &&
-          separtationApplicationLog.dateOfLeave.isValid()
-            ? separtationApplicationLog.dateOfLeave.format(DATE_FORMAT)
-            : null,
         dateEdited:
           separtationApplicationLog.dateEdited != null &&
           separtationApplicationLog.dateEdited.isValid()
@@ -106,14 +86,6 @@ export class SepartationApplicationLogService {
   }
 
   private convertDateFromServer(res: EntityResponseType): EntityResponseType {
-    res.body.dateApproved =
-      res.body.dateApproved != null ? moment(res.body.dateApproved) : null;
-    res.body.dateSubmitted =
-      res.body.dateSubmitted != null ? moment(res.body.dateSubmitted) : null;
-    res.body.dateCompleted =
-      res.body.dateCompleted != null ? moment(res.body.dateCompleted) : null;
-    res.body.dateOfLeave =
-      res.body.dateOfLeave != null ? moment(res.body.dateOfLeave) : null;
     res.body.dateEdited =
       res.body.dateEdited != null ? moment(res.body.dateEdited) : null;
     return res;
@@ -124,22 +96,6 @@ export class SepartationApplicationLogService {
   ): EntityArrayResponseType {
     res.body.forEach(
       (separtationApplicationLog: ISepartationApplicationLog) => {
-        separtationApplicationLog.dateApproved =
-          separtationApplicationLog.dateApproved != null
-            ? moment(separtationApplicationLog.dateApproved)
-            : null;
-        separtationApplicationLog.dateSubmitted =
-          separtationApplicationLog.dateSubmitted != null
-            ? moment(separtationApplicationLog.dateSubmitted)
-            : null;
-        separtationApplicationLog.dateCompleted =
-          separtationApplicationLog.dateCompleted != null
-            ? moment(separtationApplicationLog.dateCompleted)
-            : null;
-        separtationApplicationLog.dateOfLeave =
-          separtationApplicationLog.dateOfLeave != null
-            ? moment(separtationApplicationLog.dateOfLeave)
-            : null;
         separtationApplicationLog.dateEdited =
           separtationApplicationLog.dateEdited != null
             ? moment(separtationApplicationLog.dateEdited)

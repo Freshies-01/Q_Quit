@@ -8,6 +8,7 @@ import { QQuitFunctionRepsModule } from "app/entities/function-reps/function-rep
 import { QQuitDepartmentModule } from "app/entities/department/department.module";
 import { QQuitSepartationApplicationLogModule } from "app/entities/separtation-application-log/separtation-application-log.module";
 import { QQuitActionModule } from "./action/action.module";
+import { QQuitSepartationApplicationLogModule } from "./separtation-application-log/separtation-application-log.module";
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
