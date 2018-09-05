@@ -2,17 +2,61 @@
 <mat-list>
     <h3 mat-subheader>Your TODO List</h3>
     <br/>
-    <mat-list-item *ngFor="let action of actions">
-        <mat-checkbox [(ngModel)]="action.isCompleted" (click)="update(action)"></mat-checkbox> <!--Applicant Employee ONLY-->
-        Task: {{action.task}}<br/>
-        Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
-        <a mat-mini-fab (click)="confirmDelete(action.id)">-</a> <!--FR ONLY-->
+    <mat-list-item *ngFor="let action of actions; let i = index">
+        <div class="flex-container">
+     
+            <div class="list-item">
+                <mat-checkbox [(ngModel)]="action.isCompleted" (click)="toggleCompleted(action)"></mat-checkbox> <!--Applicant Employee ONLY-->
+            </div>
+            <div class="list-item" [ngSwitch]="action.actionStatus">
+                <div *ngSwitchCase="'DISPUTED'" style="color: red;">
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                </div>
+                <div *ngSwitchCase="'EDITED'">
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}<br/>
+                </div>
+                <div *ngSwitchCase="'ACCEPTED'" style="font-weight: bold;">
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}           
+                </div>
+                <div *ngSwitchDefault>
+                    <form [formGroup]="actionEditForm">
+                        <input matInput formControlName="task" [(ngModel)]="action.task">
+                    </form>
+                    Added by {{action.functionReps?.employee?.user?.firstName}} {{action.functionReps?.employee?.user?.lastName}}
+                </div>
+            </div>
+            <div class="list-item">
+                <button class="icon" mat-mini-fab (click)="confirmDelete(action.id)">X</button> <!--FR ONLY-->
+            </div>
+
+            <div class="list-item"> <!--Employee ONLY-->
+                <button (click)="dispute(action)" class="icon" mat-mini-fab>!</button>
+            </div>
+            <div class="list-item" (click)="openDialog(action)"> <!--FR ONLY-->
+                <button class="icon" mat-mini-fab><fa-icon [icon]="'pencil-alt'"></fa-icon></button>
+            </div>
+            <div class="list-item"> <!--Employee ONLY, + HR if numDisputes > 2-->
+                <button class="icon" (click)="accept(action)" mat-mini-fab>OK</button>
+            </div>
+            <br/>
+        </div>
+        <br/>
     </mat-list-item>
     <form (ngSubmit)="save()" [formGroup]="actionForm"> <!--FR ONLY-->
         <mat-form-field>
-            <input matInput formControlName="task" placeholder="Add new task" name="task">
+            <input matInput formControlName="task" placeholder="Add new task then hit 'Enter'" name="task">
         </mat-form-field>
-        <button mat-mini-fab type="submit">+</button>
+        <button class="icon" mat-mini-fab type="submit">+</button>
+        <br/>
     </form>
 </mat-list>
 <br/>

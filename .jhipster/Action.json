@@ -30,6 +30,15 @@
         {
             "fieldName": "dateCompleted",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "numDisputes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "actionStatus",
+            "fieldType": "ActionStatus",
+            "fieldValues": "DISPUTED,EDITED,ACCEPTED"
         }
     ],
     "changelogDate": "20180808183050",
