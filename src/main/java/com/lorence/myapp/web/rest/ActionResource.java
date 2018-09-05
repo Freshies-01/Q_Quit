@@ -123,7 +123,7 @@ public class ActionResource {
         log.debug("REST request to return the average duration of an action assoicated with department: " + deptID);
         List<Action> actions = actionRepository.findAllActionsByDepartment(deptID);
         for (Action action : actions) {
-            Duration duration = Duration.between(action.getDateCompleted(), action.getSeparationApplication().getDateApproved());
+            Duration duration = Duration.between(action.getDateCompleted().atStartOfDay(), action.getSeparationApplication().getDateApproved().atStartOfDay());
             res.plus(duration);
         }
         res.dividedBy(actions.size());
