@@ -1,0 +1,52 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "employee",
+            "otherEntityName": "employee",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "separationApplicationLog"
+        },
+        {
+            "relationshipName": "separationApplication",
+            "otherEntityName": "separationApplication",
+            "relationshipType": "one-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "separationApplicationLog"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "editType",
+            "fieldType": "EditType",
+            "fieldValues": "CREATE,UPDATE,DELETE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateEdited",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180905134610",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "separation_application_log",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

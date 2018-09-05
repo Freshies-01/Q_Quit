@@ -9,56 +9,7 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="separtationApplicationLog.id" readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateEdited">Date Edited</label>
-                    <div class="input-group">
-                        <input id="field_dateEdited" type="text" class="form-control" name="dateEdited" ngbDatepicker  #dateEditedDp="ngbDatepicker" [(ngModel)]="separtationApplicationLog.dateEdited"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateEditedDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.dateEdited?.dirty && editForm.controls.dateEdited?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.dateEdited?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_editType">Edit Type</label>
-                    <select class="form-control" name="editType" [(ngModel)]="separtationApplicationLog.editType" id="field_editType"  required>
-                        <option value="CREATE">CREATE</option>
-                        <option value="UPDATE">UPDATE</option>
-                        <option value="DELETE">DELETE</option>
-                    </select>
-                    <div [hidden]="!(editForm.controls.editType?.dirty && editForm.controls.editType?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.editType?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_editId">Edit Id</label>
-                    <input type="number" class="form-control" name="editId" id="field_editId"
-                        [(ngModel)]="separtationApplicationLog.editId" />
-                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_separationApplication">Separation Application</label>
-                    <select class="form-control" id="field_separationApplication" name="separationApplication" [(ngModel)]="separtationApplicationLog.separationApplication">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="separationApplicationOption.id === separtationApplicationLog.separationApplication?.id ? separtationApplicationLog.separationApplication : separationApplicationOption" *ngFor="let separationApplicationOption of separationapplications; trackBy: trackSeparationApplicationById">{{separationApplicationOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_employee">Employee</label>
-                    <select class="form-control" id="field_employee" name="employee" [(ngModel)]="separtationApplicationLog.employee">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="employeeOption.id === separtationApplicationLog.employee?.id ? separtationApplicationLog.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

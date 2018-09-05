@@ -15,30 +15,12 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="dateEdited"><span>Date Edited</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="editType"><span>Edit Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="editId"><span>Edit Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="separationApplication.id"><span>Separation Application</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="employee.id"><span>Employee</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let separtationApplicationLog of separtationApplicationLogs ;trackBy: trackId">
                 <td><a [routerLink]="['/separtation-application-log', separtationApplicationLog.id, 'view' ]">{{separtationApplicationLog.id}}</a></td>
-                <td>{{separtationApplicationLog.dateEdited | date:'mediumDate'}}</td>
-                <td>{{separtationApplicationLog.editType}}</td>
-                <td>{{separtationApplicationLog.editId}}</td>
-                <td>
-                    <div *ngIf="separtationApplicationLog.separationApplication">
-                        <a [routerLink]="['../separation-application', separtationApplicationLog.separationApplication?.id, 'view' ]" >{{separtationApplicationLog.separationApplication?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="separtationApplicationLog.employee">
-                        <a [routerLink]="['../employee', separtationApplicationLog.employee?.id, 'view' ]" >{{separtationApplicationLog.employee?.id}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
