@@ -10,14 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.Duration;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-
 /**
  * REST controller for managing Action.
  */
@@ -117,12 +115,31 @@ public class ActionResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    @GetMapping("/actions-dept/{deptID}")
+    @GetMapping("/actions-functionWise/{deptID}")
     @Timed
-    public List<Action> findAllActionsByDepartment(@PathVariable Long deptID){
+    public String functionWiseDuration(@PathVariable Long deptID){
 
-        log.debug("REST request to return all actions assoicated with department: " + deptID);
-        return actionRepository.findAllActionsByDepartment(deptID);
+        Duration res = Duration.ZERO;
+        log.debug("REST request to return the average duration of an action assoicated with department: " + deptID);
+        List<Action> actions = actionRepository.findAllActionsByDepartment(deptID);
+        for (Action action : actions) {
+            Duration duration = Duration.between(action.getSeparationApplication().getDateApproved().atStartOfDay(), action.getDateCompleted().atStartOfDay());
+            res = res.plus(duration);
+        }
+        res.dividedBy(actions.size());
+        long days = res.toDays();
+        if(days == 0){ return "{ \"duration\": \"Days: 1\"}";}
+        res = res.minusDays(days);
+        String result = convertDaysToDuration(days);
+        return "{ \"duration\": \"" + result + "\" }";
+    }
+
+    private String convertDaysToDuration(long days) {
+        long week = days / 7;
+        days = days % 7;
+        long month = week / 4;
+        week = week % 4;
+        return "Months: " + month + "Weeks: " + week + "Days: " + days;
     }
 
     @GetMapping("/actions-sa/{saID}")
