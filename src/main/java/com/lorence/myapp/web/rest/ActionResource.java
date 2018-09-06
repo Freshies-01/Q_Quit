@@ -123,11 +123,23 @@ public class ActionResource {
         log.debug("REST request to return the average duration of an action assoicated with department: " + deptID);
         List<Action> actions = actionRepository.findAllActionsByDepartment(deptID);
         for (Action action : actions) {
-            Duration duration = Duration.between(action.getDateCompleted().atStartOfDay(), action.getSeparationApplication().getDateApproved().atStartOfDay());
-            res.plus(duration);
+            Duration duration = Duration.between(action.getSeparationApplication().getDateApproved().atStartOfDay(), action.getDateCompleted().atStartOfDay());
+            res = res.plus(duration);
         }
         res.dividedBy(actions.size());
-        return res.toString();
+        long days = res.toDays();
+        if(days == 0){ return "{ \"duration\": \"Days: 1\"}";}
+        res = res.minusDays(days);
+        String result = convertDaysToDuration(days);
+        return "{ \"duration\": \"" + result + "\" }";
+    }
+
+    private String convertDaysToDuration(long days) {
+        long week = days / 7;
+        days = days % 7;
+        long month = week / 4;
+        week = week % 4;
+        return "Months: " + month + "Weeks: " + week + "Days: " + days;
     }
 
     @GetMapping("/actions-sa/{saID}")
