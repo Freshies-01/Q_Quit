@@ -3,6 +3,7 @@ package com.lorence.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.lorence.myapp.domain.Employee;
 import com.lorence.myapp.repository.EmployeeRepository;
+import com.lorence.myapp.security.SecurityUtils;
 import com.lorence.myapp.web.rest.errors.BadRequestAlertException;
 import com.lorence.myapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -90,6 +91,13 @@ public class EmployeeResource {
         List<Employee> emp = filterEmployees(filter);
         if(locID != null){emp = filterEmployeesByLocation(emp, locID);}
         return emp;
+    }
+
+    @GetMapping("/current-employee")
+    @Timed
+    public ResponseEntity<Employee> getCurrentUser() {
+        Optional<Employee> employee =  employeeRepository.findOneByLogin();
+        return ResponseUtil.wrapOrNotFound(employee);
     }
 
     public List<Employee> filterEmployeesByLocation(List<Employee> emp, Long locID) {
